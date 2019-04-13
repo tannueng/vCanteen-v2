@@ -1,0 +1,145 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView_done"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="2dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginBottom="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <RelativeLayout
+        android:id="@+id/orderRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/orderName"
+            android:layout_width="218dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/sfprotext_bold"
+            android:text="@string/order_name"
+            android:textColor="@color/black_text"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/orderNameExtra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderName"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/sfprotext_regular"
+            android:paddingTop="4dp"
+            android:text="@string/order_name_extra"
+            android:textColor="@color/grey_text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/vendorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderNameExtra"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/sfprotext_regular"
+            android:paddingTop="4dp"
+            android:text="@string/vendor_name"
+            android:textColor="@color/black_text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/orderId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vendorName"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/sfprotext_regular"
+            android:paddingTop="4dp"
+            android:text="@string/order_id"
+            android:textColor="@color/black_text"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/pickup_tab"
+            android:layout_width="100dp"
+            android:layout_height="128dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/gradient_pickup_tab"
+            android:fontFamily="@font/sfprotext_bold"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/pickup_tab"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite" />
+
+        <TextView
+            android:id="@+id/orderPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/pickup_tab"
+            android:fontFamily="@font/sfprotext_bold"
+            android:text="@string/order_price"
+            android:textAlignment="textEnd"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/blank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderPrice"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/pickup_tab"
+            android:fontFamily="@font/sfprotext_regular"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/orderDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/blank"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/pickup_tab"
+            android:fontFamily="@font/sfprotext_regular"
+            android:paddingTop="4dp"
+            android:text="@string/order_date"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black_text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/orderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderDate"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/pickup_tab"
+            android:fontFamily="@font/sfprotext_bold"
+            android:gravity="bottom"
+            android:includeFontPadding="false"
+            android:paddingTop="4dp"
+            android:text="@string/order_status"
+            android:textAlignment="textEnd"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

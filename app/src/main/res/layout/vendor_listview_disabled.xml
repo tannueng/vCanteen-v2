@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <android.support.v7.widget.CardView
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="10dp"
+    android:scrollbars="none"
+    android:padding="10dp"
+    android:orientation="horizontal"
+    android:layout_height="100dp"
+    android:descendantFocusability="blocksDescendants"
+    android:alpha="0.5"
+    android:clickable="false"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="@drawable/vendor_card"/>
+
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+    <ImageView
+        android:layout_height="97.5dp"
+        android:layout_width="97.5dp"
+        android:background="@drawable/round_vendor_img"
+        android:alpha="0.3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="1dp"
+        android:id="@+id/vendorImage"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/vendorName"
+        android:textSize="16sp"
+        android:textColor="@color/primaryLight"
+        android:text="Null"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_toEndOf="@id/vendorImage"
+        android:layout_toStartOf="@+id/next_icon"
+        android:layout_marginRight="10dp"/>
+
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@drawable/ic_right_arrow"
+        android:id="@+id/next_icon"
+        android:layout_marginRight="8dp"
+        android:alpha="0.5"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="9dp"/>
+
+</RelativeLayout>
+
+</android.support.v7.widget.CardView>

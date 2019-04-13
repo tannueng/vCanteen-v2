@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".customizeOrderActivity">
+
+    <ImageView
+        android:id="@+id/addToCartImgFromCustomize"
+        android:layout_width="297dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/button_background" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="46dp"
+        android:text="ADD TO CART"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:fontFamily="@font/sfprotext_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/addToCartImgFromCustomize" />
+
+    <TextView
+        android:id="@+id/orderPriceCombi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="46dp"
+        android:text="0"
+        android:textAlignment="textEnd"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:fontFamily="@font/sfprotext_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/orderPrice4" />
+
+    <TextView
+        android:id="@+id/orderPrice4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="46dp"
+        android:fontFamily="@font/sfprotext_bold"
+        android:text="฿"
+        android:textAlignment="textEnd"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/addToCartImgFromCustomize" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="94dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="159dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_vcanteen_header_logo" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="Customize your own menu"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:fontFamily="@font/sfprotext_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/addToCartImgFromCustomize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="12dp"
+                android:text="Base"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:fontFamily="@font/sfprotext_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+            <ListView
+                android:id="@+id/list1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="395dp"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="12dp"
+                android:text="Main"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:fontFamily="@font/sfprotext_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+            <ListView
+                android:id="@+id/list2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="395dp"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="12dp"
+                android:text="Extra"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:fontFamily="@font/sfprotext_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+            <ListView
+                android:id="@+id/list3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="395dp"
+                android:layout_height="5dp"
+                android:background="?android:attr/listDivider" />
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/popup_confirm_pickup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/popup_drop_shadow"
+        android:elevation="8dp"
+        android:foregroundGravity="center_vertical|center_horizontal"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/popup_confirm_pickup_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/popup_confirm_pickup_title"
+                android:fontFamily="@font/sfprotext_semibold"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/pickup_slot_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/order_slot"
+                android:fontFamily="@font/sfprotext_bold"
+                android:textAlignment="center"
+                android:textColor="@color/colorStatusRed"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/popup_timeout_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sfprotext_regular"
+                android:text="@string/popup_confirm_pickup_subtitle_text"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="12dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/confirmPickup_btn"
+                    android:layout_width="121dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfprotext_bold"
+                    android:background="@drawable/button_bg_rounded_corner_pink"
+                    android:text="@string/confirm_text"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp" />
+
+                <Space
+                    android:layout_width="32dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/dismiss_btn"
+                    android:layout_width="118dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/dismiss_text"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="@color/grey_text"
+                    android:textSize="12sp" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>
