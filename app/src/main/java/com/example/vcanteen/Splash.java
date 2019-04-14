@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.example.vcanteen.Data.Token;
 import com.example.vcanteen.Data.TokenVerification;
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,7 +61,7 @@ public class Splash extends AppCompatActivity {
                             if (expired)
                                 startActivity(new Intent(Splash.this, emailActivity.class));
                             else
-                                startActivity(new Intent(Splash.this, homev1Activity.class));
+                                startActivity(new Intent(Splash.this, vendorListActivity.class));
                         }
                     }, 1000);
                 }
@@ -86,7 +85,7 @@ public class Splash extends AppCompatActivity {
 
                 @Override
                 public void run() {
-                    Intent i = new Intent(Splash.this, homev1Activity.class);
+                    Intent i = new Intent(Splash.this, vendorListActivity.class);
                     startActivity(i);
 
                     finish();

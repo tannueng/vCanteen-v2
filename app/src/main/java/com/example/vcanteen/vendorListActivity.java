@@ -4,24 +4,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vcanteen.Data.Customers;
-import com.facebook.login.LoginManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,18 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.facebook.internal.LockOnGetVariable;
-import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,15 +32,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class homev1Activity extends AppCompatActivity {
+public class vendorListActivity extends AppCompatActivity {
 
     private List<vendorList> vendorLists;
     private TextView mTextMessage;
     private ListView listView;
 
-    FloatingActionButton profilebtn;
-    FloatingActionButton ordersbtn;
-    FloatingActionButton settingsbtn;
+//    FloatingActionButton profilebtn;
+//    FloatingActionButton ordersbtn;
+//    FloatingActionButton settingsbtn;
     orderStack orderStack;
 
     private SharedPreferences sharedPref;
@@ -73,11 +56,11 @@ public class homev1Activity extends AppCompatActivity {
 //                    return true;
 //                case R.id.navigation_orders:
 ////                    mTextMessage.setText("ORDERS");
-//                    startActivity(new Intent(homev1Activity.this, OrderListActivity.class));
+//                    startActivity(new Intent(vendorListActivity.this, OrderListActivity.class));
 //                    return true;
 //                case R.id.navigation_settings:
 ////                    mTextMessage.setText("SETTINGS");
-//                    startActivity(new Intent(homev1Activity.this, settingActivity.class));
+//                    startActivity(new Intent(vendorListActivity.this, settingActivity.class));
 //                    return true;
 //            }
 //            return false;
@@ -87,7 +70,7 @@ public class homev1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_v1);
+        setContentView(R.layout.activity_vendor_list);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -107,9 +90,9 @@ public class homev1Activity extends AppCompatActivity {
 
         mTextMessage = (TextView) findViewById(R.id.message);
         listView = findViewById(R.id.vendorlist);
-        profilebtn = findViewById(R.id.buttonprofile);
-        ordersbtn = findViewById(R.id.buttonorders);
-        settingsbtn = findViewById(R.id.buttonsettings);
+//        profilebtn = findViewById(R.id.buttonprofile);
+//        ordersbtn = findViewById(R.id.buttonorders);
+//        settingsbtn = findViewById(R.id.buttonsettings);
 
         //orderStack.setEmpty();
         //orderStack = new orderStack(orderStack.getCustomerId(),orderStack.getVendorId(),orderStack.getOrderList(),orderStack.getTotalPrice(),orderStack.getCustomerMoneyAccount());
@@ -118,26 +101,26 @@ public class homev1Activity extends AppCompatActivity {
 //        profilebtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(homev1Activity.this, profile.class);
+//                Intent intent = new Intent(vendorListActivity.this, profile.class);
 //                startActivity(intent);
 //            }
 //        });
 
-       ordersbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(homev1Activity.this, OrderListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        settingsbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(homev1Activity.this, settingActivity.class);
-                startActivity(intent);
-            }
-        });
+//       ordersbtn.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                Intent intent = new Intent(vendorListActivity.this, OrderListActivity.class);
+////                startActivity(intent);
+////            }
+////        });
+////
+////        settingsbtn.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                Intent intent = new Intent(vendorListActivity.this, settingActivity.class);
+////                startActivity(intent);
+////            }
+////        });
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         System.out.println(sharedPref.getString("token", "empty token"));
@@ -193,7 +176,7 @@ public class homev1Activity extends AppCompatActivity {
                     temp.add(newVendorList);
 
                 }
-                vendorListAdapter adapter = new vendorListAdapter(homev1Activity.this,temp);
+                vendorListAdapterv2 adapter = new vendorListAdapterv2(vendorListActivity.this,temp);
 
                 listView.setAdapter(adapter);
 
@@ -209,9 +192,9 @@ public class homev1Activity extends AppCompatActivity {
                         vendorStatus = item.getVendorStatus();
                         if(vendorStatus.equals("CLOSED")){
                             view.setClickable(false);
-                            //Toast.makeText(homev1Activity.this, "This restaurant is closed.", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(vendorListActivity.this, "This restaurant is closed.", Toast.LENGTH_SHORT).show();
                         } else{
-                            Intent i = new Intent(homev1Activity.this, vendorMenuActivity.class);
+                            Intent i = new Intent(vendorListActivity.this, vendorMenuv2Activity.class);
                             i.putExtra("vendor id", vendornumber);
                             orderStack.setVendorId(vendornumber);
                             orderStack.setCustomerId(sharedPref.getInt("customerId",0));
@@ -258,7 +241,7 @@ public class homev1Activity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-//                    Toast.makeText(homev1Activity.this, "Token Saved", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(vendorListActivity.this, "Token Saved", Toast.LENGTH_LONG).show();
                     System.out.println("TOKEN SAVED - AUTO LOGIN");
 
                 }

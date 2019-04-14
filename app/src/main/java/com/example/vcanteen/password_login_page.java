@@ -5,19 +5,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,13 +23,11 @@ import android.widget.Toast;
 import com.example.vcanteen.Data.Customers;
 import com.example.vcanteen.Data.RecoverPass;
 import com.example.vcanteen.Data.TokenResponse;
-import com.example.vcanteen.Data.UserFirebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,23 +35,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.json.JSONObject;
-
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLOutput;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -152,7 +133,7 @@ public class password_login_page extends AppCompatActivity {
                 progressDialog = new ProgressDialog(context);
                 progressDialog = ProgressDialog.show(context, "",
                         "Loading. Please wait...", true);
-                final Intent intent = new Intent(password_login_page.this, homev1Activity.class);
+                final Intent intent = new Intent(password_login_page.this, vendorListActivity.class);
                 passwd = passwdField.getText().toString();
                 if (passwd.equals("")) {
                     errorMessage.setVisibility(View.VISIBLE);
@@ -300,7 +281,7 @@ public class password_login_page extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-//                    Toast.makeText(homev1Activity.this, "Token Saved", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(vendorListActivity.this, "Token Saved", Toast.LENGTH_LONG).show();
                     System.out.println("TOKEN SAVED - AUTO LOGIN");
 
                 }

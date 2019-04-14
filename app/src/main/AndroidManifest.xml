@@ -21,20 +21,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".paymentSplash"></activity>
+        <activity android:name=".paymentSplash" />
         <activity android:name=".orderConfirmationActivity" />
         <activity android:name=".password_login_page" />
-        <activity android:name=".homev1Activity" />
+        <activity android:name=".vendorListActivity" />
         <activity android:name=".processingPaymentActivity" />
         <activity android:name=".cartActivity" />
         <activity android:name=".normalOrderActivity" />
         <activity android:name=".customizeOrderActivity" />
-        <activity android:name=".vendorMenuActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".vendorMenuActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".vendorMenuv2Activity"
+            android:launchMode="singleTask" />
         <activity android:name=".changePasswordActivity" />
         <activity android:name=".settingActivity" />
         <activity android:name=".emailActivity" />
-        <activity android:name=".OrderListActivity"></activity>
+        <activity android:name=".OrderListActivity" />
         <activity android:name=".passwordLoginActivity" />
 
         <meta-data
@@ -58,7 +62,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.example.vcanteen.MyFirebaseMessagingService">
+        <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
