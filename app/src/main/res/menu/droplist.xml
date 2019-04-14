@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/sort"
+        android:title="Sort by"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/sort_price"
+                android:title="Price"/>
+            <item android:id="@+id/sort_az"
+                android:title="A-Z"/>
+        </menu>
+    </item>
+    <item android:id="@+id/category"
+        android:title="Category"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/category_all"
+                android:title="All"/>
+            <item android:id="@+id/category_vegan"
+                android:title="Vegan"/>
+            <item android:id="@+id/category_spicy"
+                android:title="Spicy"/>
+            <item android:id="@+id/category_meat"
+                android:title="Meat"/>
+            <item android:id="@+id/category_noodles"
+                android:title="Noodles"/>
+            <item android:id="@+id/category_soup"
+                android:title="Soup"/>
+        </menu>
+    </item>
+
+
+</menu>
