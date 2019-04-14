@@ -133,7 +133,7 @@ public class password_login_page extends AppCompatActivity {
                 progressDialog = new ProgressDialog(context);
                 progressDialog = ProgressDialog.show(context, "",
                         "Loading. Please wait...", true);
-                final Intent intent = new Intent(password_login_page.this, vendorListActivity.class);
+                final Intent intent = new Intent(password_login_page.this, vendorListActivity.class); //TODO change vendorlistactivity to homepagev2
                 passwd = passwdField.getText().toString();
                 if (passwd.equals("")) {
                     errorMessage.setVisibility(View.VISIBLE);

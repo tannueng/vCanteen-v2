@@ -15,7 +15,7 @@
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
 
-        app:title="Vendor Menu">
+        app:title="VENDOR MENU">
 
         <!--<ImageView-->
             <!--android:id="@+id/your_icon"-->
