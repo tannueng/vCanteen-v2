@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".homev2Activity">
+
+
+    <ImageView
+        android:id="@+id/vcanteenHeaderLogo"
+        android:layout_width="94dp"
+        android:layout_height="25dp"
+        android:background="@drawable/ic_vcanteen_header_logo"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        />
+    <LinearLayout
+        android:id="@+id/userTabBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/vcanteenHeaderLogo"
+        android:weightSum="16">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_marginVertical="2dp"
+            android:layout_gravity="center_vertical">
+            <Button
+                android:id="@+id/editProfileButton"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:padding="3dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_edit"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editProfileButton"
+                android:padding="1dp"
+                android:text="EDIT"
+                android:textSize="7sp"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/sfprotext_medium"
+                android:textColor="@color/primaryPink"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <ImageView
+                android:id="@+id/profilePictureButton"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center_vertical"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_profile"
+                android:scaleType="centerInside"
+                android:elevation="4dp"
+                android:layout_margin="2dp"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/nameSection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="10"
+            android:layout_marginLeft="8dp"
+            android:padding="5dp"
+            android:weightSum="8">
+
+            <TextView
+                android:id="@+id/helloText"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:text="Hello,"
+                android:fontFamily="@font/sfprotext_semibold"
+                android:textColor="#828282"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/firstAndLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:text="John D."
+                android:fontFamily="@font/sfprotext_bold"
+                android:textColor="@color/black_text"
+                android:textSize="16sp"
+                />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_marginVertical="2dp"
+            android:layout_gravity="center_vertical">
+            <Button
+                android:id="@+id/settingsButton"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:padding="3dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_settings_homepage"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/settingsButton"
+                android:padding="1dp"
+                android:text="SETTINGS"
+                android:textSize="7sp"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/sfprotext_medium"
+                android:textColor="@color/primaryPink"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dividerLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        android:layout_below="@id/userTabBar"
+        android:layout_marginVertical="5dp"/>
+
+    <ScrollView
+        android:id="@+id/homev2ScrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/dividerLine"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:id="@+id/scrollViewLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/recommendationHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RECOMMENDATION"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/sfprotext_bold"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                />
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/recommendationCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="false"
+                app:contentPadding="0dp"
+                android:layout_margin="10dp"
+                android:layout_below="@id/recommendationHeader">
+
+                <RelativeLayout
+                    android:id="@+id/recommendationCardImageLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/RecommendationCardImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/vendorimg"
+                        android:layout_alignParentTop="true"/>
+
+                    <RelativeLayout
+                        android:id="@+id/recommendationCardTextLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/RecommendationCardImage">
+                        <TextView
+                            android:id="@+id/recommendationCardHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Recommended Menu"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:layout_marginLeft="7dp"
+                            android:textColor="#333333"
+                            android:textSize="20sp"
+                            android:padding="3dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true" />
+
+                        <TextView
+                            android:id="@+id/recommendationDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ceasar Salad"
+                            android:layout_below="@+id/recommendationCardHeader"
+                            android:fontFamily="@font/sfprotext_regular"
+                            android:textColor="#828282"
+                            android:layout_marginLeft="7dp"
+                            android:textSize="14sp"
+                            android:padding="3dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            />
+
+                        <Button
+                            android:id="@+id/recommedationButton"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_alignParentRight="true"
+                            android:text="ORDER NOW"
+                            android:layout_centerInParent="true"
+                            android:textColor="#ffffff"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:background="@drawable/button_bg_rounded_corner_pink"
+                            android:layout_alignBottom="@id/recommendationDescription"
+                            />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/vendorsHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VENDORS"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/recommendationCardView"
+                android:fontFamily="@font/sfprotext_bold"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/vendorsCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="false"
+                app:contentPadding="0dp"
+                android:layout_margin="10dp"
+                android:layout_below="@id/vendorsHeader">
+
+                <RelativeLayout
+                    android:id="@+id/vendorsCardImageLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/vendorsCardImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/vendorimg"
+                        android:layout_alignParentTop="true"/>
+
+                    <RelativeLayout
+                        android:id="@+id/vendorsCardTextLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/vendorsCardImage">
+                        <TextView
+                            android:id="@+id/vendorsCardHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Browse all vendor list"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:layout_marginLeft="7dp"
+                            android:textColor="#333333"
+                            android:textSize="20sp"
+                            android:padding="3dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"/>
+
+
+                        <Button
+                            android:id="@+id/vendorsButton"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:text="BROWSE"
+                            android:textColor="#ffffff"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:background="@drawable/button_bg_rounded_corner_pink"
+                            android:layout_marginBottom="15dp"
+                            />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/crowdHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CROWD ESTIMATION"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/vendorsCardView"
+                android:fontFamily="@font/sfprotext_bold"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/crowdCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="false"
+                app:contentPadding="0dp"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/crowdHeader">
+
+                <RelativeLayout
+                    android:id="@+id/crowdCardImageLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/crowdCardImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/vendorimg"
+                        android:layout_alignParentTop="true"/>
+                    <TextView
+                        android:id="@+id/crowdEstimationOnPicValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="68%"
+                        android:fontFamily="@font/sfprotext_bold"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignBottom="@id/crowdCardImage"
+                        android:layout_marginLeft="5dp"
+                        android:padding="2dp"
+                        android:textColor="#FFFFFF"
+                        android:textSize="64sp"
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/crowdCardTextLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/crowdCardImage">
+                        <TextView
+                            android:id="@+id/crowdCardHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Canteen capacity"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:layout_marginLeft="7dp"
+                            android:textColor="#333333"
+                            android:textSize="20sp"
+                            android:padding="3dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true" />
+
+                        <TextView
+                            android:id="@+id/crowdDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View canteen capacity statistic"
+                            android:layout_below="@+id/crowdCardHeader"
+                            android:fontFamily="@font/sfprotext_regular"
+                            android:textColor="#828282"
+                            android:layout_marginLeft="7dp"
+                            android:textSize="14sp"
+                            android:padding="3dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            />
+
+                        <Button
+                            android:id="@+id/crowdButton"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_alignParentRight="true"
+                            android:text="VIEW"
+                            android:textColor="#ffffff"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:background="@drawable/button_bg_rounded_corner_pink"
+                            android:layout_alignBottom="@id/crowdDescription"
+                            android:layout_centerInParent="true"
+                            />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/ordersHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MY ORDERS"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/crowdCardView"
+                android:fontFamily="@font/sfprotext_bold"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/ordersCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="false"
+                app:contentPadding="0dp"
+                android:layout_margin="10dp"
+                android:layout_below="@id/ordersHeader">
+
+                <RelativeLayout
+                    android:id="@+id/ordersCardImageLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ordersCardImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:background="@drawable/vendorimg"
+                        android:layout_alignParentTop="true"/>
+
+                    <RelativeLayout
+                        android:id="@+id/ordersCardTextLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ordersCardImage">
+                        <TextView
+                            android:id="@+id/ordersCardHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Order in-progress &amp; history"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:layout_marginLeft="7dp"
+                            android:textColor="#333333"
+                            android:textSize="20sp"
+                            android:padding="3dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_toLeftOf="@id/ordersButton"
+                            android:paddingLeft="3dp"/>
+
+                        <TextView
+                            android:id="@+id/ordersDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View status and accept your meal here"
+                            android:layout_below="@+id/ordersCardHeader"
+                            android:fontFamily="@font/sfprotext_regular"
+                            android:textColor="#828282"
+                            android:layout_marginLeft="7dp"
+                            android:textSize="14sp"
+                            android:padding="3dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_toLeftOf="@id/ordersButton"
+                            android:paddingLeft="3dp"
+                            />
+
+                        <Button
+                            android:id="@+id/ordersButton"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_alignParentRight="true"
+                            android:text="MY ORDERS"
+                            android:textColor="#ffffff"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:background="@drawable/button_bg_rounded_corner_pink"
+                            android:layout_alignBottom="@id/ordersDescription"
+                            android:layout_centerInParent="true"
+                            />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>
