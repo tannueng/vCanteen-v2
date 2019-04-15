@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ToolbarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="PAYMENT METHOD"
+        app:titleTextColor="@color/colorWhite">
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/sp_cunex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="32dp"
+        android:layout_toEndOf="@+id/sp_cunex_checkmark"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:text="@string/cunex_text" />
+
+
+    <TextView
+        android:id="@+id/sp_cunex_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="28dp"
+        android:fontFamily="@font/sfprotext_regular"
+        android:text="@string/sp_link_status"
+        android:textColor="@color/primaryPink"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/sp_cunex_checkmark"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="37dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/checkmark" />
+
+    <TextView
+        android:id="@+id/sp_scbeasy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sp_cunex"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="26dp"
+        android:layout_toEndOf="@+id/sp_scbeasy_checkmark"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="@string/scbeasy_text"
+        android:textColor="@android:color/black"
+
+        android:textSize="18sp"
+
+        />
+
+    <TextView
+        android:id="@+id/sp_scbeasy_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sp_cunex_link"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="28dp"
+        android:fontFamily="@font/sfprotext_regular"
+        android:text="@string/sp_link_status"
+        android:textColor="@color/primaryPink"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/sp_scbeasy_checkmark"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_below="@+id/sp_cunex_checkmark"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/checkmark" />
+
+    <TextView
+        android:id="@+id/sp_kplus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sp_scbeasy"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="26dp"
+        android:layout_toEndOf="@+id/sp_kplus_checkmark"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="@string/kplus_text"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sp_kplus_checkmark"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sp_kplus_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sp_scbeasy_link"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="28dp"
+        android:fontFamily="@font/sfprotext_regular"
+        android:text="@string/sp_link_status"
+        android:textColor="@color/primaryPink"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/sp_kplus_checkmark"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_below="@+id/sp_scbeasy_checkmark"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/checkmark" />
+
+    <TextView
+        android:id="@+id/sp_truemoneywallet_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sp_kplus_link"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="28dp"
+        android:fontFamily="@font/sfprotext_regular"
+        android:text="@string/sp_link_status"
+        android:textColor="@color/primaryPink"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sp_truemoneywallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sp_kplus"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="26dp"
+        android:layout_toEndOf="@+id/sp_truemoneywallet_checkmark"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="@string/truemoneywallet_text"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sp_truemoneywallet_checkmark"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/sp_truemoneywallet_checkmark"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_below="@+id/sp_kplus_checkmark"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/checkmark" />
+
+
+
+
+</RelativeLayout>

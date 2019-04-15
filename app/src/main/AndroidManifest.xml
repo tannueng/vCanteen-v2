@@ -15,11 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".paymentSplash" />
         <activity android:name=".orderConfirmationActivity" />
@@ -36,10 +32,19 @@
             android:name=".vendorMenuv2Activity"
             android:launchMode="singleTask" />
         <activity android:name=".changePasswordActivity" />
-        <activity android:name=".settingActivity" />
+        <activity android:name=".settingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".emailActivity" />
         <activity android:name=".OrderListActivity" />
         <activity android:name=".passwordLoginActivity" />
+        <activity android:name=".reportBugActivity"/>
+        <activity android:name=".EditPaymentMethodActivity"/>
+
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

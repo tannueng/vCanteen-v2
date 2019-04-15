@@ -21,6 +21,7 @@ public class settingActivity extends AppCompatActivity {
     private LinearLayout tappable_password, tappable_payment;
     private SharedPreferences sharedPref;
     private Button logout;
+    private Button reportBug;
     private Dialog logoutWarningDialog;
     private Button confirmLogoutBtn;
     private Button cancelLogoutBtn;
@@ -32,7 +33,9 @@ public class settingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         tappable_password = (LinearLayout)findViewById(R.id.tappable_password);
+        tappable_payment = findViewById(R.id.tappable_payment);
         logout = findViewById(R.id.logOutButton);
+        reportBug = findViewById(R.id.report_bug_button);
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         String account_type = sharedPref.getString("account_type", "UNKONWN");
@@ -42,12 +45,14 @@ public class settingActivity extends AppCompatActivity {
 
         //tappable_payment = (LinearLayout)findViewById(R.id.tappable_payment);
 
-        tappable_password.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                openChangePassword();
-            }
+        tappable_password.setOnClickListener(v -> openChangePassword());
+
+        tappable_payment.setOnClickListener(v -> {
+            startActivity(new Intent(settingActivity.this, EditPaymentMethodActivity.class));
         });
+
+
+        reportBug.setOnClickListener(v -> startActivity(new Intent(settingActivity.this, reportBugActivity.class)));
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
