@@ -25,7 +25,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/popup_payment_link_title"
+                android:id="@+id/popup_payment_unlink_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -52,10 +52,10 @@
                 app:srcCompat="@drawable/close_x" />
 
             <TextView
-                android:id="@+id/service_provider_text"
+                android:id="@+id/unlink_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/popup_payment_link_title"
+                android:layout_below="@+id/popup_payment_unlink_title"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
@@ -67,10 +67,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/popup_payment_link_account_number"
+                android:id="@+id/popup_payment_unlink_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/service_provider_text"
+                android:layout_below="@+id/unlink_title"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
@@ -84,7 +84,7 @@
                 android:id="@+id/accountNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/popup_payment_link_account_number"
+                android:layout_below="@+id/popup_payment_unlink_description"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"

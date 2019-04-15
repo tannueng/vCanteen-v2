@@ -48,6 +48,7 @@ public class settingActivity extends AppCompatActivity {
         tappable_password.setOnClickListener(v -> openChangePassword());
 
         tappable_payment.setOnClickListener(v -> {
+            //TODO call retrofit for editpayment here
             startActivity(new Intent(settingActivity.this, EditPaymentMethodActivity.class));
         });
 

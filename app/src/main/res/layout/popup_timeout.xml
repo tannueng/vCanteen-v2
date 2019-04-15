@@ -33,7 +33,7 @@
             android:paddingBottom="16dp">
 
             <TextView
-                android:id="@+id/popup_5min_title"
+                android:id="@+id/popup_timeout_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
@@ -46,7 +46,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/service_provider_text"
+                android:id="@+id/old_slot_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/order_slot"
@@ -74,7 +74,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/pickup_btn"
+                    android:id="@+id/dismiss_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sfprotext_bold"

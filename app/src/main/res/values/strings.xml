@@ -48,4 +48,5 @@
     <string name="kplus_text">K PLUS</string>
     <string name="truemoneywallet_text">TrueMoney Wallet</string>
     <string name="sp_link_status">LINK</string>
+    <string name="unlink_account_text">Unlink your account</string>
 </resources>
