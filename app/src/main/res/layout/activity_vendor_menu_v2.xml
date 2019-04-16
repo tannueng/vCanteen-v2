@@ -11,11 +11,14 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
 
-        app:title="Vendor Menu">
+        app:title="VENDOR MENU"
+        app:titleMarginStart="25dp"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        >
 
         <!--<ImageView-->
             <!--android:id="@+id/your_icon"-->

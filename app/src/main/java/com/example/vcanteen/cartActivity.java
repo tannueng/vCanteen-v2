@@ -19,7 +19,6 @@ import com.example.vcanteen.POJO.availablePaymentMethod;
 import com.example.vcanteen.POJO.newOrder;
 import com.example.vcanteen.POJO.paymentMethod;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -177,7 +176,7 @@ public class cartActivity extends AppCompatActivity {
 
     public void showPopUp(){
         showpopup.setContentView(R.layout.cart_confirm_popup);
-        confirmButton = (Button)showpopup.findViewById(R.id.confirmButtonPassword);
+        confirmButton = (Button)showpopup.findViewById(R.id.dissmiss_btn);
         cancelButton = (TextView)showpopup.findViewById(R.id.cancelButton);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
