@@ -1,5 +1,7 @@
 package com.example.vcanteen;
 
+import io.reactivex.annotations.Nullable;
+
 public class orderListData {
     public String orderId;
     public String orderPrice;
@@ -8,12 +10,14 @@ public class orderListData {
     public String vendorName;
     public String orderDate;
     public String orderStatus;
+    @Nullable
+    public int orderEstimatedTime;
     public int type;
 
     public static final int COOKING_TYPE = 0;
     public static final int DONE_TYPE = 1;
 
-    orderListData(String orderId, String orderPrice, String orderName, String orderNameExtra, String vendorName, String orderDate, String orderStatus, int type) {
+    orderListData(String orderId, String orderPrice, String orderName, String orderNameExtra, String vendorName, String orderDate, String orderStatus, int typeม, @Nullable int orderEstimatedTime) {
         this.orderId = orderId;
         this.orderPrice = orderPrice;
         this.orderName = orderName;
@@ -22,6 +26,7 @@ public class orderListData {
         this.orderDate = orderDate;
         this.orderStatus = orderStatus;
         this.type = type;
+        this.orderEstimatedTime = orderEstimatedTime;
     }
 
     public String getOrderId() {
@@ -88,6 +93,13 @@ public class orderListData {
         this.type = type;
     }
 
+    public int getOrderEstimatedTime() {
+        return orderEstimatedTime;
+    }
+
+    public void setOrderEstimatedTime(int orderEstimatedTime) {
+        orderEstimatedTime = orderEstimatedTime;
+    }
 
 
 

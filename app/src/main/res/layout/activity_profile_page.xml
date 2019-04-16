@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profilePageActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+
+        app:title="PROFILE"
+        app:titleMarginStart="25dp"
+        app:titleTextAppearance="@style/Toolbar.TitleText"/>
+
+    <ImageView
+        android:id="@+id/profilePictureImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/round_vendor_img"
+        android:elevation="2dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/toolbar"/>
+
+
+
+    <View
+        android:id="@+id/dividerBelowImage"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@id/profilePictureImage"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/NameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:fontFamily="@font/sfprotext_bold"
+        android:textColor="#333333"
+        android:layout_below="@id/dividerBelowImage"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="John Doe"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:textColor="@color/primaryPink"
+        android:layout_below="@id/NameTitle"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"/>
+
+    <View
+        android:id="@+id/dividerBelowName"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@id/Name"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/EmailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:fontFamily="@font/sfprotext_bold"
+        android:textColor="#333333"
+        android:layout_below="@id/dividerBelowName"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="isezinfo@gmail.com"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:textColor="@color/primaryPink"
+        android:layout_below="@id/EmailTitle"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"/>
+
+    <View
+        android:id="@+id/dividerBelowEmail"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@id/Email"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/editProfileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dividerBelowEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_bg_rounded_corner_pink"
+        android:elevation="2dp"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="EDIT PROFILE"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+</RelativeLayout>

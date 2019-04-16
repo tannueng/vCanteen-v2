@@ -61,7 +61,7 @@ public class Splash extends AppCompatActivity {
                             if (expired)
                                 startActivity(new Intent(Splash.this, emailActivity.class));
                             else
-                                startActivity(new Intent(Splash.this, vendorListActivity.class));
+                                startActivity(new Intent(Splash.this, homev2Activity.class));
                         }
                     }, 1000);
                 }

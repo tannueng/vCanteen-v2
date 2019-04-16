@@ -7,64 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".vendorListActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
 
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text="VENDOR LIST"
-            android:layout_alignParentLeft="true"
-            android:gravity="center"
-            android:layout_marginLeft="25dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:textColor="#ffffff"
-            android:textSize="18dp"
-            />
-
-    <TextView
-        android:id="@+id/selectarestaurant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/sfprotext_medium"
-        android:text="SELECT A RESTAURANT"
-        android:textColor="@color/com_facebook_button_background_color_focused_disabled" />
+        app:title="VENDOR LIST"
+        app:titleMarginStart="25dp"
+        app:titleTextAppearance="@style/Toolbar.TitleText"/>
 
 
     <ListView
         android:id="@+id/vendorlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/gradientrect"
-        android:layout_below="@id/selectarestaurant"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginRight="20dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
 
-        android:layout_marginBottom="-3dp"
+        android:layout_marginRight="16dp"
         android:divider="#00000000"
         android:dividerHeight="15.0dp"
         android:elevation="5dp"
         android:fontFamily="@font/sfprotext_semibold"
         android:paddingBottom="40dp"
         android:scrollbars="none" />
-    <ImageView
-        android:id="@+id/gradientrect"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="-130dp"
-        android:background="@drawable/mainactivityrectangle"
-        android:alpha="0.5"
-        android:layout_alignParentBottom="true"/>
 
 
 </RelativeLayout>

@@ -39,4 +39,15 @@
     <string name="popup_confirm_pickup_title">Your order is ready at slot.</string>
     <string name="popup_confirm_pickup_subtitle_text">Only press confirm after picking up your meal.</string>
     <string name="pickup_tab">  PICK UP ▶  </string>
+    <string name="report_bug_hint">Report any bug here, every little things will improve your experiences with the app :)</string>
+    <string name="popup_payment_link_title_text">Link Payment</string>
+    <string name="popup_payment_link_service_provider">SCB EASY</string>
+    <string name="popup_payment_link_account_number_text">ACCOUNT NUMBER</string>
+    <string name="cunex_text">CUNEX</string>
+    <string name="scbeasy_text">SCB EASY</string>
+    <string name="kplus_text">K PLUS</string>
+    <string name="truemoneywallet_text">TrueMoney Wallet</string>
+    <string name="sp_link_status">LINK</string>
+    <string name="unlink_account_text">Unlink your account</string>
+    <string name="unlink_description_text">Do you wish to unlink serviceProvider\n from your account?></string>
 </resources>
