@@ -46,26 +46,6 @@ public class vendorListActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private FirebaseAuth mAuth;
 
-//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-//
-//        @Override
-//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//            switch (item.getItemId()) {
-//                case R.id.navigation_profile:
-//                    return true;
-//                case R.id.navigation_orders:
-////                    mTextMessage.setText("ORDERS");
-//                    startActivity(new Intent(vendorListActivity.this, OrderListActivity.class));
-//                    return true;
-//                case R.id.navigation_settings:
-////                    mTextMessage.setText("SETTINGS");
-//                    startActivity(new Intent(vendorListActivity.this, settingActivity.class));
-//                    return true;
-//            }
-//            return false;
-//        }
-//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,9 +230,5 @@ public class vendorListActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
-    }
 
 }

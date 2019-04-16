@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -39,9 +40,12 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     ((CookingViewHolder) holder).orderNameExtra.setText(list.getOrderNameExtra());
                     ((CookingViewHolder) holder).vendorName.setText(list.getVendorName());
                     ((CookingViewHolder) holder).orderId.setText("Order ID: "+list.getOrderId());
-                    ((CookingViewHolder) holder).orderPrice.setText(list.getOrderPrice()+" ฿");
+                    ((CookingViewHolder) holder).orderPrice.setText(list.getOrderPrice()+"฿");
+                    ((CookingViewHolder) holder).orderPrice.setText(list.getOrderPrice()+"฿");
                     ((CookingViewHolder) holder).orderDate.setText(list.getOrderDate());
                     ((CookingViewHolder) holder).orderStatus.setText(list.getOrderStatus());
+                    ((CookingViewHolder) holder).orderEstimatedTime.setVisibility(View.INVISIBLE);
+                    ((CookingViewHolder) holder).orderEstimatedTimeClock.setVisibility(View.INVISIBLE);
 
                     if (list.getOrderStatus().equals("COLLECTED")) {
                         ((CookingViewHolder) holder).cv.setForeground(null);
@@ -61,6 +65,9 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     if (list.getOrderStatus().equals("COOKING")) {
                         ((CookingViewHolder) holder).cv.setForeground(null);
                         ((CookingViewHolder) holder).orderStatus.setTextColor(Color.parseColor("#757575"));
+                        ((CookingViewHolder) holder).orderEstimatedTime.setText(Integer.toString(list.getOrderEstimatedTime())+" mins");
+                        ((CookingViewHolder) holder).orderEstimatedTime.setVisibility(View.VISIBLE);
+                        ((CookingViewHolder) holder).orderEstimatedTimeClock.setVisibility(View.VISIBLE);
                     }
                     break;
 
@@ -69,7 +76,7 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     ((DoneViewHolder) holder).orderName.setText(list.getOrderName());
                     ((DoneViewHolder) holder).orderNameExtra.setText(list.getOrderNameExtra());
                     ((DoneViewHolder) holder).orderId.setText("Order ID: "+list.getOrderId());
-                    ((DoneViewHolder) holder).orderPrice.setText(list.getOrderPrice()+" ฿");
+                    ((DoneViewHolder) holder).orderPrice.setText(list.getOrderPrice()+"฿");
                     ((DoneViewHolder) holder).vendorName.setText(list.getVendorName());
                     ((DoneViewHolder) holder).orderDate.setText(list.getOrderDate());
                     if (list.getOrderStatus().equals("DONE")) {
@@ -174,6 +181,9 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private TextView vendorName;
         private TextView orderDate;
         private TextView orderStatus;
+        private TextView orderEstimatedTime;
+        private ImageView orderEstimatedTimeClock;
+
 
         public CookingViewHolder(View itemView) {
             super(itemView);
@@ -185,6 +195,8 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             vendorName = itemView.findViewById(R.id.vendorName);
             orderDate = itemView.findViewById(R.id.orderDate);
             orderStatus = itemView.findViewById(R.id.orderStatus);
+            orderEstimatedTime = itemView.findViewById(R.id.estimateTimeText);
+            orderEstimatedTimeClock = itemView.findViewById(R.id.estimatedTimeClock);
 
 
 

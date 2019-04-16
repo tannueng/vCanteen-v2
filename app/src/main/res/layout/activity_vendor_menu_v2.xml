@@ -17,19 +17,7 @@
 
         app:title="VENDOR MENU"
         app:titleMarginStart="25dp"
-        app:titleTextAppearance="@style/Toolbar.TitleText"
-        >
-
-        <!--<ImageView-->
-            <!--android:id="@+id/your_icon"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="end"-->
-            <!--android:layout_marginRight="20dp"-->
-            <!--android:src="@drawable/ic_three_bars"-->
-            <!--/>-->
-
-    </android.support.v7.widget.Toolbar>
+        app:titleTextAppearance="@style/Toolbar.TitleText"/>
 
     <ImageView
         android:id="@+id/search_icon"
@@ -180,9 +168,9 @@ matching with your search." />
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
         android:clickable="true"
         android:onClick="openCartActivity"
         android:src="@drawable/ic_cart"

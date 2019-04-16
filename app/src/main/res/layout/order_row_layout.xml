@@ -86,42 +86,38 @@
             android:textAlignment="textEnd"
             android:textSize="14sp" />
 
-        <RelativeLayout
-            android:id="@+id/estimateTime"
-            android:layout_marginTop="4dp"
+        <ImageView
+            android:id="@+id/estimatedTimeClock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/orderPrice"
-            >
-
-        <ImageView
-            android:id="@+id/clock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/estimateTimeText"
-            android:layout_alignBottom="@id/estimateTimeText"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginRight="4dp"
-            android:background="@drawable/ic_clock"/>
+            android:layout_toStartOf="@+id/estimateTimeText"
+            android:background="@drawable/ic_clock" />
+
         <TextView
             android:id="@+id/estimateTimeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/orderPrice"
             android:layout_alignParentEnd="true"
-            android:text="10 mins"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/sfprotext_regular"
-            android:textSize="12sp"
-            android:textColor="#F86D70"/>
-        </RelativeLayout>
+            android:text="10 mins"
+            android:textColor="#F86D70"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/orderDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/estimateTime"
+            android:layout_below="@+id/estimateTimeText"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="17dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/sfprotext_regular"
             android:paddingTop="4dp"
             android:text="@string/order_date"

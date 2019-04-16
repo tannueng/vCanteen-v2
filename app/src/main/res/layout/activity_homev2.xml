@@ -16,38 +16,45 @@
         android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
         />
+
     <LinearLayout
         android:id="@+id/userTabBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/vcanteenHeaderLogo"
+        android:layout_marginTop="13dp"
         android:weightSum="16">
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:id="@+id/profileLayout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
             android:layout_marginVertical="2dp"
-            android:layout_gravity="center_vertical">
+            android:layout_weight="2"
+            android:clickable="true">
+
             <Button
                 android:id="@+id/editProfileButton"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:padding="3dp"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/ic_edit"
-                />
+                android:clickable="false"
+                android:padding="3dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/editProfileButton"
-                android:padding="1dp"
-                android:text="EDIT"
-                android:textSize="7sp"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/sfprotext_medium"
-                android:textColor="@color/primaryPink"/>
+                android:padding="1dp"
+                android:text="EDIT"
+                android:textColor="@color/primaryPink"
+                android:textSize="7sp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -57,23 +64,22 @@
                 android:id="@+id/profilePictureButton"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
-                android:layout_gravity="center_vertical"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_profile"
-                android:scaleType="centerInside"
-                android:elevation="4dp"
+                android:layout_gravity="center_vertical"
                 android:layout_margin="2dp"
-                />
+                android:elevation="4dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_profile" />
         </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/nameSection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="10"
             android:layout_marginLeft="8dp"
+            android:layout_weight="10"
+            android:orientation="vertical"
             android:padding="5dp"
             android:weightSum="8">
 
@@ -82,50 +88,53 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="3"
-                android:text="Hello,"
                 android:fontFamily="@font/sfprotext_semibold"
+                android:text="Hello,"
                 android:textColor="#828282"
-                android:textSize="12sp"
-                />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/firstAndLastName"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="5"
-                android:text="John D."
                 android:fontFamily="@font/sfprotext_bold"
+                android:text="John D."
                 android:textColor="@color/black_text"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
 
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/settingsLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
             android:layout_marginVertical="2dp"
-            android:layout_gravity="center_vertical">
+            android:layout_marginEnd="16dp"
+            android:layout_weight="2"
+            android:clickable="true">
+
             <Button
                 android:id="@+id/settingsButton"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:padding="3dp"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/ic_settings_homepage"
-                />
+                android:clickable="false"
+                android:padding="3dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/settingsButton"
-                android:padding="1dp"
-                android:text="SETTINGS"
-                android:textSize="7sp"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/sfprotext_medium"
-                android:textColor="@color/primaryPink"/>
+                android:padding="1dp"
+                android:text="SETTINGS"
+                android:textColor="@color/primaryPink"
+                android:textSize="7sp" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -224,15 +233,14 @@
                             android:id="@+id/recommedationButton"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:layout_alignParentRight="true"
-                            android:text="ORDER NOW"
-                            android:layout_centerInParent="true"
-                            android:textColor="#ffffff"
-                            android:fontFamily="@font/sfprotext_semibold"
-                            android:background="@drawable/button_bg_rounded_corner_pink"
                             android:layout_alignBottom="@id/recommendationDescription"
-                            />
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="8dp"
+                            android:background="@drawable/button_bg_rounded_corner_pink"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:text="ORDER NOW"
+                            android:textColor="#ffffff" />
 
                     </RelativeLayout>
 
@@ -302,15 +310,14 @@
                             android:id="@+id/vendorsButton"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:text="BROWSE"
-                            android:textColor="#ffffff"
-                            android:fontFamily="@font/sfprotext_semibold"
-                            android:background="@drawable/button_bg_rounded_corner_pink"
+                            android:layout_marginRight="8dp"
                             android:layout_marginBottom="15dp"
-                            />
+                            android:background="@drawable/button_bg_rounded_corner_pink"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:text="BROWSE"
+                            android:textColor="#ffffff" />
 
                     </RelativeLayout>
 
@@ -373,47 +380,46 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/crowdCardImage">
+
                         <TextView
                             android:id="@+id/crowdCardHeader"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Canteen capacity"
-                            android:fontFamily="@font/sfprotext_semibold"
-                            android:layout_marginLeft="7dp"
-                            android:textColor="#333333"
-                            android:textSize="20sp"
-                            android:padding="3dp"
+                            android:layout_alignParentLeft="true"
                             android:layout_alignParentTop="true"
-                            android:layout_alignParentLeft="true" />
+                            android:layout_marginLeft="7dp"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:padding="3dp"
+                            android:text="Canteen density"
+                            android:textColor="#333333"
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/crowdDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="View canteen capacity statistic"
                             android:layout_below="@+id/crowdCardHeader"
-                            android:fontFamily="@font/sfprotext_regular"
-                            android:textColor="#828282"
-                            android:layout_marginLeft="7dp"
-                            android:textSize="14sp"
-                            android:padding="3dp"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentBottom="true"
-                            />
+                            android:layout_marginLeft="7dp"
+                            android:fontFamily="@font/sfprotext_regular"
+                            android:padding="3dp"
+                            android:text="View canteen density statistics"
+                            android:textColor="#828282"
+                            android:textSize="14sp" />
 
                         <Button
                             android:id="@+id/crowdButton"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:layout_alignParentRight="true"
-                            android:text="VIEW"
-                            android:textColor="#ffffff"
-                            android:fontFamily="@font/sfprotext_semibold"
-                            android:background="@drawable/button_bg_rounded_corner_pink"
                             android:layout_alignBottom="@id/crowdDescription"
+                            android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            />
+                            android:layout_marginRight="8dp"
+                            android:background="@drawable/button_bg_rounded_corner_pink"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:text="VIEW"
+                            android:textColor="#ffffff" />
 
                     </RelativeLayout>
 
@@ -499,15 +505,14 @@
                             android:id="@+id/ordersButton"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:layout_alignParentRight="true"
-                            android:text="MY ORDERS"
-                            android:textColor="#ffffff"
-                            android:fontFamily="@font/sfprotext_semibold"
-                            android:background="@drawable/button_bg_rounded_corner_pink"
                             android:layout_alignBottom="@id/ordersDescription"
+                            android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            />
+                            android:layout_marginRight="8dp"
+                            android:background="@drawable/button_bg_rounded_corner_pink"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:text="MY ORDERS"
+                            android:textColor="#ffffff" />
 
                     </RelativeLayout>
 

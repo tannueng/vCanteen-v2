@@ -9,408 +9,414 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="CROWD ESTIMATION"
-        android:layout_alignParentLeft="true"
-        android:gravity="center"
-        android:layout_marginLeft="25dp"
-        android:fontFamily="@font/sfprotext_semibold"
-        android:textColor="#ffffff"
-        android:textSize="18dp"
-        />
+        app:title="CROWD ESTIMATION"
+        app:titleMarginStart="25dp"
+        app:titleTextAppearance="@style/Toolbar.TitleText"/>
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-
-    <TextView
-        android:id="@+id/lastestTimeStampText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:text="Latest Data : Today 11:55"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:textSize="16sp"
-        android:textColor="#828282"
-        android:fontFamily="@font/sfprotext_semibold"
-        android:layout_below="@id/toolbar"/>
-
-    <Button
-        android:id="@+id/refreshButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REFRESH  "
-        android:textColor="@color/primaryPink"
-        android:textSize="16sp"
-        android:drawableRight="@drawable/ic_refresh_arrow"
-        android:padding="10dp"
-        style="?android:attr/buttonBarButtonStyle"
-        android:layout_alignParentRight="true"
-        android:layout_alignBaseline="@id/lastestTimeStampText"
-        android:layout_marginRight="15dp"/>
-
-    <TextView
-        android:id="@+id/currentCanteenDensityTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CURRENT ICANTEEN DENSITY"
-        android:layout_below="@id/lastestTimeStampText"
-        android:layout_marginTop="20dp"
-        android:layout_alignLeft="@id/lastestTimeStampText"
-        android:textSize="16sp"
-        android:textColor="#333333"
-        android:fontFamily="@font/sfprotext_semibold"/>
-
-    <TextView
-        android:id="@+id/currentCanteenDensityValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#333333"
-        android:text="68%"
-        android:textSize="35sp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@id/currentCanteenDensityTitle"
-        android:layout_alignLeft="@id/currentCanteenDensityTitle"
-        android:fontFamily="@font/sfprotext_bold"/>
-
-    <View
-        android:id="@+id/dividerBelowCurrentCanteenDensity"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/primaryLight"
-        android:layout_below="@id/currentCanteenDensityValue"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
 
-    <TextView
-        android:id="@+id/statisticTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="STATISTIC"
-        android:fontFamily="@font/sfprotext_semibold"
-        android:textColor="#333333"
-        android:layout_below="@id/dividerBelowCurrentCanteenDensity"
-        android:layout_alignLeft="@id/currentCanteenDensityValue"
-        android:textSize="16sp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/dropDownTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DAY"
-        android:fontFamily="@font/sfprotext_regular"
-        android:textColor="#333333"
-        android:layout_alignLeft="@id/statisticTitle"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/statisticTitle"/>
+            <TextView
+                android:id="@+id/statisticTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dividerBelowCurrentCanteenDensity"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/sfprotext_semibold"
+                android:text="STATISTICS"
+                android:textColor="#333333"
+                android:textSize="16sp" />
 
-    <LinearLayout
-        android:id="@+id/dateDropdown"
-        android:layout_below="@id/dropDownTitle"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignLeft="@id/dropDownTitle"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/dropdownbg"
-        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/lastestTimeStampText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/sfprotext_semibold"
+                android:text="Latest Data : Today 11:55"
+                android:textColor="#828282"
+                android:textSize="16sp" />
 
-        <Spinner
-            android:id="@+id/daySpinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="6"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:spinnerMode="dropdown"/>
+            <Button
+                android:id="@+id/showDataButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/dataBox"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_bg_rounded_corner_pink"
+                android:elevation="2dp"
+                android:fontFamily="@font/sfprotext_semibold"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="SHOW DATA"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:id="@+id/dataBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dateDropdown"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/crowd_estimation_data_box"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/timeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="TIME"
+                    android:textColor="#333333"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/densityTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="DENSITY"
+                    android:textColor="#333333"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/eightAM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/timeTitle"
+                    android:layout_alignLeft="@id/timeTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="8:00"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/nineAM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/eightAM"
+                    android:layout_alignLeft="@id/timeTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="9:00"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tenAM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nineAM"
+                    android:layout_alignLeft="@id/timeTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="10:00"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/elevenAM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tenAM"
+                    android:layout_alignLeft="@id/timeTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="11:00"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/twelvePM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/elevenAM"
+                    android:layout_alignLeft="@id/timeTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="12:00"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/onePM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/twelvePM"
+                    android:layout_alignLeft="@id/timeTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="13:00"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/twoPM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/onePM"
+                    android:layout_alignLeft="@id/timeTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="14:00"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/threePM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/twoPM"
+                    android:layout_alignLeft="@id/timeTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="15:00"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/fourPM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/threePM"
+                    android:layout_alignLeft="@id/timeTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="16:00"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/fivePM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/fourPM"
+                    android:layout_alignLeft="@id/timeTitle"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="17:00"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/eightAMData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/timeTitle"
+                    android:layout_alignRight="@id/densityTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="7 %"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/nineAMData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/eightAMData"
+                    android:layout_alignRight="@id/densityTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="7 %"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tenAMData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nineAMData"
+                    android:layout_alignRight="@id/densityTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="7 %"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/elevenAMData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tenAMData"
+                    android:layout_alignRight="@id/densityTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="7 %"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/twelvePMData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/elevenAMData"
+                    android:layout_alignRight="@id/densityTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="7 %"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/onePMData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/twelvePMData"
+                    android:layout_alignRight="@id/densityTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="7 %"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/twoPMData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/onePMData"
+                    android:layout_alignRight="@id/densityTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="7 %"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/threePMData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/twoPMData"
+                    android:layout_alignRight="@id/densityTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="7 %"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/fourPMData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/threePMData"
+                    android:layout_alignRight="@id/densityTitle"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="7 %"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/fivePMData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/fourPMData"
+                    android:layout_alignRight="@id/densityTitle"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="7 %"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/dividerBelowCurrentCanteenDensity"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/currentCanteenDensityValue"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/primaryLight" />
+
+            <Button
+                android:id="@+id/refreshButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/lastestTimeStampText"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="26dp"
+                android:layout_marginRight="15dp"
+                android:drawableRight="@drawable/ic_refresh_arrow"
+                android:padding="10dp"
+                android:text="REFRESH  "
+                android:textColor="@color/primaryPink"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/currentCanteenDensityValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/currentCanteenDensityTitle"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/sfprotext_bold"
+                android:text="68%"
+                android:textColor="#333333"
+                android:textSize="35sp" />
+
+            <TextView
+                android:id="@+id/currentCanteenDensityTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lastestTimeStampText"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/sfprotext_semibold"
+                android:text="CURRENT ICANTEEN DENSITY"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/dateDropdown"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/dropDownTitle"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/dropdownbg"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/daySpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="6"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
 
 
-        <ImageView
-            android:id="@+id/spinnerIcon"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:src="@drawable/ic_angle_arrow_down" />
+                <ImageView
+                    android:id="@+id/spinnerIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_angle_arrow_down" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/showDataButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_marginRight="10dp"
-        android:textSize="16sp"
-        android:fontFamily="@font/sfprotext_semibold"
-        android:textColor="#ffffff"
-        android:background="@drawable/button_bg_rounded_corner_pink"
-        android:text="SHOW DATA"
-        android:layout_alignRight="@id/refreshButton"
-        android:layout_below="@id/statisticTitle"
-        android:layout_marginTop="30dp"
-        android:elevation="2dp"/>
-
-    <RelativeLayout
-        android:id="@+id/dataBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@id/showDataButton"
-        android:background="@drawable/crowd_estimation_data_box">
-
-        <TextView
-            android:id="@+id/timeTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="TIME"
-            android:textSize="18sp"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:textColor="#333333"/>
-
-        <TextView
-            android:id="@+id/densityTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="DENSITY"
-            android:layout_marginBottom="5dp"
-            android:textSize="18sp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:textColor="#333333"/>
-
-        <TextView
-            android:id="@+id/eightAM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="8:00"
-            android:textSize="18sp"
-            android:layout_alignLeft="@id/timeTitle"
-            android:layout_below="@id/timeTitle"/>
-        <TextView
-            android:id="@+id/nineAM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="9:00"
-            android:textSize="18sp"
-            android:layout_alignLeft="@id/timeTitle"
-            android:layout_below="@id/eightAM"/>
-        <TextView
-            android:id="@+id/tenAM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="10:00"
-            android:textSize="18sp"
-            android:layout_alignLeft="@id/timeTitle"
-            android:layout_below="@id/nineAM"/>
-        <TextView
-            android:id="@+id/elevenAM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="11:00"
-            android:textSize="18sp"
-            android:layout_alignLeft="@id/timeTitle"
-            android:layout_below="@id/tenAM"/>
-        <TextView
-            android:id="@+id/twelvePM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="12:00"
-            android:textSize="18sp"
-            android:layout_alignLeft="@id/timeTitle"
-            android:layout_below="@id/elevenAM"/>
-        <TextView
-            android:id="@+id/onePM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="13:00"
-            android:textSize="18sp"
-            android:layout_alignLeft="@id/timeTitle"
-            android:layout_below="@id/twelvePM"/>
-        <TextView
-            android:id="@+id/twoPM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="14:00"
-            android:textSize="18sp"
-            android:layout_alignLeft="@id/timeTitle"
-            android:layout_below="@id/onePM"/>
-        <TextView
-            android:id="@+id/threePM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="15:00"
-            android:textSize="18sp"
-            android:layout_alignLeft="@id/timeTitle"
-            android:layout_below="@id/twoPM"/>
-        <TextView
-            android:id="@+id/fourPM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="16:00"
-            android:textSize="18sp"
-            android:layout_alignLeft="@id/timeTitle"
-            android:layout_below="@id/threePM"/>
-        <TextView
-            android:id="@+id/fivePM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="17:00"
-            android:textSize="18sp"
-            android:layout_alignLeft="@id/timeTitle"
-            android:layout_below="@id/fourPM"
-            android:layout_marginBottom="10dp"/>
-
-        <TextView
-            android:id="@+id/eightAMData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="7 %"
-            android:textSize="18sp"
-            android:layout_alignRight="@id/densityTitle"
-            android:layout_below="@id/timeTitle"
-            />
-
-        <TextView
-            android:id="@+id/nineAMData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="7 %"
-            android:textSize="18sp"
-            android:layout_alignRight="@id/densityTitle"
-            android:layout_below="@id/eightAMData"
-            />
-        <TextView
-            android:id="@+id/tenAMData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="7 %"
-            android:textSize="18sp"
-            android:layout_alignRight="@id/densityTitle"
-            android:layout_below="@id/nineAMData"
-            />
-        <TextView
-            android:id="@+id/elevenAMData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="7 %"
-            android:textSize="18sp"
-            android:layout_alignRight="@id/densityTitle"
-            android:layout_below="@id/tenAMData"
-            />
-        <TextView
-            android:id="@+id/twelvePMData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="7 %"
-            android:textSize="18sp"
-            android:layout_alignRight="@id/densityTitle"
-            android:layout_below="@id/elevenAMData"
-            />
-        <TextView
-            android:id="@+id/onePMData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="7 %"
-            android:textSize="18sp"
-            android:layout_alignRight="@id/densityTitle"
-            android:layout_below="@id/twelvePMData"
-            />
-        <TextView
-            android:id="@+id/twoPMData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="7 %"
-            android:textSize="18sp"
-            android:layout_alignRight="@id/densityTitle"
-            android:layout_below="@id/onePMData"
-            />
-        <TextView
-            android:id="@+id/threePMData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="7 %"
-            android:textSize="18sp"
-            android:layout_alignRight="@id/densityTitle"
-            android:layout_below="@id/twoPMData"
-            />
-        <TextView
-            android:id="@+id/fourPMData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="7 %"
-            android:textSize="18sp"
-            android:layout_alignRight="@id/densityTitle"
-            android:layout_below="@id/threePMData"
-            />
-        <TextView
-            android:id="@+id/fivePMData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/sfprotext_semibold"
-            android:text="7 %"
-            android:textSize="18sp"
-            android:layout_alignRight="@id/densityTitle"
-            android:layout_below="@id/fourPMData"
-            />
-
-    </RelativeLayout>
-
+            <TextView
+                android:id="@+id/dropDownTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/statisticTitle"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/sfprotext_regular"
+                android:text="DAY"
+                android:textColor="#333333" />
+        </RelativeLayout>
     </ScrollView>
 
 </RelativeLayout>
