@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/relativeLayout"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".basicInfoPageActivity">
+
+
+    <TextView
+        android:id="@+id/Secondary_Title_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Main_Title_Text"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="30dp"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="Tell us about yourself"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="#FF4141"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Main_Title_Text" />
+
+    <TextView
+        android:id="@+id/Main_Title_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:autoText="false"
+        android:fontFamily="@font/sfprotext_bold"
+        android:text="Your account has been created!"
+        android:textColor="#333333"
+        android:textSize="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/firstNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Secondary_Title_Text"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="First Name"
+        android:textColor="#333333"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/firstNameBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstNameTitle"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+        android:ems="10"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:maxLength="20"
+        android:textColor="#333333"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="24dp" />
+
+    <Button
+        android:id="@+id/clear_text_btn"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_below="@id/firstNameTitle"
+        android:layout_alignRight="@id/firstNameBox"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+
+        android:background="@drawable/ic_delete" />
+
+    <TextView
+        android:id="@+id/firstNameBoxError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/firstNameBox"
+        android:text="firstNameBox Error"
+        android:textColor="#FF4141"
+        android:visibility="invisible"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:textSize="14dp"
+        android:layout_alignLeft="@id/firstNameTitle"
+        android:layout_marginTop="-6dp"
+        />
+
+    <TextView
+        android:id="@+id/lastNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstNameBoxError"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="Last Name"
+        android:textColor="#333333"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/lastNameBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastNameTitle"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+        android:ems="10"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:maxLength="20"
+        android:textColor="#333333"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="24dp" />
+
+    <Button
+        android:id="@+id/lastNameClearTextBtn"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_below="@id/lastNameTitle"
+        android:layout_alignRight="@id/firstNameBox"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+
+        android:background="@drawable/ic_delete" />
+
+    <TextView
+        android:id="@+id/lastNameBoxError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lastNameBox"
+        android:text="lastNameBox Error"
+        android:textColor="#FF4141"
+        android:visibility="invisible"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:textSize="14dp"
+        android:layout_alignLeft="@id/firstNameTitle"
+        android:layout_marginTop="-6dp"
+        />
+
+    <ImageButton
+        android:id="@+id/next_button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/next_button"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:translationY="1dp"
+        android:translationZ="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_next" />
+
+</RelativeLayout>

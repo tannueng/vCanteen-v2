@@ -14,6 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".crowdEstimationActivity"></activity>
+        <activity android:name=".editProfilePageActivity" />
+        <activity android:name=".profilePageActivity" />
+        <activity android:name=".firstTimeLinkPaymentActivity" />
+        <activity android:name=".basicInfoPageActivity" />
+        <activity android:name=".passwordSignUpPage" />
+        <activity android:name=".homev2Activity" />
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

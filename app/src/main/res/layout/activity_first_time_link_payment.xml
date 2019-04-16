@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/relativeLayout"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".firstTimeLinkPaymentActivity">
+
+
+    <TextView
+        android:id="@+id/Main_Title_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:autoText="false"
+        android:fontFamily="@font/sfprotext_bold"
+        android:text="Choose your payment method"
+        android:textColor="#333333"
+        android:textSize="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/paymentDropdown"
+                android:layout_below="@id/Main_Title_Text"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/dropdownbg"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="7"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown"/>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_angle_arrow_down" />
+
+            </LinearLayout>
+
+    <TextView
+        android:id="@+id/accountNumberTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/paymentDropdown"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sfprotext_medium"
+        android:text="ACCOUNT NUMBER"
+        android:textColor="#333333"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/accountNumberBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accountNumberTitle"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:digits="1234567890"
+        android:ems="10"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:inputType="number"
+        android:maxLength="13"
+        android:textColor="#333333"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="24dp" />
+
+
+    <TextView
+        android:id="@+id/accountNumberError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/accountNumberBox"
+        android:text="accountNumber Error"
+        android:textColor="#FF4141"
+        android:visibility="invisible"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:textSize="14dp"
+        android:layout_alignLeft="@id/accountNumberTitle"
+        android:layout_marginTop="-6dp"
+        />
+
+
+
+    <Button
+        android:id="@+id/linkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/accountNumberError"
+        android:background="@drawable/button_bg_rounded_corner_pink"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:text="LINK"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
