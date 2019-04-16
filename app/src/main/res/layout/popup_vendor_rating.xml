@@ -20,10 +20,9 @@
         android:id="@+id/closeButton"
         android:layout_width="12dp"
         android:layout_height="12dp"
-       android:layout_marginTop="5dp"
-        android:background="@drawable/ic_close"
-        android:layout_align="@id/shareYourFeedbackTitle"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_close" />
 
     <TextView
         android:id="@+id/restaurantName"
