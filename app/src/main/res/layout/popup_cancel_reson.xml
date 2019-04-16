@@ -32,14 +32,14 @@
         android:fontFamily="@font/sfprotext_regular"
         android:text="Reasons for cancellation:"
         android:textAlignment="center"
-        android:textColor="#828282"
+        android:textColor="@color/black_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popup_cancel_title" />
 
     <TextView
-        android:id="@+id/popup_reason"
+        android:id="@+id/popup_reason_text"
         android:layout_width="295dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -70,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/popup_reason"
+        app:layout_constraintTop_toBottomOf="@+id/popup_reason_text"
         app:layout_constraintVertical_bias="0.100000024" />
 
 </android.support.constraint.ConstraintLayout>

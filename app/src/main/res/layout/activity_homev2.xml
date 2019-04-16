@@ -201,33 +201,34 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/RecommendationCardImage">
+
                         <TextView
                             android:id="@+id/recommendationCardHeader"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Recommended Menu"
-                            android:fontFamily="@font/sfprotext_semibold"
-                            android:layout_marginLeft="7dp"
-                            android:textColor="#333333"
-                            android:textSize="20sp"
-                            android:padding="3dp"
+                            android:layout_alignParentLeft="true"
                             android:layout_alignParentTop="true"
-                            android:layout_alignParentLeft="true" />
+                            android:layout_marginLeft="7dp"
+                            android:fontFamily="@font/sfprotext_semibold"
+                            android:padding="3dp"
+                            android:text="Recommended Menu"
+                            android:textColor="#333333"
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/recommendationDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ceasar Salad"
                             android:layout_below="@+id/recommendationCardHeader"
-                            android:fontFamily="@font/sfprotext_regular"
-                            android:textColor="#828282"
-                            android:layout_marginLeft="7dp"
-                            android:textSize="14sp"
-                            android:padding="3dp"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentBottom="true"
-                            />
+                            android:layout_marginLeft="7dp"
+                            android:fontFamily="@font/sfprotext_regular"
+                            android:paddingLeft="5dp"
+                            android:paddingBottom="10dp"
+                            android:text="Ceasar Salad"
+                            android:textColor="#828282"
+                            android:textSize="14sp" />
 
                         <Button
                             android:id="@+id/recommedationButton"
@@ -390,7 +391,7 @@
                             android:layout_marginLeft="7dp"
                             android:fontFamily="@font/sfprotext_semibold"
                             android:padding="3dp"
-                            android:text="Canteen density"
+                            android:text="Canteen Density"
                             android:textColor="#333333"
                             android:textSize="20sp" />
 
@@ -403,7 +404,8 @@
                             android:layout_alignParentBottom="true"
                             android:layout_marginLeft="7dp"
                             android:fontFamily="@font/sfprotext_regular"
-                            android:padding="3dp"
+                            android:paddingLeft="5dp"
+                            android:paddingBottom="8dp"
                             android:text="View canteen density statistics"
                             android:textColor="#828282"
                             android:textSize="14sp" />
@@ -488,18 +490,17 @@
                             android:id="@+id/ordersDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="View status and accept your meal here"
                             android:layout_below="@+id/ordersCardHeader"
-                            android:fontFamily="@font/sfprotext_regular"
-                            android:textColor="#828282"
-                            android:layout_marginLeft="7dp"
-                            android:textSize="14sp"
-                            android:padding="3dp"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="7dp"
                             android:layout_toLeftOf="@id/ordersButton"
-                            android:paddingLeft="3dp"
-                            />
+                            android:fontFamily="@font/sfprotext_regular"
+                            android:paddingLeft="5dp"
+                            android:paddingBottom="8dp"
+                            android:text="View status and accept your meal here"
+                            android:textColor="#828282"
+                            android:textSize="14sp" />
 
                         <Button
                             android:id="@+id/ordersButton"

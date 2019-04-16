@@ -1,7 +1,10 @@
 package com.example.vcanteen;
 
+import com.example.vcanteen.POJO.BugReport;
+import com.example.vcanteen.POJO.cancelReason;
 import com.example.vcanteen.POJO.menuExtra;
 import com.example.vcanteen.POJO.newOrder;
+import com.example.vcanteen.POJO.oldSlot;
 import com.example.vcanteen.POJO.orderHistory;
 import com.example.vcanteen.POJO.orderProgress;
 import com.example.vcanteen.POJO.orderStatus;
@@ -66,5 +69,14 @@ public interface JsonPlaceHolderApi {
 
     @GET("v1/orders/{vendorId}/menu/{foodId}")
     Call<menuExtra> getMenuExtra(@Path("vendorId") int vendorId, @Path("foodId") int foodId);
+
+    @POST("/v2/settings/customer/report")
+    Call<Void> postBugReport(@Body BugReport bugReport);
+
+    @GET("/v2/orders/{orderId}/slot-old")
+    Call<oldSlot> getOldSlot(@Path("orderId") int orderId);
+
+    @GET("/v2/orders/{orderId}/cancellation-reason")
+    Call<cancelReason> getCancelReason(@Path("orderId") int orderId);
 
 }
