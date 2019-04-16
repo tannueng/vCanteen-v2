@@ -171,7 +171,7 @@ public class historyTabFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit2.create(JsonPlaceHolderApi.class);
-        Call<cancelReason> call =  jsonPlaceHolderApi.getCancelReason(orderId);
+        Call<cancelReason> call =  jsonPlaceHolderApi.getCancellationReason(orderId);
 
         call.enqueue(new Callback<cancelReason>() {
             @Override

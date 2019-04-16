@@ -39,7 +39,7 @@ public class settingActivity extends AppCompatActivity {
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         String account_type = sharedPref.getString("account_type", "UNKONWN");
-        System.out.println(account_type);
+        System.out.println("Account Type: " + account_type);
         if (account_type.equals("FACEBOOK"))
             tappable_password.setVisibility(View.GONE);
 

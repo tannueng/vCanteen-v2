@@ -77,6 +77,6 @@ public interface JsonPlaceHolderApi {
     Call<oldSlot> getOldSlot(@Path("orderId") int orderId);
 
     @GET("/v2/orders/{orderId}/cancellation-reason")
-    Call<cancelReason> getCancelReason(@Path("orderId") int orderId);
+    Call<cancelReason> getCancellationReason(@Path("orderId") int orderId);
 
 }
