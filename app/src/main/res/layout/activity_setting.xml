@@ -1,134 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".settingActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ToolbarTheme"
+        android:focusable="true"
+        android:clickable="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="SETTINGS"
+        app:titleTextColor="@color/colorWhite"></android.support.v7.widget.Toolbar>
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tappable_payment"
+        android:background="?android:attr/listDivider"
+        android:visibility="visible" />
+
     <LinearLayout
-        android:layout_width="396dp"
-        android:layout_height="600dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="9dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7">
+        android:id="@+id/tappable_password"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical">
 
-        <View
-            android:id="@+id/divider"
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
-            android:visibility="visible" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/sfprotext_semibold"
+            android:lineSpacingExtra="12sp"
+            android:text="Password"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/tappable_password"
+        <TextView
+            android:id="@+id/textView5"
             android:layout_width="match_parent"
-            android:layout_height="112dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:lineSpacingExtra="12sp"
-                android:text="Password"
-                android:textColor="@color/colorAccent"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Change Your Password"
-                android:textColor="#828282"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
-            android:visibility="visible" />
-
-        <LinearLayout
-            android:id="@+id/tappable_payment"
-            android:layout_width="match_parent"
-            android:layout_height="112dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:lineSpacingExtra="12sp"
-                android:text="Payment Method"
-                android:textColor="@color/colorAccent"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Manage Your Payment Method"
-                android:textColor="#828282"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <View
-            android:id="@+id/divider3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
-            android:visibility="visible" />
-
-        <!--<Button-->
-        <!--android:id="@+id/reportBugButton"-->
-        <!--android:layout_width="180dp"-->
-        <!--android:layout_height="35dp"-->
-        <!--android:layout_marginLeft="108dp"-->
-        <!--android:layout_marginTop="170dp"-->
-        <!--android:background="@color/colorAccent"-->
-        <!--android:text="REPORT BUG"-->
-        <!--android:textColor="#FFFFFF" />-->
-
-        <Button
-            android:id="@+id/logOutButton"
-            android:layout_width="180dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="108dp"
-            android:layout_marginTop="200dp"
-            android:background="@drawable/button_background"
-            android:text="LOG OUT"
-            android:textColor="#FFFFFF" />
-
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/sfprotext_medium"
+            android:text="Change your password"
+            android:textColor="#828282"
+            android:textSize="15sp" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="94dp"
+    <LinearLayout
+        android:id="@+id/tappable_payment"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:layout_below="@+id/divider2"
+        android:focusable="true"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/sfprotext_semibold"
+            android:lineSpacingExtra="12sp"
+            android:text="Payment Method"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/sfprotext_medium"
+            android:text="Manage your payment method"
+            android:textColor="#828282"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/report_bug_button"
+        android:layout_width="180dp"
+        android:layout_height="35dp"
+        android:layout_above="@+id/logOutButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="REPORT BUG"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/logOutButton"
+        android:layout_width="180dp"
+        android:layout_height="35dp"
+        android:layout_above="@+id/app_version"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="108dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="LOG OUT"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/app_version"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="159dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_vcanteen_header_logo" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="150dp"
+        android:text="VCANTEEN V.2.00"
+        android:textSize="12sp" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tappable_password"
+        android:background="?android:attr/listDivider"
+        android:visibility="visible" />
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

@@ -40,6 +40,8 @@
         <activity android:name=".emailActivity" />
         <activity android:name=".OrderListActivity" />
         <activity android:name=".passwordLoginActivity" />
+        <activity android:name=".reportBugActivity"/>
+        <activity android:name=".EditPaymentMethodActivity"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
