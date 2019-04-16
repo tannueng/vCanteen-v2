@@ -9,15 +9,19 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
 
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_constraintBottom_toTopOf="@+id/textView18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="A LA CARTE DISH" />
+        app:title="A LA CARTE DISH"
+        app:titleMarginStart="25dp"
+        app:titleTextAppearance="@style/Toolbar.TitleText"/>
+
 
     <TextView
         android:id="@+id/textView"

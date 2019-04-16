@@ -6,26 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".orderConfirmationActivity">
 
+    <TextView
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="Order Successful"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="94dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
+        android:layout_width="62dp"
+        android:layout_height="63dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="159dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_vcanteen_header_logo" />
+        app:layout_constraintTop_toBottomOf="@id/top"
+        app:srcCompat="@drawable/ic_check_circle" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/sfprotext_semibold"
-        android:text="Your Order is Now Cooking! "
+        android:text="Your Order Summary"
         android:textColor="#333333"
         android:textSize="18sp"
         android:textStyle="bold"
