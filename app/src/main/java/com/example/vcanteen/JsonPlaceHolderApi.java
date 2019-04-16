@@ -1,5 +1,6 @@
 package com.example.vcanteen;
 
+import com.example.vcanteen.POJO.customerHome;
 import com.example.vcanteen.POJO.menuExtra;
 import com.example.vcanteen.POJO.newOrder;
 import com.example.vcanteen.POJO.orderHistory;
@@ -66,5 +67,8 @@ public interface JsonPlaceHolderApi {
 
     @GET("v1/orders/{vendorId}/menu/{foodId}")
     Call<menuExtra> getMenuExtra(@Path("vendorId") int vendorId, @Path("foodId") int foodId);
+
+    @GET("v2/customer-main/{customerId}/home")
+    Call<customerHome> getCustomerHome(@Path("customerId") int customerId);
 
 }
