@@ -100,15 +100,16 @@
         android:layout_width="250dp"
         android:layout_height="100dp"
         android:layout_below="@id/description_text"
-        android:background="@drawable/crowd_estimation_data_box"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:hint="Tell us more about the dish. How was it?"
-        android:textAlignment="viewStart"
-        android:padding="5dp"
-        android:textSize="12sp"
+        android:background="@drawable/crowd_estimation_data_box"
         android:fontFamily="@font/sfprotext_regularitalic"
-        android:textColor="#333333"/>
+        android:gravity="top"
+        android:hint="Tell us more about the dish. How was it?"
+        android:padding="5dp"
+        android:textAlignment="viewStart"
+        android:textColor="#333333"
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/sendButton"
