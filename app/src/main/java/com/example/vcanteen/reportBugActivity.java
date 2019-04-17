@@ -22,6 +22,8 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -65,6 +67,22 @@ public class reportBugActivity extends AppCompatActivity {
                     .build();
             JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
             Call<Void> call =  jsonPlaceHolderApi.postBugReport(report);
+
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(reportBugActivity.this, "CODE: "+response.code(),Toast.LENGTH_LONG).show();
+                        return;
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+
+                }
+            });
 
             reportText.setText("");
             Toast.makeText(this, "Bug report successfully submitted", Toast.LENGTH_LONG).show();
