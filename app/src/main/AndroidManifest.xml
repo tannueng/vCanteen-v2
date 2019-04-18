@@ -48,7 +48,6 @@
         <activity android:name=".settingActivity" />
         <activity android:name=".emailActivity" />
         <activity android:name=".OrderListActivity" />
-        <activity android:name=".passwordLoginActivity" />
         <activity android:name=".reportBugActivity" />
         <activity android:name=".EditPaymentMethodActivity" />
 

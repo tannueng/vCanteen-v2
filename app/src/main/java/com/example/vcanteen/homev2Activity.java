@@ -57,7 +57,7 @@ public class homev2Activity extends AppCompatActivity {
         firstAndLastName = findViewById(R.id.firstAndLastName);
         profilePictureButton = findViewById(R.id.profilePictureButton);
 
-        getSharedPreferences("myPref", MODE_PRIVATE);
+        sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         customerId = sharedPref.getInt("customerId",0);
 
         customerSingleton = com.example.vcanteen.customerSingleton.getInstance();
