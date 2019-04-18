@@ -1,22 +1,26 @@
 package com.example.vcanteen;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +30,7 @@ import com.example.vcanteen.POJO.pickupSlot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +49,9 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
     static String slotString = "";
     static TextView slotNumber;
+    public static RatingBar ratingBar;
+    static TextView descriptionText;
+    static ProgressDialog progressDialog;
 
     static SharedPreferences sharedPref;
     @Nullable
@@ -131,7 +139,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                     if(String.valueOf(post.getOrderStatus()).equals("DONE")) {
                         data.add(new orderListData(Integer.toString(post.getOrderId()),Integer.toString(post.getOrderPrice()),post.getOrderName(),post.getOrderNameExtra(), post.getRestaurantName(), post.getCreatedAt(), post.getOrderStatus(),1,0));
                     } else {
-                        data.add(new orderListData(Integer.toString(post.getOrderId()),Integer.toString(post.getOrderPrice()),post.getOrderName(),post.getOrderNameExtra(), post.getRestaurantName(), post.getCreatedAt(), post.getOrderStatus(),0,15));
+                        data.add(new orderListData(Integer.toString(post.getOrderId()),Integer.toString(post.getOrderPrice()),post.getOrderName(),post.getOrderNameExtra(), post.getRestaurantName(), post.getCreatedAt(), post.getOrderStatus(),0,post.getOrderEstimatedTime()));
                     }
                 }
                 DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
@@ -195,7 +203,6 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
     private static void showConfirmDialog(final Context context, final int orderId, final pickupSlot slot) {
 
         //display popup confirm pickup
-
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.popup_confirm_pickup);
         slotNumber =(TextView)dialog.findViewById(R.id.pickup_slot_number);
@@ -219,12 +226,8 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                     public void onClick(View v) {
                         dialog.dismiss();
 
-
                         System.out.println("My orderID is " + orderId);
                         putOrderSlot(context, orderId);
-
-
-
                     }
                 });
 
@@ -249,12 +252,14 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
             @Override
             public void onResponse(Call<orderStatus> call3, Response<orderStatus> response) {
                 if(!response.isSuccessful()) {
-                                            Toast.makeText(context, "CODE: "+response.code(),
-                                                    Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "CODE: "+response.code(), Toast.LENGTH_LONG).show();
                     System.out.println("PICKUP onResponse collected unsuccessful");
 //                                            System.out.println("Current - orderStatus : "+String.valueOf(.orderStatus.getText()));
                     return;
                 }
+
+                //Show review dialog
+//                showReviewDialog(context, orderId);
             }
 
             @Override
@@ -264,6 +269,118 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
             }
         });
         System.out.println("ENDD");
+    }
+
+    public static void showReviewDialog(final Context context, int orderId, String vendorName, String orderName1, @Nullable String orderNameExtra1) {
+        //display popup confirm pickup
+        dialog = new Dialog(context);
+        dialog.setContentView(R.layout.popup_vendor_rating);
+        TextView restaurantName = dialog.findViewById(R.id.restaurantName);
+        TextView orderName = dialog.findViewById(R.id.orderName);
+        TextView orderNameExtra = dialog.findViewById(R.id.orderNameExtra);
+        restaurantName.setText(vendorName);
+        orderName.setText(orderName1);
+        orderNameExtra.setText(orderNameExtra1);
+
+        ratingBar = dialog.findViewById(R.id.ratingBar);
+        descriptionText = dialog.findViewById(R.id.description_text);
+        EditText reviewBox = dialog.findViewById(R.id.reviewBox);
+        TextView counter = dialog.findViewById(R.id.counter);
+        TextView inlineError = dialog.findViewById(R.id.inlineError);
+
+        AtomicReference<Double> score = new AtomicReference<>(0.0);
+        double score2 = 0.0;
+        dialog.setCancelable(true);
+        descriptionText.setText("Tap on the stars to rate!");
+        //if rating value is changed,
+        //display the current rating value in the result (textview) automatically
+        ratingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            if(String.valueOf(rating).equals("0.0")) descriptionText.setText("\"Tap on the stars to rate!\"");
+            if(String.valueOf(rating).equals("1.0")) descriptionText.setText("\"Is it really that bad?\"");
+            if(String.valueOf(rating).equals("2.0")) descriptionText.setText("\"Not so bad for a meal!\"");
+            if(String.valueOf(rating).equals("3.0")) descriptionText.setText("\"Good taste. Worth a try!\"");
+            if(String.valueOf(rating).equals("4.0")) descriptionText.setText("\"Great taste. Would recommend!\"");
+            if(String.valueOf(rating).equals("5.0")) descriptionText.setText("\"Awesome, I can eat this everyday!\"");
+            score.set(Double.parseDouble(new Float(rating).toString()));
+//            score2 = (double)rating;
+            Toast.makeText(context, new Float(rating).toString(),Toast.LENGTH_LONG).show();
+
+        });
+
+        reviewBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            @Override
+            public void afterTextChanged(Editable s) {
+                counter.setText(s.toString().length()+"/300");
+//                final Pattern PASSWORD_PATTERN =
+//                        Pattern.compile("^[a-zA-Z0-9@!#$%^&+-=].*$");  // Password Constraint
+//                // (?=\S+$) = no space is allowed.
+//                // special characters that are allowed @ ! # $ % ^ & + = -
+//
+////                _ - * ‘ “ # & () @
+//                if(!PASSWORD_PATTERN.matcher(reviewBox.getText().toString()).matches()) {
+//                    inlineError.setVisibility(View.VISIBLE);
+//                } else {
+//                    inlineError.setVisibility(View.INVISIBLE);
+//                }
+            }
+        });
+
+
+        (dialog.findViewById(R.id.closeButton))
+                .setOnClickListener(v -> dialog.dismiss());
+
+        (dialog.findViewById(R.id.sendButton))
+                .setOnClickListener(v -> {
+                    //check constraint
+                    progressDialog = new ProgressDialog(context);
+                    progressDialog = ProgressDialog.show(context, "","Loading. Please wait...", true);
+
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://vcanteen.herokuapp.com/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+                    Call<Void> call = jsonPlaceHolderApi.postVendorReview(sharedPref.getInt("customerId", 0),score, orderId,reviewBox.getText().toString().trim() );
+//                    Call<Void> call = jsonPlaceHolderApi.postVendorReview(1,1.0, 2,"gfdhfhg" );
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(context, "CODE: "+response.code(),Toast.LENGTH_LONG).show();
+                                return;
+
+                            }
+                            progressDialog.dismiss();
+                            Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
+                            loadRecyclerViewData(context);
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            System.out.println("review fail");
+                            dialog.dismiss();
+                        }
+                    });
+
+                    Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show(); //TODO need to remove on real usage
+                    progressDialog.dismiss();
+                    dialog.dismiss();
+
+                });
+        dialog.findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                return true;
+            }
+        });
+        dialog.show();
     }
 
 }

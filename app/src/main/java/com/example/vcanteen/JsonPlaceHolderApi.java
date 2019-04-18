@@ -24,8 +24,11 @@ import com.example.vcanteen.POJO.vendorCombinationMenu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
 import retrofit2.http.POST;
@@ -85,9 +88,10 @@ public interface JsonPlaceHolderApi {
     @GET("/v2/orders/{orderId}/cancellation-reason")
     Call<cancelReason> getCancellationReason(@Path("orderId") int orderId);
 
+    @FormUrlEncoded
     @POST("/v2/orders/customer/rating")
     Call<Void> postVendorReview(@Field("customerId") int customerId,
-                                @Field("score") double score,
+                                @Field("score") AtomicReference<Double> score, //TODO need to check compat
                                 @Field("orderId") int orderId,
                                 @Field("comment") String comment);
 

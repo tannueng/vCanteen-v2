@@ -170,6 +170,15 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             this.orderStatus = orderStatus;
         }
 
+        public boolean isHasRated() {
+            return hasRated;
+        }
+
+        public void setHasRated(boolean hasRated) {
+            this.hasRated = hasRated;
+        }
+
+
         private CardView cv;
         private TextView orderId;
         private TextView orderPrice;
@@ -180,6 +189,7 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private TextView orderStatus;
         private TextView orderEstimatedTime;
         private ImageView orderEstimatedTimeClock;
+        private boolean hasRated;
 
 
         public CookingViewHolder(View itemView) {
@@ -198,16 +208,21 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             itemView.setOnClickListener(v -> {
                 //todo get order id
                 //todo call retrofit in historytab fragment to get was_at
+                int order = Integer.parseInt(String.valueOf(orderId.getText()).substring(10));
                 if(orderStatus.getText().equals("TIMEOUT")) {
                     System.out.println("Pressed one TIMEOUT");
-                    int order = Integer.parseInt(String.valueOf(orderId.getText()).substring(10));
                     historyTabFragment.getOldSlotInfo(itemView.getContext(),order);
                 }
 
                 if(orderStatus.getText().equals("CANCELLED")) {
                     System.out.println("Pressed one CANCELLED");
-                    int order = Integer.parseInt(String.valueOf(orderId.getText()).substring(10));
                     historyTabFragment.getCancelReason(itemView.getContext(),order);
+                }
+
+                if(orderStatus.getText().equals("COLLECTED")&&!hasRated) {//and hasRated = false
+                    System.out.println("Pressed one COLLECTED and not rated");
+
+                    progressTabFragment.showReviewDialog(itemView.getContext(),order,vendorName.getText().toString(),orderName.getText().toString(),orderNameExtra.getText().toString());
                 }
 
 
@@ -305,12 +320,12 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    if(orderStatus.getText().equals("DONE")) {
+
 
                     System.out.println("onClick DONE Detected. "+String.valueOf(orderId.getText()));
                     int order = Integer.parseInt(String.valueOf(orderId.getText()).substring(10));
                     progressTabFragment.getSlotInfo(itemView.getContext(),order);
-//                    }
+
                 }
             });
         }

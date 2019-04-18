@@ -27,6 +27,9 @@ public class orderProgress {
     @SerializedName("createdAt")
     private String createdAt;
 
+    @SerializedName("orderEstimatedTime")
+    private int orderEstimatedTime;
+
 
 //    private orderListData data;
 //
@@ -66,4 +69,9 @@ public class orderProgress {
     public String getCreatedAt() {
         return createdAt;
     }
+
+    public int getOrderEstimatedTime() {
+        return orderEstimatedTime;
+    }
+
 }

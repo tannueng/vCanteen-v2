@@ -12,23 +12,20 @@ public class orderHistory {
     @SerializedName("orderNameExtra")
     private String orderNameExtra;
 
-    @SerializedName("foodImage")
-    private String foodImage;
-
     @SerializedName("orderPrice")
     private int orderPrice;
 
     @SerializedName("restaurantName")
     private String restaurantName;
 
-    @SerializedName("restaurantNumber")
-    private int restaurantNumber; //number or id
-
     @SerializedName("orderStatus")
     private String orderStatus;
 
     @SerializedName("createdAt")
     private String createdAt;
+
+    @SerializedName("hasRated")
+    private boolean hasRated;
 
 
 //    private orderListData data;
@@ -50,10 +47,6 @@ public class orderHistory {
         return orderNameExtra;
     }
 
-    public String getFoodImage() {
-        return foodImage;
-    }
-
     public int getOrderPrice() {
         return orderPrice;
     }
@@ -62,15 +55,15 @@ public class orderHistory {
         return restaurantName;
     }
 
-    public int getRestaurantNumber() {
-        return restaurantNumber;
-    }
-
     public String getOrderStatus() {
         return orderStatus;
     }
 
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    public boolean isHasRated() {
+        return hasRated;
     }
 }

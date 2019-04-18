@@ -96,7 +96,17 @@ public class historyTabFragment extends Fragment {
 //                showData(response.body());
 
                 for (orderHistory post : posts) {
-                    data.add(new orderListData(Integer.toString(post.getOrderId()),Integer.toString(post.getOrderPrice()),post.getOrderName(),post.getOrderNameExtra(), post.getRestaurantName(), post.getCreatedAt(), post.getOrderStatus(),0, 0));
+                    data.add(new orderListData(Integer.toString(post.getOrderId()),
+                            Integer.toString(post.getOrderPrice()),
+                            post.getOrderName(),
+                            post.getOrderNameExtra(),
+                            post.getRestaurantName(),
+                            post.getCreatedAt(),
+                            post.getOrderStatus(),
+                            0,
+//                            post.isHasRated()
+                            false
+                    ));
 
                 }
                 DifferentRowAdapter adapter = new DifferentRowAdapter(data);

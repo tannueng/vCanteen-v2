@@ -86,8 +86,8 @@
             android:fontFamily="@font/sfprotext_semibold"
             android:gravity="start"
             android:text="Invalid email address"
-            android:visibility="invisible"
             android:textColor="#FF4141"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/EMAIL"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
