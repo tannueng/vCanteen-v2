@@ -1,9 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".tutorialTwo">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:textSize="48sp"
+        android:fontFamily="@font/sfprotext_bold"
+        android:text="JUST PAY &amp;
+PICK UP"
+        android:textColor="#333333"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Title"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="40dp"
+        android:text="We make it simple. Choose or customize your menu, order, pay, and just enjoy chatting with your friends until your order is ready."
+        android:textColor="#333333"
+        android:fontFamily="@font/sfprotext_regular"
+        android:textSize="16sp"
+        />
+
+    <ImageView
+        android:id="@+id/pic1"
+        android:layout_width="296dp"
+        android:layout_height="215dp"
+        android:layout_below="@id/Description"
+        android:background="@drawable/ic_tutorialtwo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageButton
+            android:id="@+id/next_button"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/next_button"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:translationY="1dp"
+            android:translationZ="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_next" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>
