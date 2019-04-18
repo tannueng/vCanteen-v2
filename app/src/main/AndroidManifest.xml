@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".crowdEstimationActivity"></activity>
+        <activity android:name=".tutorialTwo"></activity>
+        <activity android:name=".tutorialOne" />
+        <activity android:name=".crowdEstimationActivity" />
         <activity android:name=".editProfilePageActivity" />
         <activity android:name=".profilePageActivity" />
         <activity android:name=".firstTimeLinkPaymentActivity" />
@@ -47,8 +49,8 @@
         <activity android:name=".emailActivity" />
         <activity android:name=".OrderListActivity" />
         <activity android:name=".passwordLoginActivity" />
-        <activity android:name=".reportBugActivity"/>
-        <activity android:name=".EditPaymentMethodActivity"/>
+        <activity android:name=".reportBugActivity" />
+        <activity android:name=".EditPaymentMethodActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
