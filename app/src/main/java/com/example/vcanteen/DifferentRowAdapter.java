@@ -86,9 +86,6 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                     break;
             }
-
-
-
         }
     }
     @Override
@@ -198,11 +195,26 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             orderEstimatedTime = itemView.findViewById(R.id.estimateTimeText);
             orderEstimatedTimeClock = itemView.findViewById(R.id.estimatedTimeClock);
 
+            itemView.setOnClickListener(v -> {
+                //todo get order id
+                //todo call retrofit in historytab fragment to get was_at
+                if(orderStatus.getText().equals("TIMEOUT")) {
+                    System.out.println("Pressed one TIMEOUT");
+                    int order = Integer.parseInt(String.valueOf(orderId.getText()).substring(10));
+                    historyTabFragment.getOldSlotInfo(itemView.getContext(),order);
+                }
 
+                if(orderStatus.getText().equals("CANCELLED")) {
+                    System.out.println("Pressed one CANCELLED");
+                    int order = Integer.parseInt(String.valueOf(orderId.getText()).substring(10));
+                    historyTabFragment.getCancelReason(itemView.getContext(),order);
+                }
+
+
+
+            });
 
         }
-
-
     }
     public static class DoneViewHolder extends RecyclerView.ViewHolder {
         private CardView cv;

@@ -1,8 +1,14 @@
 package com.example.vcanteen;
 
+import com.example.vcanteen.POJO.BugReport;
+import com.example.vcanteen.POJO.cancelReason;
+import com.example.vcanteen.POJO.currentDensity;
+import com.example.vcanteen.POJO.currentDensityAll;
+import com.example.vcanteen.POJO.hourlyCrowdStat;
 import com.example.vcanteen.POJO.customerHome;
 import com.example.vcanteen.POJO.menuExtra;
 import com.example.vcanteen.POJO.newOrder;
+import com.example.vcanteen.POJO.oldSlot;
 import com.example.vcanteen.POJO.orderHistory;
 import com.example.vcanteen.POJO.orderProgress;
 import com.example.vcanteen.POJO.orderStatus;
@@ -16,8 +22,10 @@ import com.example.vcanteen.Data.TokenResponse;
 import com.example.vcanteen.Data.TokenVerification;
 import com.example.vcanteen.POJO.vendorCombinationMenu;
 
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
 import retrofit2.http.POST;
@@ -68,7 +76,30 @@ public interface JsonPlaceHolderApi {
     @GET("v1/orders/{vendorId}/menu/{foodId}")
     Call<menuExtra> getMenuExtra(@Path("vendorId") int vendorId, @Path("foodId") int foodId);
 
+    @POST("/v2/settings/customer/report")
+    Call<Void> postBugReport(@Body BugReport bugReport);
+
+    @GET("/v2/orders/{orderId}/slot-old")
+    Call<oldSlot> getOldSlot(@Path("orderId") int orderId);
+
+    @GET("/v2/orders/{orderId}/cancellation-reason")
+    Call<cancelReason> getCancellationReason(@Path("orderId") int orderId);
+
+    @POST("/v2/orders/customer/rating")
+    Call<Void> postVendorReview(@Field("customerId") int customerId,
+                                @Field("score") double score,
+                                @Field("orderId") int orderId,
+                                @Field("comment") String comment);
+
+    @GET("/v2/crowd-estimation/current")        //Current Density
+    Call<currentDensity> getCurrentDensity();
+
+    @GET("/v2/crowd-estimation/current/all")    //Crowd Estimation Page All Elements
+    Call<currentDensityAll> getCurrentDensityAll();
+
+    @GET("/v2/crowd-estimation/{day}")
+    Call<ArrayList<hourlyCrowdStat>> getDailyStat(@Path("day") String day);
+
     @GET("v2/customer-main/{customerId}/home")
     Call<customerHome> getCustomerHome(@Path("customerId") int customerId);
-
 }

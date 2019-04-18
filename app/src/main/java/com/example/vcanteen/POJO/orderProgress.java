@@ -21,9 +21,6 @@ public class orderProgress {
     @SerializedName("restaurantName")
     private String restaurantName;
 
-    @SerializedName("restaurantNumber")
-    private int restaurantNumber; //number or id
-
     @SerializedName("orderStatus")
     private String orderStatus;
 
@@ -60,10 +57,6 @@ public class orderProgress {
 
     public String getRestaurantName() {
         return restaurantName;
-    }
-
-    public int getRestaurantNumber() {
-        return restaurantNumber;
     }
 
     public String getOrderStatus() {

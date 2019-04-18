@@ -86,31 +86,6 @@ public class changePasswordActivity extends AppCompatActivity {
         account_type = sharedPref.getString("account_type", "UNKONWN");
         firebaseToken = sharedPref.getString("firebaseToken", "NO TOKEN");
 
-
-        // show and hide password for current password field
-        showHide1.setVisibility(View.GONE);
-        currentPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        currentPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (currentPassword.getText().length() > 0) {
-                    showHide1.setVisibility(View.VISIBLE);
-                } else {
-                    showHide1.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
         showHide1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,29 +101,6 @@ public class changePasswordActivity extends AppCompatActivity {
             }
         });
 
-        // show and hide password for new password field
-        showHide2.setVisibility(View.GONE);
-        newPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        newPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (newPassword.getText().length() > 0) {
-                    showHide2.setVisibility(View.VISIBLE);
-                } else {
-                    showHide2.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         showHide2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,29 +116,7 @@ public class changePasswordActivity extends AppCompatActivity {
             }
         });
 
-        // show and hide password for confirm new password field
-        showHide3.setVisibility(View.GONE);
-        confirmNewPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        confirmNewPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (confirmNewPassword.getText().length() > 0) {
-                    showHide3.setVisibility(View.VISIBLE);
-                } else {
-                    showHide3.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         showHide3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -202,14 +132,7 @@ public class changePasswordActivity extends AppCompatActivity {
             }
         });
 
-        changePasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                changePassword();
-
-            }
-        });
+        changePasswordButton.setOnClickListener(view -> changePassword());
 
         findViewById(R.id.constraintLayout).setOnTouchListener(new View.OnTouchListener() {
             @Override

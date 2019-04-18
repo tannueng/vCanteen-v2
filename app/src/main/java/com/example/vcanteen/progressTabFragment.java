@@ -159,8 +159,6 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit2.create(JsonPlaceHolderApi.class);
-//        System.out.println("My order id is "+ DifferentRowAdapter.DoneViewHolder.orderId.getText().toString().substring(10));
-//        int i = Integer.parseInt(holder.orderId.getText().toString().substring(10));
         Call<pickupSlot> call =  jsonPlaceHolderApi.getPickupSlot(orderId);
 
         call.enqueue(new Callback<pickupSlot>() {
@@ -242,18 +240,6 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-//                                System.out.println("My order id is "+holder.orderId.getText().toString().substring(10));
-
-//                                            orderStatus orderStatus2 = new orderStatus("COLLECTED");
-//                                            Call<orderStatus> call = jsonPlaceHolderApi.putOrderStatus(orderStatus2);
-
-
-//                                            Task task = new Task(1, "my task title");
-//                                            Call<Task> call = taskService.createTask(task);
-//                                            call.enqueue(new Callback<orderStatus>() {});
-
-
-//                                int i = Integer.parseInt(holder.orderId.getText().toString().substring(10));
         loadRecyclerViewData(context);
         System.out.println("entered putOrderSlot");
         System.out.println("Received Order ID : "+orderId);
@@ -269,15 +255,6 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 //                                            System.out.println("Current - orderStatus : "+String.valueOf(.orderStatus.getText()));
                     return;
                 }
-
-
-
-//                                                    refresh();
-//                                        System.out.println("Current + orderStatus : "+String.valueOf(holder.orderStatus));
-//                                                    orderListData delete = holder.getAdapterPosition();
-//                                                    list.remove(getAdapterPosition());
-//                                                    remove();
-
             }
 
             @Override
