@@ -176,7 +176,7 @@ public class cartActivity extends AppCompatActivity {
 
     public void showPopUp(){
         showpopup.setContentView(R.layout.cart_confirm_popup);
-        confirmButton = (Button)showpopup.findViewById(R.id.dissmiss_btn);
+        confirmButton = (Button)showpopup.findViewById(R.id.dismiss_btn);
         cancelButton = (TextView)showpopup.findViewById(R.id.cancelButton);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {

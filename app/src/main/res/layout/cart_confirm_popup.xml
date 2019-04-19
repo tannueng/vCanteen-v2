@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/popup_cancel_title" />
 
     <Button
-        android:id="@+id/dissmiss_btn"
+        android:id="@+id/dismiss_btn"
         android:layout_width="125dp"
         android:layout_height="34dp"
         android:layout_marginStart="48dp"
@@ -66,7 +66,7 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dissmiss_btn"
+        app:layout_constraintStart_toEndOf="@+id/dismiss_btn"
         app:layout_constraintTop_toBottomOf="@+id/text_reason"
         app:layout_constraintVertical_bias="1.0" />
 </android.support.constraint.ConstraintLayout>

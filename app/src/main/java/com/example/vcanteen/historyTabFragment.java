@@ -194,9 +194,11 @@ public class historyTabFragment extends Fragment {
                 }
 
 
-                cancelReason reason = response.body();
+//                cancelReason reason = response.body();
+                cancelReason reason = new cancelReason();
+                reason.setCancelReason("Not enough food");
 
-                showCancelReasonDialog(context,orderId,reason);
+                showCancelReasonDialog(context,reason);
 
 
             }
@@ -208,12 +210,17 @@ public class historyTabFragment extends Fragment {
                 System.out.println("CANC some error");
             }
         });
+        //Mock Data
+        cancelReason reason = new cancelReason();
+        reason.setCancelReason("Not enough food");
+
+        showCancelReasonDialog(context,reason);
     }
 
-    private static void showCancelReasonDialog(Context context, int orderId, cancelReason reason) {
+    private static void showCancelReasonDialog(Context context, cancelReason reason) {
         //display popup cancel reason
         dialog = new Dialog(context);
-        dialog.setContentView(R.layout.popup_cancel_reson);
+        dialog.setContentView(R.layout.popup_cancel_reason);
         reasonText = dialog.findViewById(R.id.popup_reason_text);
         reasonText.setText(reason.getCancelReason());
         dialog.setCancelable(true);
