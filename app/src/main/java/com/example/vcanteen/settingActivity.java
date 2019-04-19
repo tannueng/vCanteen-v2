@@ -36,6 +36,7 @@ public class settingActivity extends AppCompatActivity {
     private Button confirmLogoutBtn;
     private Button cancelLogoutBtn;
     ArrayList<paymentList> paymentList;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -59,6 +60,11 @@ public class settingActivity extends AppCompatActivity {
         tappable_password.setOnClickListener(v -> openChangePassword());
 
         tappable_payment.setOnClickListener(v -> {
+
+//            progressDialog = new ProgressDialog(settingActivity.this);
+//            progressDialog = ProgressDialog.show(settingActivity.this
+//                    , "",
+//                    "Loading. Please wait...", true);
             //TODO call retrofit for editpayment here
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("http://vcanteen.herokuapp.com/")
@@ -84,6 +90,7 @@ public class settingActivity extends AppCompatActivity {
                     }
 
                     intent.putExtra("availablePaymentMethodList", lists ); //IMPORTANT
+//                    progressDialog.dismiss();
                     startActivity(intent);
 
                 }

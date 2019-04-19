@@ -12,7 +12,6 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/popup_drop_shadow"
         android:foregroundGravity="center_vertical|center_horizontal"
-        app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,10 +21,11 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
             <TextView
-                android:id="@+id/popup_payment_unlink_title"
+                android:id="@+id/popup_payment_link_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -36,7 +36,6 @@
                 android:fontFamily="@font/sfprotext_semibold"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="@string/popup_payment_link_title_text"
-                android:textAlignment="textStart"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -45,32 +44,33 @@
                 android:id="@+id/close_x"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
+                android:layout_alignEnd="@+id/accountNumber"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
                 android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="0dp"
                 app:srcCompat="@drawable/close_x" />
 
             <TextView
-                android:id="@+id/unlink_title"
+                android:id="@+id/serviceProviderName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/popup_payment_unlink_title"
+                android:layout_below="@+id/popup_payment_link_title"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprotext_bold"
                 android:text="@string/popup_payment_link_service_provider"
                 android:textAlignment="textStart"
                 android:textColor="@color/black_text"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/popup_payment_unlink_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/unlink_title"
+                android:layout_below="@+id/serviceProviderName"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
@@ -105,7 +105,8 @@
                 android:textAlignment="textStart"
                 android:textColor="#FF4141"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/link_btn"

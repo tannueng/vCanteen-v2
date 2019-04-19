@@ -49,7 +49,7 @@
     <string name="truemoneywallet_text">TrueMoney Wallet</string>
     <string name="sp_link_status">LINK</string>
     <string name="unlink_account_text">Unlink your account</string>
-    <string name="unlink_description_text">Do you wish to unlink serviceProvider\n from your account?></string>
+    <string name="unlink_description_text">Do you wish to unlink serviceProvider\n from your account?</string>
     <string-array name="day_of_week">
         <item>Monday</item>
         <item>Tuesday</item>

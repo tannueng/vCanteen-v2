@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -106,4 +107,14 @@ public interface JsonPlaceHolderApi {
 
     @GET("v2/customer-main/{customerId}/home")
     Call<customerHome> getCustomerHome(@Path("customerId") int customerId);
+
+    @FormUrlEncoded
+    @POST("/v2/payments/customer/link")
+    Call<Void> postLinkPayment(@Field("customerId") int customerId,
+                                @Field("serviceProvider") String serviceProvider,
+                                @Field("accountNumber") String accountNumber);
+
+
+    @DELETE("/v2/payments/customer/{customerId}/{customerMoneyAccountId}")
+    Call<Void> deleteUnlinkPayment(@Path("customerId") int customerId, @Path("customerMoneyAccountId") int customerMoneyAccountId);
 }
