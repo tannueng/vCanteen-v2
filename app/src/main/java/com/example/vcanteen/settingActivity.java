@@ -11,11 +11,20 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.example.vcanteen.POJO.availablePaymentMethod;
+import com.example.vcanteen.POJO.paymentMethod;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class settingActivity extends AppCompatActivity {
     private LinearLayout tappable_password, tappable_payment;
@@ -25,6 +34,7 @@ public class settingActivity extends AppCompatActivity {
     private Dialog logoutWarningDialog;
     private Button confirmLogoutBtn;
     private Button cancelLogoutBtn;
+    ArrayList<paymentList> paymentList;
 
 
     @Override
@@ -49,6 +59,47 @@ public class settingActivity extends AppCompatActivity {
 
         tappable_payment.setOnClickListener(v -> {
             //TODO call retrofit for editpayment here
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://vcanteen.herokuapp.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+            Call<paymentMethod> call =  jsonPlaceHolderApi.getPaymentMethod(sharedPref.getInt("customerId",0));
+
+            call.enqueue(new Callback<paymentMethod>() {
+                @Override
+                public void onResponse(Call<paymentMethod> call, Response<paymentMethod> response) {
+                    paymentMethod methods = response.body();
+                    ArrayList<availablePaymentMethod> lists = methods.availablePaymentMethod;
+
+                    for (availablePaymentMethod list :lists){
+                        System.out.println("payment");
+                        System.out.println(list.getCustomerMoneyAccountId()+","+list.getServiceProvider());
+
+                        paymentList.add(new paymentList(list.getCustomerMoneyAccountId(), list.getServiceProvider()));
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<paymentMethod> call, Throwable t) {
+
+                }
+            });
+            //MOCK DATA
+            paymentMethod methods = new paymentMethod();
+            ArrayList<availablePaymentMethod> availMethods = new ArrayList<>();
+            availMethods.add
+            methods.setAvailablePaymentMethod(availMethods);
+            ArrayList<availablePaymentMethod> lists = methods.availablePaymentMethod;
+
+            for (availablePaymentMethod list :lists){
+                System.out.println("payment");
+                System.out.println(list.getCustomerMoneyAccountId()+","+list.getServiceProvider());
+
+                paymentList.add(new paymentList(list.getCustomerMoneyAccountId(), list.getServiceProvider()));
+            }
+
             startActivity(new Intent(settingActivity.this, EditPaymentMethodActivity.class));
         });
 

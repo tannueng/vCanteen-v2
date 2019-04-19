@@ -10,5 +10,8 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_payment_method);
         //TODO getExtra from setting page
+
+
+
     }
 }
