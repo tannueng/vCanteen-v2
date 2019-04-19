@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.vcanteen.POJO.availablePaymentMethod;
 import com.example.vcanteen.POJO.paymentMethod;
@@ -69,15 +70,21 @@ public class settingActivity extends AppCompatActivity {
             call.enqueue(new Callback<paymentMethod>() {
                 @Override
                 public void onResponse(Call<paymentMethod> call, Response<paymentMethod> response) {
-                    paymentMethod methods = response.body();
-                    ArrayList<availablePaymentMethod> lists = methods.availablePaymentMethod;
-
-                    for (availablePaymentMethod list :lists){
+                    if(!response.isSuccessful()) {
+                        Toast.makeText(settingActivity.this, "CODE: "+response.code(),
+                                Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    paymentMethod methods = response.body(); //IMPORTANT
+                    ArrayList<availablePaymentMethod> lists = methods.availablePaymentMethod; //IMPORTANT
+                    Intent intent = new Intent(settingActivity.this, EditPaymentMethodActivity.class); //IMPORTANT
+                    for (availablePaymentMethod list :lists){ //just to print
                         System.out.println("payment");
                         System.out.println(list.getCustomerMoneyAccountId()+","+list.getServiceProvider());
-
-                        paymentList.add(new paymentList(list.getCustomerMoneyAccountId(), list.getServiceProvider()));
                     }
+
+                    intent.putExtra("availablePaymentMethodList", lists ); //IMPORTANT
+                    startActivity(intent);
 
                 }
 
@@ -87,20 +94,21 @@ public class settingActivity extends AppCompatActivity {
                 }
             });
             //MOCK DATA
-            paymentMethod methods = new paymentMethod();
-            ArrayList<availablePaymentMethod> availMethods = new ArrayList<>();
-            availMethods.add
-            methods.setAvailablePaymentMethod(availMethods);
-            ArrayList<availablePaymentMethod> lists = methods.availablePaymentMethod;
+//            paymentMethod methods = new paymentMethod();
+//            ArrayList<availablePaymentMethod> availMethods = new ArrayList<>();
+//            availMethods.add(new availablePaymentMethod(1,"SCB EASY"));
+//            availMethods.add(new availablePaymentMethod(2,"K PLUS"));
+//            methods.setAvailablePaymentMethod(availMethods);
+//            ArrayList<availablePaymentMethod> lists = methods.availablePaymentMethod;
+//
+//            for (availablePaymentMethod list :lists){
+//                System.out.println("payment");
+//                System.out.println(list.getCustomerMoneyAccountId()+","+list.getServiceProvider());
+//
+////                paymentList.add(new paymentList(list.getCustomerMoneyAccountId(), list.getServiceProvider()));
+//            }
 
-            for (availablePaymentMethod list :lists){
-                System.out.println("payment");
-                System.out.println(list.getCustomerMoneyAccountId()+","+list.getServiceProvider());
-
-                paymentList.add(new paymentList(list.getCustomerMoneyAccountId(), list.getServiceProvider()));
-            }
-
-            startActivity(new Intent(settingActivity.this, EditPaymentMethodActivity.class));
+//            startActivity(new Intent(settingActivity.this, EditPaymentMethodActivity.class));
         });
 
 
