@@ -155,6 +155,11 @@ public class historyTabFragment extends Fragment {
                 System.out.println("OLDS some error");
             }
         });
+
+        //Mock Data
+        oldSlot oldSlot = new oldSlot();
+        oldSlot.setOldSlot(111);
+        showTimeoutDialog(context,orderId,oldSlot);
     }
 
     private static void showTimeoutDialog(Context context, int orderId, oldSlot oldSlot) {
