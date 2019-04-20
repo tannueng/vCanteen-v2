@@ -35,6 +35,7 @@ public class homev2Activity extends AppCompatActivity {
 
     TextView firstAndLastName;
     ImageView profilePictureButton;
+    TextView crowdEstimationOnPicValue;
     customerSingleton customerSingleton;
 
     Bitmap bitmap;
@@ -56,6 +57,7 @@ public class homev2Activity extends AppCompatActivity {
         profileLayout = findViewById(R.id.profileLayout);
         firstAndLastName = findViewById(R.id.firstAndLastName);
         profilePictureButton = findViewById(R.id.profilePictureButton);
+        crowdEstimationOnPicValue = findViewById(R.id.crowdEstimationOnPicValue);
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         customerId = sharedPref.getInt("customerId",0);
@@ -89,6 +91,8 @@ public class homev2Activity extends AppCompatActivity {
                      customerSingleton.setLastname(info.getCustomerInfo().getLastname());
                      customerSingleton.setEmail(info.getCustomerInfo().getEmail());
                      customerSingleton.setCustomerImage(info.getCustomerInfo().getCustomerImage());
+
+                     crowdEstimationOnPicValue.setText(info.getPercentDensity()+"%");
                  }
 
                  @Override
