@@ -1,5 +1,7 @@
 package com.example.vcanteen;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vcanteen.Data.Customers;
+import com.example.vcanteen.POJO.vendorListObject;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,12 +34,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
 public class vendorListActivity extends AppCompatActivity {
 
     private List<vendorList> vendorLists;
     private TextView mTextMessage;
     private ListView listView;
+    private ProgressDialog progressDialog;
 
 //    FloatingActionButton profilebtn;
 //    FloatingActionButton ordersbtn;
@@ -45,7 +48,7 @@ public class vendorListActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPref;
     private FirebaseAuth mAuth;
-
+    vendorAlacarteMenu menuVendorAvailable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,8 +119,10 @@ public class vendorListActivity extends AppCompatActivity {
 
     }
 
-    private void getVendorList(){
-
+    private void getVendorList() {
+        ProgressDialog pd = new ProgressDialog(vendorListActivity.this);
+        pd.setMessage("loading");
+        pd.show();
         String url = "https://vcanteen.herokuapp.com/";
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -125,71 +130,99 @@ public class vendorListActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        vendorListApi jsonPlaceHolderApi = retrofit.create(vendorListApi.class);
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
+//        Call<List<vendorList>> call = jsonPlaceHolderApi.getVendorList();
 
-
-
-        Call<List<vendorList>> call = jsonPlaceHolderApi.getVendorList();
-
-        call.enqueue(new Callback<List<vendorList>>() {
+        Call<vendorListObject> call = jsonPlaceHolderApi.getVendorList();
+        call.enqueue(new Callback<vendorListObject>() {
             @Override
-            public void onResponse(Call<List<vendorList>> call, Response<List<vendorList>> response) {
+            public void onResponse(Call<vendorListObject> call, Response<vendorListObject> response) {
 
                 if (!response.isSuccessful()) {
                     Toast.makeText(getApplicationContext(),"cannot connect error code: "+response.code(),Toast.LENGTH_LONG).show();
                     return;
                 }
-
-                List<vendorList> vendorLists = response.body();
-                Log.d("TEST", String.valueOf(vendorLists.size()));
-                ArrayList<vendorList> temp = new ArrayList<vendorList>();
-                for(int i =0; i<vendorLists.size();i++){
-
-                    int vendorId = vendorLists.get(i).getVendorId();
-                    String vendorName = vendorLists.get(i).getRestaurantName();
-                    int vendorNumber = vendorLists.get(i).getRestaurantNumber();
-                    String vendorImageURL = vendorLists.get(i).getVendorImage();
-                    String vendorStatus = vendorLists.get(i).getVendorStatus();
-
-                    vendorList newVendorList = new vendorList(vendorId,vendorName,vendorNumber,vendorImageURL,vendorStatus);
-                    temp.add(newVendorList);
-
-                }
+                vendorListObject vendorLists = response.body();
+//                Log.d("TEST", String.valueOf(vendorLists.size()));
+                final ArrayList<vendorList> temp = vendorLists.getVendorList();
+                //temp.add(new vendorList(vendorLists));
+//                temp = vendorLists.getVendorList();
+//                for(int i =0; i<vendorLists.size();i++){
+//
+//                    int vendorId = vendorLists.get(i).getVendorId();
+//                    String vendorName = vendorLists.get(i).getRestaurantName();
+//                    //int vendorNumber = vendorLists.get(i).getRestaurantNumber();
+//                    String vendorImageURL = vendorLists.get(i).getVendorImage();
+//                    String vendorStatus = vendorLists.get(i).getVendorStatus();
+//                    int queuingTime = vendorLists.get(i).getQueuingTime();
+//
+//                    //vendorList newVendorList = new vendorList(vendorId,vendorName,vendorNumber,vendorImageURL,vendorStatus,queuingTime);
+//                    vendorList newVendorList = new vendorList(vendorId,vendorName,vendorImageURL,vendorStatus,queuingTime);
+//                    temp.add(newVendorList);
+//
+//                }
                 vendorListAdapterv2 adapter = new vendorListAdapterv2(vendorListActivity.this,temp);
 
                 listView.setAdapter(adapter);
-
+                pd.dismiss();
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                        /*ProgressDialog pd = new ProgressDialog(vendorListActivity.this);
+                        pd.setMessage("loading");
+                        pd.show();*/
                         Object clickItemObj = adapter.getAdapter().getItem(position);
-                        int vendornumber = vendorLists.get(position).getVendorId();
-                        String chosenVendor = vendorLists.get(position).getRestaurantName();
-                        String vendorUrl = vendorLists.get(position).getVendorImage();
+                        int vendornumber = temp.get(position).getVendorId();
+                        String chosenVendor = temp.get(position).getRestaurantName();
+                        String vendorUrl = temp.get(position).getVendorImage();
                         String vendorStatus;
-                        vendorList item = vendorLists.get(position);
+                        vendorList item = temp.get(position);
                         vendorStatus = item.getVendorStatus();
-                        if(vendorStatus.equals("CLOSED")){
+                        //int queuingTime = item.getQueuingTime();
+                        if (vendorStatus.equals("CLOSED")) {
                             view.setClickable(false);
                             //Toast.makeText(vendorListActivity.this, "This restaurant is closed.", Toast.LENGTH_SHORT).show();
-                        } else{
+                        } else {
+
                             Intent i = new Intent(vendorListActivity.this, vendorMenuv2Activity.class);
                             i.putExtra("vendor id", vendornumber);
                             orderStack.setVendorId(vendornumber);
-                            orderStack.setCustomerId(sharedPref.getInt("customerId",0));
-                            System.out.println("added vendor id in intent/singleton: "+vendornumber);
-                            System.out.println("customer id in orderstack: "+orderStack.getCustomerId());
+                            orderStack.setCustomerId(sharedPref.getInt("customerId", 0));
                             i.putExtra("vendor url", vendorUrl);
-                            i.putExtra("chosenVendor",chosenVendor);
-                            startActivity(i);
-                            /*On the second activity:
-                            Bundle bundle = getIntent().getExtras();
-                            int value = bundle.getInt("vendor id");
-                            */
+                            i.putExtra("chosenVendor", chosenVendor);
+                            /*Retrofit retrofit = new Retrofit.Builder()
+                                    .baseUrl("https://vcanteen.herokuapp.com/")
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
+                            JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+                            Call<vendorAlacarteMenu> call = jsonPlaceHolderApi.getVendorAlacarte(vendornumber);
+                            call.enqueue(new Callback<vendorAlacarteMenu>() {
+                                @Override
+                                public void onResponse(Call<vendorAlacarteMenu> call, Response<vendorAlacarteMenu> response) {
+                                    if (!response.isSuccessful()) {
+                                        Toast.makeText(vendorListActivity.this, "CODE: " + response.code(), Toast.LENGTH_LONG).show();
+                                        return;
+
+                                    }
+                                    vendorAlacarteMenu menu = response.body();
+                                    i.putExtra("vendorMenu", menu);
+                                    //i.putExtra("vendorMenuAvailable", menu.availableList);
+                                    i.putExtra("minCombinationPrice", menu.getMinCombinationPrice());
+                                    //pd.dismiss();*/
+                                    startActivity(i);
+
+                                /*}
+                                /*@Override
+                                public void onFailure(Call<vendorAlacarteMenu> call, Throwable t) {
+                                    System.out.println("Entered Menu Fail.....");
+
+                                }
+                                         });*/
+
+
 
                         }
-
                     }
 
 
@@ -197,10 +230,29 @@ public class vendorListActivity extends AppCompatActivity {
                 });
 
 
+                            /*On the second activity:
+                            Bundle bundle = getIntent().getExtras();
+                            int value = bundle.getInt("vendor id");
+                            */
+
+                        }
+
+                    /*}
+            @Override
+            public void onFailure(Call<vendorAlacarteMenu> call, Throwable t) {
+                System.out.println("Entered Menu Fail.....");
+
             }
 
+
+                });
+
+
+            }*/
+
             @Override
-            public void onFailure(Call<List<vendorList>> call, Throwable t) {
+            public void onFailure(Call<vendorListObject> call, Throwable t) {
+                System.out.println("Didnt ENTER");
                 Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
@@ -230,5 +282,18 @@ public class vendorListActivity extends AppCompatActivity {
 
     }
 
+    public void onResume() {
+        super.onResume();
+        getVendorList();
+    }
 
+    private void addAlacarteToList(ArrayList<availableList> inputList) {
+        final ArrayList<food> availableList = new ArrayList<>();
+        ArrayList<food> soldOutList = new ArrayList<>();
+        for (availableList list : inputList) {
+            availableList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "A LA CARTE", list.getFoodCategory()));
+        }
+        final ArrayList<food> shownFoodList = new ArrayList<>(availableList);
+        shownFoodList.addAll(soldOutList);
+    }
 }

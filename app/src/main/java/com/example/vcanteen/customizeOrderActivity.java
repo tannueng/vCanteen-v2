@@ -106,7 +106,7 @@ public class customizeOrderActivity extends AppCompatActivity {
         baseList = new ArrayList<>(); //need to get from BE
 
         for(baseList list : inputBaseList) {
-            baseList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "COMBINATION_BASE"));
+            baseList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "COMBINATION_BASE", null));
         }
         // for testing
 //        baseList.add(new food(3, "Jasmine Rice", 5, "COMBINATION_BASE"));
@@ -126,9 +126,9 @@ public class customizeOrderActivity extends AppCompatActivity {
 
         for(mainList list : inputMainList) {
             if(list.getFoodStatus().equals("AVAILABLE")) {
-                availableMainList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "COMBINATION_BASE"));
+                availableMainList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "COMBINATION_BASE", null));
             } else {
-                soldOutMainList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "COMBINATION_BASE"));
+                soldOutMainList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "COMBINATION_BASE", null));
             }
 
         }
@@ -154,7 +154,7 @@ public class customizeOrderActivity extends AppCompatActivity {
         extraList = new ArrayList<>();
 
         for(extraList list : inputExtraList) {
-            extraList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "EXTRA"));
+            extraList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "EXTRA", null));
         }
 //        extraList.add(new food(11, "More Rice", 5, "EXTRA"));
 //        extraList.add(new food(12, "Extra Large", 10, "EXTRA"));

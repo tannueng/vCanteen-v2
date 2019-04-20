@@ -21,6 +21,7 @@ import com.example.vcanteen.Data.Token;
 import com.example.vcanteen.Data.TokenResponse;
 import com.example.vcanteen.Data.TokenVerification;
 import com.example.vcanteen.POJO.vendorCombinationMenu;
+import com.example.vcanteen.POJO.vendorListObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,4 +107,9 @@ public interface JsonPlaceHolderApi {
 
     @GET("v2/customer-main/{customerId}/home")
     Call<customerHome> getCustomerHome(@Path("customerId") int customerId);
+
+    @GET("/v2/orders/all-vendors")
+    Call<vendorListObject> getVendorList();
+
+
 }

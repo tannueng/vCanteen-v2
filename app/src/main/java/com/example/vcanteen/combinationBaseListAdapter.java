@@ -83,7 +83,7 @@ public class combinationBaseListAdapter extends ArrayAdapter  {
 
     //try new
     public food getSelectedBase(){
-        food selected = new food(foodList.get(p).foodId,foodList.get(p).foodName,foodList.get(p).foodPrice,foodList.get(p).foodType);
+        food selected = new food(foodList.get(p).foodId,foodList.get(p).foodName,foodList.get(p).foodPrice,foodList.get(p).foodType,foodList.get(p).foodCategory);
         return selected;
     }
 

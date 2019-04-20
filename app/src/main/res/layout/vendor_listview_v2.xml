@@ -77,7 +77,7 @@
                 android:layout_marginTop="26dp"
                 android:layout_toStartOf="@+id/next_icon"
                 android:layout_toEndOf="@id/estimatedTimeClock"
-                android:text="2 mins"
+                android:text="x min"
                 android:textColor="@color/primaryDark" />
 
         </RelativeLayout>

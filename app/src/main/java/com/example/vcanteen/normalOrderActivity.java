@@ -127,7 +127,7 @@ public class normalOrderActivity extends AppCompatActivity {
                 ArrayList<extraList> lists = menuExtra.extraList;
 
                 for (extraList list : lists) {
-                    availableExtraList.add(new food(list.foodId,list.foodName,list.foodPrice,"EXTRA"));
+                    availableExtraList.add(new food(list.foodId,list.foodName,list.foodPrice,"EXTRA", null));
                 }
 
                 shownFoodList = new ArrayList<>(availableExtraList);

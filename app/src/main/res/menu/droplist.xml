@@ -13,11 +13,11 @@
         </menu>
     </item>
     <item android:id="@+id/category"
-        android:title="Category"
+        android:title="Filter By"
         app:showAsAction="never">
         <menu>
             <item android:id="@+id/category_all"
-                android:title="All"/>
+                android:title="All" />
             <item android:id="@+id/category_vegan"
                 android:title="Vegan"/>
             <item android:id="@+id/category_spicy"
