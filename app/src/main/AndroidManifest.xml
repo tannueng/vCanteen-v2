@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".tutorialTwo"></activity>
+        <activity android:name=".tutorialMain" />
+        <activity android:name=".tutorialTwo" />
         <activity android:name=".tutorialOne" />
         <activity android:name=".crowdEstimationActivity" />
         <activity android:name=".editProfilePageActivity" />
