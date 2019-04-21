@@ -122,5 +122,12 @@ public interface JsonPlaceHolderApi {
     @GET("/v2/orders/all-vendors")
     Call<vendorListObject> getVendorList();
 
+    @FormUrlEncoded
+    @PUT("/v2/profile-management/customer/profile")
+    Call<Void> updateCustomerProfile(@Field("customerId") int customerId,
+                                  @Field("firstname") String firstname,
+                                  @Field("lastname") String lastname,
+                                  @Field("email") String email,
+                                  @Field("profileImage") String profileImage);
 
 }
