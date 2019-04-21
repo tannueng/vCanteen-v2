@@ -15,6 +15,7 @@
         android:layout_marginEnd="25dp"
         android:fontFamily="@font/sfprotext_semibold"
         android:text="Your order has been cancelled."
+        android:textAlignment="center"
         android:textColor="#FF9C9C"
         android:textSize="18sp"
         android:textStyle="bold"

@@ -108,7 +108,7 @@
 
         <RelativeLayout
             android:id="@+id/settingsLayout"
-            android:layout_width="0dp"
+            android:layout_width="15dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginVertical="2dp"
@@ -126,13 +126,14 @@
                 android:padding="3dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/settingsButton"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/sfprotext_medium"
                 android:padding="1dp"
                 android:text="SETTINGS"
+                android:textAlignment="center"
                 android:textColor="@color/primaryPink"
                 android:textSize="7sp" />
         </RelativeLayout>

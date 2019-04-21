@@ -51,6 +51,7 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         ((CookingViewHolder) holder).cv.setForeground(null);
                         ((CookingViewHolder) holder).orderStatus.setTextColor(Color.parseColor("#4DC031")); //green
                         ((CookingViewHolder) holder).orderStatus.setText(list.orderStatus);
+                        ((CookingViewHolder) holder).orderEstimatedTime.setText(Boolean.toString(list.isHasRated()));
                     }
                     if (list.getOrderStatus().equals("TIMEOUT")) {
                         ((CookingViewHolder) holder).cv.setForeground(null);
@@ -170,13 +171,13 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             this.orderStatus = orderStatus;
         }
 
-        public boolean isHasRated() {
-            return hasRated;
-        }
-
-        public void setHasRated(boolean hasRated) {
-            this.hasRated = hasRated;
-        }
+//        public boolean isHasRated() {
+//            return hasRated;
+//        }
+//
+//        public void setHasRated(boolean hasRated) {
+//            this.hasRated = hasRated;
+//        }
 
 
         private CardView cv;
@@ -189,7 +190,7 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private TextView orderStatus;
         private TextView orderEstimatedTime;
         private ImageView orderEstimatedTimeClock;
-        private boolean hasRated;
+//        private boolean hasRated;
 
 
         public CookingViewHolder(View itemView) {
@@ -218,9 +219,11 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     System.out.println("Pressed one CANCELLED");
                     historyTabFragment.getCancelReason(itemView.getContext(),order);
                 }
+//                System.out.println("hasRated status: "+Boolean.valueOf(orderEstimatedTime.getText().toString()));
 
-                if(orderStatus.getText().equals("COLLECTED")&&!hasRated) {//and hasRated = false
+                if(orderStatus.getText().equals("COLLECTED")&&!Boolean.valueOf(orderEstimatedTime.getText().toString())) {//and hasRated = false
                     System.out.println("Pressed one COLLECTED and not rated");
+                    System.out.println(orderId.getText().toString()+", hasRated: "+Boolean.valueOf(orderEstimatedTime.getText().toString()));
 
                     progressTabFragment.showReviewDialog(itemView.getContext(),order,vendorName.getText().toString(),orderName.getText().toString(),orderNameExtra.getText().toString());
                 }

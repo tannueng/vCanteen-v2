@@ -58,12 +58,11 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
         sp_truemoneywallet_checkmark = findViewById(R.id.sp_truemoneywallet_checkmark);
 
 
+        reload();
 
         //TODO getExtra from setting page
 
         payments = getIntent().getParcelableArrayListExtra( "availablePaymentMethodList"); //IMPORTANT
-        System.out.println("SP: "+payments.get(0).serviceProvider);
-        System.out.println("SP: "+payments.get(1).serviceProvider);
 
         mapping(payments);
         //successfully intent the object
@@ -151,7 +150,6 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
                     }
                     System.out.println("onResponse done");
                     reload();
-                    progressDialog.dismiss();
                     dialog.dismiss();
                     Toast.makeText(EditPaymentMethodActivity.this, "Successfully Unlinked Account", Toast.LENGTH_LONG).show();
                 }
@@ -216,6 +214,7 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if(!response.isSuccessful()) {
                                 Toast.makeText(EditPaymentMethodActivity.this, "CODE: "+response.code(), Toast.LENGTH_LONG).show();
+                                sp_kplus_link.setText("unlink");
                                 progressDialog.dismiss();
                                 dialog.dismiss();
                                 reload();

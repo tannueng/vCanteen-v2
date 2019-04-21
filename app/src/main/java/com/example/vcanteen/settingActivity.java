@@ -73,6 +73,7 @@ public class settingActivity extends AppCompatActivity {
             JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
             Call<paymentMethod> call =  jsonPlaceHolderApi.getPaymentMethod(sharedPref.getInt("customerId",0));
 
+
             call.enqueue(new Callback<paymentMethod>() {
                 @Override
                 public void onResponse(Call<paymentMethod> call, Response<paymentMethod> response) {
@@ -81,7 +82,9 @@ public class settingActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
                         return;
                     }
-                    paymentMethod methods = response.body(); //IMPORTANT
+
+                    paymentMethod methods;
+                    methods = response.body(); //IMPORTANT
                     ArrayList<availablePaymentMethod> lists = methods.availablePaymentMethod; //IMPORTANT
                     Intent intent = new Intent(settingActivity.this, EditPaymentMethodActivity.class); //IMPORTANT
                     for (availablePaymentMethod list :lists){ //just to print
@@ -90,9 +93,12 @@ public class settingActivity extends AppCompatActivity {
                     }
 
                     intent.putExtra("availablePaymentMethodList", lists ); //IMPORTANT
+                    methods.setAvailablePaymentMethod(new ArrayList<>());
 //                    progressDialog.dismiss();
-                    startActivity(intent);
 
+                    call.cancel();
+                    System.out.println("done retrofit");
+                    startActivity(intent);
                 }
 
                 @Override
@@ -100,6 +106,8 @@ public class settingActivity extends AppCompatActivity {
 
                 }
             });
+
+
             //MOCK DATA
 //            paymentMethod methods = new paymentMethod();
 //            ArrayList<availablePaymentMethod> availMethods = new ArrayList<>();

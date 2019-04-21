@@ -12,9 +12,6 @@ public class orderProgress {
     @SerializedName("orderNameExtra")
     private String orderNameExtra;
 
-    @SerializedName("foodImage")
-    private String foodImage;
-
     @SerializedName("orderPrice")
     private int orderPrice;
 
@@ -48,10 +45,6 @@ public class orderProgress {
 
     public String getOrderNameExtra() {
         return orderNameExtra;
-    }
-
-    public String getFoodImage() {
-        return foodImage;
     }
 
     public int getOrderPrice() {

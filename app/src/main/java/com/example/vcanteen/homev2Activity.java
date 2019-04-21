@@ -13,11 +13,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vcanteen.POJO.availablePaymentMethod;
+import com.example.vcanteen.POJO.currentDensityAll;
 import com.example.vcanteen.POJO.customerHome;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,6 +68,7 @@ public class homev2Activity extends AppCompatActivity {
         customerSingleton = com.example.vcanteen.customerSingleton.getInstance();
 
 
+        System.out.println("customerId : "+customerId);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://vcanteen.herokuapp.com/")
@@ -79,11 +83,15 @@ public class homev2Activity extends AppCompatActivity {
                          Toast.makeText(homev2Activity.this, "CODE: "+response.code(),Toast.LENGTH_LONG).show();
                          return;
                      }
+                     System.out.println("200 Homepage");
 
                      //get result here
                      customerHome info = response.body();
                      firstAndLastName.setText(info.getCustomerInfo().getFirstname()+" "+ info.getCustomerInfo().getLastname().substring(0,1)+".");
 
+//                     if(info.getCustomerInfo().getCustomerImage().equals(null)) {
+//                         info.getCustomerInfo().setCustomerImage("https://firebasestorage.googleapis.com/v0/b/vcanteen-d8ede.appspot.com/o/default%20user%20icon.png?alt=media&token=07b2a90c-2404-4b72-9357-ed40501300b7");
+//                     }
                      bitmap = getBitmapFromURL(info.getCustomerInfo().getCustomerImage());
                      profilePictureButton.setImageBitmap(bitmap);
 
@@ -116,7 +124,9 @@ public class homev2Activity extends AppCompatActivity {
         crowdButton.setOnClickListener(v -> {
             //TODO create retrofit here
             //TODO spinner
-            startActivity(new Intent(homev2Activity.this, crowdEstimationActivity.class));
+            Intent i = new Intent(homev2Activity.this, crowdEstimationActivity.class);
+            preloadCrowdPage(i);
+
         });
 
         ordersButton.setOnClickListener(v -> {
@@ -138,6 +148,51 @@ public class homev2Activity extends AppCompatActivity {
         });
     }
 
+    private void preloadCrowdPage(Intent i) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://vcanteen.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        Call<currentDensityAll> call =  jsonPlaceHolderApi.getCurrentDensityAll();
+
+        call.enqueue(new Callback<currentDensityAll>() {
+            @Override
+            public void onResponse(Call<currentDensityAll> call, Response<currentDensityAll> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(homev2Activity.this, "CODE: "+response.code(),Toast.LENGTH_LONG).show();
+                    return;
+                }
+                currentDensityAll preloadCrowdData = response.body();
+                System.out.println("preloaded");
+
+                System.out.println("preload time "+preloadCrowdData.hourlyCrowdStat.get(0).getCrowdStat());
+                System.out.println("preload time "+preloadCrowdData.hourlyCrowdStat.get(1).getCrowdStat());
+                i.putExtra("preloadCrowdData",preloadCrowdData );
+                i.putExtra("hourlyData", preloadCrowdData.hourlyCrowdStat);
+
+//                i.putExtra("8",preloadCrowdData.hourlyCrowdStat.get(0).getCrowdStat());
+//                i.putExtra("9",preloadCrowdData.hourlyCrowdStat.get(1).getCrowdStat());
+//                i.putExtra("10",preloadCrowdData.hourlyCrowdStat.get(2).getCrowdStat());
+//                i.putExtra("11",preloadCrowdData.hourlyCrowdStat.get(3).getCrowdStat());
+//                i.putExtra("12",preloadCrowdData.hourlyCrowdStat.get(4).getCrowdStat());
+//                i.putExtra("13",preloadCrowdData.hourlyCrowdStat.get(5).getCrowdStat());
+//                i.putExtra("14",preloadCrowdData.hourlyCrowdStat.get(6).getCrowdStat());
+//                i.putExtra("15",preloadCrowdData.hourlyCrowdStat.get(7).getCrowdStat());
+//                i.putExtra("16",preloadCrowdData.hourlyCrowdStat.get(8).getCrowdStat());
+
+                System.out.println("put preloadCrowdData into intent");
+                startActivity(i);
+
+            }
+
+            @Override
+            public void onFailure(Call<currentDensityAll> call, Throwable t) {
+
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
@@ -145,6 +200,11 @@ public class homev2Activity extends AppCompatActivity {
 
     public Bitmap getBitmapFromURL(String src){
         try{
+            System.out.println("check1 : "+src);
+                if(src == null) {
+                    src = "http://firebasestorage.googleapis.com/v0/b/vcanteen-d8ede.appspot.com/o/default%20user%20icon.png?alt=media&token=07b2a90c-2404-4b72-9357-ed40501300b7";
+                }
+            System.out.println("check2 : "+src);
             URL url = new URL(src);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
@@ -153,6 +213,7 @@ public class homev2Activity extends AppCompatActivity {
             Bitmap myBitmap = BitmapFactory.decodeStream(input);
             return myBitmap;
         } catch (Exception e){
+            System.out.println("null image url..");
             e.printStackTrace();
             return null;
         }
