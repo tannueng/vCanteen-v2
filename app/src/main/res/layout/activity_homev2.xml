@@ -191,7 +191,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/RecommendationCardImage"
+                        android:id="@+id/recommendationCardImage"
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
                         android:background="@drawable/vendorimg"
@@ -201,7 +201,7 @@
                         android:id="@+id/recommendationCardTextLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/RecommendationCardImage">
+                        android:layout_below="@id/recommendationCardImage">
 
                         <TextView
                             android:id="@+id/recommendationCardHeader"
@@ -217,7 +217,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/recommendationDescription"
+                            android:id="@+id/recommendationMenu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/recommendationCardHeader"
@@ -235,7 +235,7 @@
                             android:id="@+id/recommedationButton"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_alignBottom="@id/recommendationDescription"
+                            android:layout_alignBottom="@id/recommendationMenu"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
                             android:layout_marginRight="8dp"

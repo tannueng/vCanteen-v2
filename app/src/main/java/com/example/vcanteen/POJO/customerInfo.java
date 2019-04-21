@@ -4,7 +4,7 @@ public class customerInfo {
 
     String firstname, lastname, email, customerImage;
 
-    public String getFirstname() {
+    public String getFirstnamev2() {
         return firstname;
     }
 
@@ -12,7 +12,7 @@ public class customerInfo {
         this.firstname = firstname;
     }
 
-    public String getLastname() {
+    public String getLastnamev2() {
         return lastname;
     }
 
@@ -28,7 +28,7 @@ public class customerInfo {
         this.email = email;
     }
 
-    public String getCustomerImage() {
+    public String getCustomerImagev2() {
         return customerImage;
     }
 

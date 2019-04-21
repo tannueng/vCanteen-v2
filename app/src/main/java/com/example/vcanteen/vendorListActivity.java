@@ -259,7 +259,6 @@ public class vendorListActivity extends AppCompatActivity {
     }
 
     private void saveToken(String token) {
-        System.out.println("entered savetoken");
         String email = mAuth.getCurrentUser().getEmail();
         orderStack = com.example.vcanteen.orderStack.getInstance();
         orderStack.setCustomerId(sharedPref.getInt("customerId",0));
