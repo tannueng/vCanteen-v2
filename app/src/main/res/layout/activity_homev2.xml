@@ -285,8 +285,8 @@
                         android:id="@+id/vendorsCardImage"
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
-                        android:background="@drawable/vendorimg"
-                        android:layout_alignParentTop="true"/>
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/vendorimg" />
 
                     <RelativeLayout
                         android:id="@+id/vendorsCardTextLayout"
@@ -361,8 +361,8 @@
                         android:id="@+id/crowdCardImage"
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
-                        android:background="@drawable/vendorimg"
-                        android:layout_alignParentTop="true"/>
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/vendorimg" />
 
                     <TextView
                         android:id="@+id/crowdEstimationOnPicValue"
@@ -464,8 +464,8 @@
                         android:id="@+id/ordersCardImage"
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
-                        android:background="@drawable/vendorimg"
-                        android:layout_alignParentTop="true"/>
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/vendorimg" />
 
                     <RelativeLayout
                         android:id="@+id/ordersCardTextLayout"

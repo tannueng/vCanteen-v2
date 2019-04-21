@@ -3,19 +3,15 @@ package com.example.vcanteen;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.vcanteen.POJO.availablePaymentMethod;
 import com.example.vcanteen.POJO.currentDensityAll;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -28,11 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,15 +42,11 @@ public class homev2Activity extends AppCompatActivity {
     private RelativeLayout profileLayout;
 
     TextView firstAndLastName;
-    ImageView profilePictureButton;
+    ImageView profilePictureButton,crowdCardImage,vendorsCardImage,ordersCardImage;
     TextView crowdEstimationOnPicValue;
     customerSingleton customerSingleton;
-    TextView crowdEstimationOnPicValue;
 
     ProgressDialog progressDialog;
-
-    Bitmap bitmap;
-    Bitmap bitmap2;
 
     static SharedPreferences sharedPref;
     RequestOptions option = new RequestOptions().centerCrop();
@@ -104,13 +91,14 @@ public class homev2Activity extends AppCompatActivity {
         firstAndLastName = findViewById(R.id.firstAndLastName);
         profilePictureButton = findViewById(R.id.profilePictureButton);
         crowdEstimationOnPicValue = findViewById(R.id.crowdEstimationOnPicValue);
+        crowdCardImage = findViewById(R.id.crowdCardImage);
+        vendorsCardImage = findViewById(R.id.vendorsCardImage);
+        ordersCardImage = findViewById(R.id.ordersCardImage);
 
         customerSingleton = com.example.vcanteen.customerSingleton.getInstance();
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         customerId = sharedPref.getInt("customerId",0);
-
-        customerSingleton = com.example.vcanteen.customerSingleton.getInstance();
 
         System.out.println("onCreate Homepage");
         progressDialog = new ProgressDialog(homev2Activity.this);
@@ -119,49 +107,16 @@ public class homev2Activity extends AppCompatActivity {
 
         recommendationButton.setOnClickListener(v -> {
             //TODO navigate to vendor_menu_page of the vendor who owns the menu
+            Intent i = new Intent(homev2Activity.this, vendorMenuv2Activity.class);
+            String chosenVendor = randomizedRestaurantName;
+            String vendorUrl = randomizedVendorImage;
+            orderStack.setCustomerId(sharedPref.getInt("customerId", 0));
+            orderStack.setVendorId(randomizedVendorId);
+            i.putExtra("vendor id", randomizedVendorId);
+            i.putExtra("vendor url", vendorUrl);
+            i.putExtra("chosenVendor", chosenVendor);
+            startActivity(i);
         });
-
-                     //get result here
-                     customerHome info = response.body();
-                     firstAndLastName.setText(info.getCustomerInfo().getFirstnamev2()+" "+ info.getCustomerInfo().getLastnamev2().substring(0,1)+".");
-
-                     Glide.with(getApplicationContext()).load(info.getCustomerInfo().getCustomerImagev2()).apply(option).into(profilePictureButton);
-
-                     randomizedVendorId = info.getRecommendationInfo().getRecVendorId();
-                     randomizedVendorImage = info.getRecommendationInfo().getRecVendorImage();
-                     randomizedRestaurantName = info.getRecommendationInfo().getRecRestaurantName();
-
-                     Glide.with(getApplicationContext()).load(info.getRecommendationInfo().getRecFoodImage()).apply(option).into(recommendationCardImage);
-                     recommendationMenu.setText(info.getRecommendationInfo().getRecFoodName());
-                     crowdEstimationOnPicValue.setText(info.getPercentDensity()+"%");
-
-                     customerSingleton.setFirstname(info.getCustomerInfo().getFirstnamev2());
-                     customerSingleton.setLastname(info.getCustomerInfo().getLastnamev2());
-                     customerSingleton.setEmail(info.getCustomerInfo().getEmail());
-                     customerSingleton.setCustomerImage(info.getCustomerInfo().getCustomerImagev2());
-
-                     crowdEstimationOnPicValue.setText(info.getPercentDensity()+"%");
-                 }
-
-                 @Override
-                 public void onFailure(Call<customerHome> call, Throwable t) {
-                     System.out.println("Entered Home Fail.....");
-
-                 }
-            });
-
-            recommendationButton.setOnClickListener(v -> {
-                //TODO navigate to vendor_menu_page of the vendor who owns the menu
-                Intent i = new Intent(homev2Activity.this, vendorMenuv2Activity.class);
-                String chosenVendor = randomizedRestaurantName;
-                String vendorUrl = randomizedVendorImage;
-                orderStack.setCustomerId(sharedPref.getInt("customerId", 0));
-                orderStack.setVendorId(randomizedVendorId);
-                i.putExtra("vendor id", randomizedVendorId);
-                i.putExtra("vendor url", vendorUrl);
-                i.putExtra("chosenVendor", chosenVendor);
-                startActivity(i);
-            });
 
         vendorsButton.setOnClickListener(v -> {
             //TODO create retrofit here
@@ -220,22 +175,29 @@ public class homev2Activity extends AppCompatActivity {
 
                 //get result here
                 customerHome info = response.body();
-                firstAndLastName.setText(info.getCustomerInfo().getFirstname()+" "+ info.getCustomerInfo().getLastname().substring(0,1)+".");
+                firstAndLastName.setText(info.getCustomerInfo().getFirstnamev2()+" "+ info.getCustomerInfo().getLastnamev2().substring(0,1)+".");
 
-//                     if(info.getCustomerInfo().getCustomerImage().equals(null)) {
-//                         info.getCustomerInfo().setCustomerImage("https://firebasestorage.googleapis.com/v0/b/vcanteen-d8ede.appspot.com/o/default%20user%20icon.png?alt=media&token=07b2a90c-2404-4b72-9357-ed40501300b7");
-//                     }
-                bitmap = getBitmapFromURL(info.getCustomerInfo().getCustomerImage());
-                profilePictureButton.setImageBitmap(bitmap);
+                Glide.with(getApplicationContext()).load(info.getCustomerInfo().getCustomerImagev2()).apply(option).into(profilePictureButton);
 
-                customerSingleton.setFirstname(info.getCustomerInfo().getFirstname());
-                customerSingleton.setLastname(info.getCustomerInfo().getLastname());
+                randomizedVendorId = info.getRecommendationInfo().getRecVendorId();
+                randomizedVendorImage = info.getRecommendationInfo().getRecVendorImage();
+                randomizedRestaurantName = info.getRecommendationInfo().getRecRestaurantName();
+
+                Glide.with(getApplicationContext()).load(info.getRecommendationInfo().getRecFoodImage()).apply(option).into(recommendationCardImage);
+                recommendationMenu.setText(info.getRecommendationInfo().getRecFoodName());
+
+                customerSingleton.setFirstname(info.getCustomerInfo().getFirstnamev2());
+                customerSingleton.setLastname(info.getCustomerInfo().getLastnamev2());
                 customerSingleton.setEmail(info.getCustomerInfo().getEmail());
-                customerSingleton.setCustomerImage(info.getCustomerInfo().getCustomerImage());
+                customerSingleton.setCustomerImage(info.getCustomerInfo().getCustomerImagev2());
 
                 crowdEstimationOnPicValue.setText(info.getPercentDensity()+"%");
-                progressDialog.dismiss();
 
+                Glide.with(getApplicationContext()).load(R.drawable.crowd_photo).apply(option).into(crowdCardImage);
+                Glide.with(getApplicationContext()).load(R.drawable.order_photo).apply(option).into(ordersCardImage);
+                Glide.with(getApplicationContext()).load(R.drawable.vendor_photo).apply(option).into(vendorsCardImage);
+
+                progressDialog.dismiss();
             }
 
             @Override
@@ -245,6 +207,7 @@ public class homev2Activity extends AppCompatActivity {
             }
         });
     }
+
 
     private void preloadCrowdPage(Intent i) {
         progressDialog = ProgressDialog.show(homev2Activity.this
@@ -268,16 +231,6 @@ public class homev2Activity extends AppCompatActivity {
                 System.out.println("preloaded");
                 i.putExtra("preloadCrowdData",preloadCrowdData );
                 i.putExtra("hourlyData", preloadCrowdData.hourlyCrowdStat);
-
-//                i.putExtra("8",preloadCrowdData.hourlyCrowdStat.get(0).getCrowdStat());
-//                i.putExtra("9",preloadCrowdData.hourlyCrowdStat.get(1).getCrowdStat());
-//                i.putExtra("10",preloadCrowdData.hourlyCrowdStat.get(2).getCrowdStat());
-//                i.putExtra("11",preloadCrowdData.hourlyCrowdStat.get(3).getCrowdStat());
-//                i.putExtra("12",preloadCrowdData.hourlyCrowdStat.get(4).getCrowdStat());
-//                i.putExtra("13",preloadCrowdData.hourlyCrowdStat.get(5).getCrowdStat());
-//                i.putExtra("14",preloadCrowdData.hourlyCrowdStat.get(6).getCrowdStat());
-//                i.putExtra("15",preloadCrowdData.hourlyCrowdStat.get(7).getCrowdStat());
-//                i.putExtra("16",preloadCrowdData.hourlyCrowdStat.get(8).getCrowdStat());
 
                 System.out.println("percent1 "+preloadCrowdData.getPercentDensity());
                 System.out.println("put preloadCrowdData into intent");

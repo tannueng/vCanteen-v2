@@ -10,10 +10,6 @@ public class customerHome {
         return percentDensity;
     }
 
-    public int getPercentDensity() {
-        return percentDensity;
-    }
-
     public recommendationInfo getRecommendationInfo() {
         return recommendationInfo;
     }
