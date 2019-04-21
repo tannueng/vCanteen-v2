@@ -21,6 +21,7 @@ import com.example.vcanteen.Data.Token;
 import com.example.vcanteen.Data.TokenResponse;
 import com.example.vcanteen.Data.TokenVerification;
 import com.example.vcanteen.POJO.vendorCombinationMenu;
+import com.example.vcanteen.POJO.vendorListObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,7 @@ public interface JsonPlaceHolderApi {
     @PUT("v1/user-authentication/customer/verify/email")
     Call<Void> verifyEmail(@Body RecoverPass recoverPass);
 
-    @GET("v1/orders/{vendorId}/menu")
+    @GET("v2/orders/{vendorId}/menu")
     Call<vendorAlacarteMenu> getVendorAlacarte(@Path("vendorId") int vendorId);
 
     @GET("v1/orders/{vendorId}/combination")
@@ -117,4 +118,9 @@ public interface JsonPlaceHolderApi {
 
     @DELETE("/v2/payments/customer/{customerId}/{customerMoneyAccountId}")
     Call<Void> deleteUnlinkPayment(@Path("customerId") int customerId, @Path("customerMoneyAccountId") int customerMoneyAccountId);
+
+    @GET("/v2/orders/all-vendors")
+    Call<vendorListObject> getVendorList();
+
+
 }

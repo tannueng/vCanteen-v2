@@ -106,7 +106,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/sfprotext_regular"
-            android:text="10 mins"
+            android:text="x mins"
             android:textColor="#F86D70"
             android:textSize="12sp" />
 

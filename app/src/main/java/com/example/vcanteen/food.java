@@ -6,16 +6,19 @@ import android.os.Parcelable;
 import io.reactivex.annotations.Nullable;
 
 public class food implements Parcelable {
-    int foodId;
-    String foodName;
-    int foodPrice;
-    String foodType;
 
-    public food(int foodId, String foodName, int foodPrice, @Nullable String foodType) {
+    public int foodId;
+    public String foodName;
+    public int foodPrice;
+    public String foodType;
+    public String foodCategory;
+
+    public food(int foodId, String foodName, int foodPrice, @Nullable String foodType, @Nullable String foodCategory) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.foodPrice = foodPrice;
         this.foodType = foodType;
+        this.foodCategory = foodCategory;
     }
 
     @Override
@@ -24,6 +27,7 @@ public class food implements Parcelable {
                 ", \"foodName\": "+"\""+foodName+"\""+
                 ", \"foodPrice\": "+"\""+foodPrice+"\""+
                 ", \"foodType\": "+"\""+foodType+"\""+
+                ", \"foodCategory\": "+"\""+foodCategory+"\""+
                 "}";
     }
 
@@ -59,6 +63,10 @@ public class food implements Parcelable {
         this.foodType = foodType;
     }
 
+    public String getFoodCategory() { return foodCategory; }
+
+    public void setFoodCategory(String foodCategory) { this.foodCategory = foodCategory; }
+
 ////// MORE INFO ABT Parcel: https://coderwall.com/p/vfbing/passing-objects-between-activities-in-android
 
     /**
@@ -71,6 +79,7 @@ public class food implements Parcelable {
         foodName = in.readString();
         foodPrice = in.readInt();
         foodType = in.readString();
+        foodCategory = in.readString();
     }
 
     /**
@@ -109,6 +118,7 @@ public class food implements Parcelable {
         dest.writeString(foodName);
         dest.writeInt(foodPrice);
         dest.writeString(foodType);
+        dest.writeString(foodCategory);
     }
 
 

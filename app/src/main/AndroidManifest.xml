@@ -39,9 +39,6 @@
         <activity android:name=".normalOrderActivity" />
         <activity android:name=".customizeOrderActivity" />
         <activity
-            android:name=".vendorMenuActivity"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".vendorMenuv2Activity"
             android:launchMode="singleTask" />
         <activity android:name=".changePasswordActivity" />

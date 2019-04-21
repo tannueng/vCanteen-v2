@@ -322,7 +322,7 @@ public class cartActivity extends AppCompatActivity {
 
 
         super.onBackPressed();
-        Intent goToMenu = new Intent(cartActivity.this,vendorMenuActivity.class);
+        Intent goToMenu = new Intent(cartActivity.this,vendorMenuv2Activity.class);
         goToMenu.putExtra("orderStackFromCart",orderStack);
         //goToMenu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(goToMenu);

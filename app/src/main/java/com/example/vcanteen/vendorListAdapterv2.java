@@ -18,11 +18,9 @@ public class vendorListAdapterv2 extends ArrayAdapter<vendorList> {
     String vendorStatus;
 
     Context context;
-    int resource;
-    List<vendorList> vendorLists = null;
+    List<vendorList> vendorLists;
 
     public vendorListAdapterv2(Context context, List<vendorList> vendorLists) {
-
         super(context, R.layout.vendor_listview_v2, vendorLists);
         this.context = context;
         this.vendorLists = vendorLists;
@@ -34,19 +32,20 @@ public class vendorListAdapterv2 extends ArrayAdapter<vendorList> {
         vendorStatus = item.getVendorStatus();
         if(vendorStatus.equals("CLOSED")){
             convertView = LayoutInflater.from(context).inflate(R.layout.vendor_listview_disabled_v2, parent, false);
+            TextView vendorName = (TextView) convertView.findViewById(R.id.vendorName);
+            vendorName.setText(item.getRestaurantName());
             convertView.setEnabled(false);
-        } else
+        } else {
             convertView = LayoutInflater.from(context).inflate(R.layout.vendor_listview_v2, parent, false);
-
-        TextView vendorName = (TextView) convertView.findViewById(R.id.vendorName);
-        ImageView vendorImage = convertView.findViewById(R.id.vendorImage);
-
-        vendorName.setText(item.getRestaurantName());
-        //vendorImage.setImageBitmap(loadBitmap(item.getVendorImage()));
-        Glide.with(context).load(item.getVendorImage()).apply(option).into(vendorImage);
-        vendorImage.setClipToOutline(true);
-
-
+            TextView vendorName = (TextView) convertView.findViewById(R.id.vendorName);
+            ImageView vendorImage = convertView.findViewById(R.id.vendorImage);
+            TextView estimate_time = (TextView) convertView.findViewById(R.id.estimate_time);
+            vendorName.setText(item.getRestaurantName());
+            estimate_time.setText(item.getQueuingTime() + " mins");
+            //vendorImage.setImageBitmap(loadBitmap(item.getVendorImage()));
+            Glide.with(context).load(item.getVendorImage()).apply(option).into(vendorImage);
+            vendorImage.setClipToOutline(true);
+        }
         return convertView;
     }
 

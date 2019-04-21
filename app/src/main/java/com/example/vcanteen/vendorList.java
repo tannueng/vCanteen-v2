@@ -10,25 +10,43 @@ public class vendorList {
     @SerializedName("vendorId")
     @Expose
     private int vendorId;
+
     @SerializedName("restaurantName")
     @Expose
     private String restaurantName;
-    @SerializedName("restaurantNumber")
-    @Expose
-    private int restaurantNumber;
+//    @SerializedName("restaurantNumber")
+//    @Expose
+//    private int restaurantNumber;
+
     @SerializedName("vendorImage")
     @Expose
     private String vendorImage;
+
     @SerializedName("vendorStatus")
     @Expose
     private String vendorStatus;
-    public vendorList(int vendorId, String restaurantName, int restaurantNumber,String vendorImage, String vendorStatus) {
+
+    @SerializedName("queuingTime")
+    @Expose
+    private int queuingTime;
+
+//    public vendorList(int vendorId, String restaurantName, int restaurantNumber,String vendorImage, String vendorStatus, int queuingTime) {
+//        super();
+//        this.vendorId = vendorId;
+//        this.restaurantName = restaurantName;
+//        this.restaurantNumber = restaurantNumber;
+//        this.vendorImage = vendorImage;
+//        this.vendorStatus = vendorStatus;
+//        this.queuingTime = queuingTime;
+//    }
+
+    public vendorList(int vendorId, String restaurantName, String vendorImage, String vendorStatus, int queuingTime) {
         super();
         this.vendorId = vendorId;
         this.restaurantName = restaurantName;
-        this.restaurantNumber = restaurantNumber;
         this.vendorImage = vendorImage;
         this.vendorStatus = vendorStatus;
+        this.queuingTime = queuingTime;
     }
 
     public int getVendorId() {
@@ -47,13 +65,13 @@ public class vendorList {
         this.restaurantName = restaurantName;
     }
 
-    public int getRestaurantNumber() {
-        return restaurantNumber;
-    }
-
-    public void setRestaurantNumber(int restaurantNumber) {
-        this.restaurantNumber = restaurantNumber;
-    }
+//    public int getRestaurantNumber() {
+//        return restaurantNumber;
+//    }
+//
+//    public void setRestaurantNumber(int restaurantNumber) {
+//        this.restaurantNumber = restaurantNumber;
+//    }
 
     public String getVendorImage() {
         return vendorImage;
@@ -71,6 +89,12 @@ public class vendorList {
         this.vendorStatus = vendorStatus;
     }
 
+    public int getQueuingTime() {
+        return queuingTime;
+    }
 
+    public void setQueuingTime(int queuingTime) {
+        this.queuingTime = queuingTime;
+    }
 
 }

@@ -113,7 +113,7 @@ public class orderListData {
     }
 
     public void setOrderEstimatedTime(int orderEstimatedTime) {
-        orderEstimatedTime = orderEstimatedTime;
+        this.orderEstimatedTime = orderEstimatedTime;
     }
 
     public boolean isHasRated() {

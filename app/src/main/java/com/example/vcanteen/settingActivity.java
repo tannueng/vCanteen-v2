@@ -109,6 +109,7 @@ public class settingActivity extends AppCompatActivity {
 
 
             //MOCK DATA
+//<<<<<<< Updated upstream
 //            paymentMethod methods = new paymentMethod();
 //            ArrayList<availablePaymentMethod> availMethods = new ArrayList<>();
 //            availMethods.add(new availablePaymentMethod(1,"SCB EASY"));
@@ -122,6 +123,20 @@ public class settingActivity extends AppCompatActivity {
 //
 ////                paymentList.add(new paymentList(list.getCustomerMoneyAccountId(), list.getServiceProvider()));
 //            }
+//=======
+            paymentMethod methods = new paymentMethod();
+            ArrayList<availablePaymentMethod> availMethods = new ArrayList<>();
+            //availMethods.add
+            methods.setAvailablePaymentMethod(availMethods);
+            ArrayList<availablePaymentMethod> lists = methods.availablePaymentMethod;
+
+            for (availablePaymentMethod list :lists){
+                System.out.println("payment");
+                System.out.println(list.getCustomerMoneyAccountId()+","+list.getServiceProvider());
+
+                paymentList.add(new paymentList(list.getCustomerMoneyAccountId(), list.getServiceProvider()));
+            }
+//>>>>>>> Stashed changes
 
 //            startActivity(new Intent(settingActivity.this, EditPaymentMethodActivity.class));
         });
