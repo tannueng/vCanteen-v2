@@ -1,5 +1,6 @@
 package com.example.vcanteen;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -54,6 +55,9 @@ public class homev2Activity extends AppCompatActivity {
     TextView crowdEstimationOnPicValue;
     customerSingleton customerSingleton;
     TextView crowdEstimationOnPicValue;
+
+    ProgressDialog progressDialog;
+
     Bitmap bitmap;
     Bitmap bitmap2;
 
@@ -108,23 +112,14 @@ public class homev2Activity extends AppCompatActivity {
 
         customerSingleton = com.example.vcanteen.customerSingleton.getInstance();
 
+        System.out.println("onCreate Homepage");
+        progressDialog = new ProgressDialog(homev2Activity.this);
 
-        System.out.println("customerId : "+customerId);
+        callRetrofitOnHomepage(customerId);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://vcanteen.herokuapp.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        Call<customerHome> call = jsonPlaceHolderApi.getCustomerHome(customerId);
-            call.enqueue(new Callback<customerHome>() {
-                 @Override
-                 public void onResponse(Call<customerHome> call, Response<customerHome> response) {
-                     if (!response.isSuccessful()) {
-                         Toast.makeText(homev2Activity.this, "CODE: "+response.code(),Toast.LENGTH_LONG).show();
-                         return;
-                     }
-                     System.out.println("200 Homepage");
+        recommendationButton.setOnClickListener(v -> {
+            //TODO navigate to vendor_menu_page of the vendor who owns the menu
+        });
 
                      //get result here
                      customerHome info = response.body();
@@ -199,11 +194,64 @@ public class homev2Activity extends AppCompatActivity {
             System.out.println("pressed settings");
             startActivity(new Intent(homev2Activity.this, settingActivity.class));
         });
+
+
+    }
+
+    private void callRetrofitOnHomepage(int customerId) {
+        progressDialog = ProgressDialog.show(homev2Activity.this
+                , "",
+                "Loading. Please wait...", true);
+        System.out.println("customerId : "+customerId);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://vcanteen.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        Call<customerHome> call = jsonPlaceHolderApi.getCustomerHome(customerId);
+        call.enqueue(new Callback<customerHome>() {
+            @Override
+            public void onResponse(Call<customerHome> call, Response<customerHome> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(homev2Activity.this, "CODE: "+response.code(),Toast.LENGTH_LONG).show();
+                    return;
+                }
+                System.out.println("200 Homepage");
+
+                //get result here
+                customerHome info = response.body();
+                firstAndLastName.setText(info.getCustomerInfo().getFirstname()+" "+ info.getCustomerInfo().getLastname().substring(0,1)+".");
+
+//                     if(info.getCustomerInfo().getCustomerImage().equals(null)) {
+//                         info.getCustomerInfo().setCustomerImage("https://firebasestorage.googleapis.com/v0/b/vcanteen-d8ede.appspot.com/o/default%20user%20icon.png?alt=media&token=07b2a90c-2404-4b72-9357-ed40501300b7");
+//                     }
+                bitmap = getBitmapFromURL(info.getCustomerInfo().getCustomerImage());
+                profilePictureButton.setImageBitmap(bitmap);
+
+                customerSingleton.setFirstname(info.getCustomerInfo().getFirstname());
+                customerSingleton.setLastname(info.getCustomerInfo().getLastname());
+                customerSingleton.setEmail(info.getCustomerInfo().getEmail());
+                customerSingleton.setCustomerImage(info.getCustomerInfo().getCustomerImage());
+
+                crowdEstimationOnPicValue.setText(info.getPercentDensity()+"%");
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<customerHome> call, Throwable t) {
+                System.out.println("Entered Home Fail.....");
+
+            }
+        });
     }
 
     private void preloadCrowdPage(Intent i) {
+        progressDialog = ProgressDialog.show(homev2Activity.this
+                , "",
+                "Loading. Please wait...", true);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://vcanteen.herokuapp.com/")
+                .baseUrl("https://vcanteen.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
@@ -218,9 +266,6 @@ public class homev2Activity extends AppCompatActivity {
                 }
                 currentDensityAll preloadCrowdData = response.body();
                 System.out.println("preloaded");
-
-                System.out.println("preload time "+preloadCrowdData.hourlyCrowdStat.get(0).getCrowdStat());
-                System.out.println("preload time "+preloadCrowdData.hourlyCrowdStat.get(1).getCrowdStat());
                 i.putExtra("preloadCrowdData",preloadCrowdData );
                 i.putExtra("hourlyData", preloadCrowdData.hourlyCrowdStat);
 
@@ -234,7 +279,9 @@ public class homev2Activity extends AppCompatActivity {
 //                i.putExtra("15",preloadCrowdData.hourlyCrowdStat.get(7).getCrowdStat());
 //                i.putExtra("16",preloadCrowdData.hourlyCrowdStat.get(8).getCrowdStat());
 
+                System.out.println("percent1 "+preloadCrowdData.getPercentDensity());
                 System.out.println("put preloadCrowdData into intent");
+                progressDialog.dismiss();
                 startActivity(i);
 
             }
@@ -270,5 +317,11 @@ public class homev2Activity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        callRetrofitOnHomepage(customerId);
     }
 }

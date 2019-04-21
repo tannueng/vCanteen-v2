@@ -72,7 +72,7 @@ public class password_login_page extends AppCompatActivity {
     private String firebaseToken;
 
     // vcanteen.herokuapp.com/
-    private final String url = "http://vcanteen.herokuapp.com/";
+    private final String url = "https://vcanteen.herokuapp.com/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

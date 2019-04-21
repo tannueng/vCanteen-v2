@@ -222,7 +222,6 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                System.out.println("hasRated status: "+Boolean.valueOf(orderEstimatedTime.getText().toString()));
 
                 if(orderStatus.getText().equals("COLLECTED")&&!Boolean.valueOf(orderEstimatedTime.getText().toString())) {//and hasRated = false
-                    System.out.println("Pressed one COLLECTED and not rated");
                     System.out.println(orderId.getText().toString()+", hasRated: "+Boolean.valueOf(orderEstimatedTime.getText().toString()));
 
                     progressTabFragment.showReviewDialog(itemView.getContext(),order,vendorName.getText().toString(),orderName.getText().toString(),orderNameExtra.getText().toString());
@@ -327,7 +326,7 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                     System.out.println("onClick DONE Detected. "+String.valueOf(orderId.getText()));
                     int order = Integer.parseInt(String.valueOf(orderId.getText()).substring(10));
-                    progressTabFragment.getSlotInfo(itemView.getContext(),order);
+                    progressTabFragment.getSlotInfo(itemView.getContext(),order, vendorName.getText().toString(), orderName.getText().toString(), orderNameExtra.getText().toString());
 
                 }
             });

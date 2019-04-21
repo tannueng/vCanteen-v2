@@ -131,9 +131,13 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                     mSwipeRefreshLayout.setRefreshing(false);
                     return;
                 }
-
+                mSwipeRefreshLayout.setRefreshing(false);
                 List<orderProgress> posts = response.body();
                 System.out.println(posts.toString());
+                if(posts.isEmpty()) {
+                    Toast.makeText(context, "In-Progress is empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 for (orderProgress post : posts) {
                     if(String.valueOf(post.getOrderStatus()).equals("DONE")) {
@@ -145,7 +149,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                 DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                mSwipeRefreshLayout.setRefreshing(false);
+
 
 
             }
@@ -161,9 +165,9 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
     }
 
-    public static void getSlotInfo(final Context context, final int orderId) {
+    public static void getSlotInfo(final Context context, final int orderId, final String vendorName, final String orderName,@Nullable String orderNameExtra ) {
         Retrofit retrofit2 = new Retrofit.Builder()
-                .baseUrl("http://vcanteen.herokuapp.com/")
+                .baseUrl("https://vcanteen.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit2.create(JsonPlaceHolderApi.class);
@@ -186,7 +190,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                 slotString = Integer.toString(slot.getPickupSlot());
 //                            holder.pickupSlot.setText("321"); //slot.getPickupSlot()
 
-                showConfirmDialog(context,orderId,slot);
+                showConfirmDialog(context,orderId,slot, vendorName, orderName, orderNameExtra);
 
 
             }
@@ -200,7 +204,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
         });
     }
     static Dialog dialog;
-    private static void showConfirmDialog(final Context context, final int orderId, final pickupSlot slot) {
+    private static void showConfirmDialog(final Context context, final int orderId, final pickupSlot slot, final String vendorName, final String orderName, final String orderNameExtra) {
 
         //display popup confirm pickup
         dialog = new Dialog(context);
@@ -228,6 +232,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
                         System.out.println("My orderID is " + orderId);
                         putOrderSlot(context, orderId);
+                        showReviewDialog(context, orderId,vendorName, orderName, orderNameExtra );
                     }
                 });
 
@@ -239,7 +244,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
         //Send endpoint putOrderStatus
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://vcanteen.herokuapp.com/")
+                .baseUrl("https://vcanteen.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
@@ -303,8 +308,6 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
             if(String.valueOf(rating).equals("5.0")) descriptionText.setText("\"Awesome, I can eat this everyday!\"");
             score.set(Double.parseDouble(new Float(rating).toString()));
 //            score2 = (double)rating;
-            Toast.makeText(context, new Float(rating).toString(),Toast.LENGTH_LONG).show();
-
         });
 
         reviewBox.addTextChangedListener(new TextWatcher() {
@@ -340,7 +343,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                     progressDialog = ProgressDialog.show(context, "","Loading. Please wait...", true);
 
                     Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://vcanteen.herokuapp.com/")
+                            .baseUrl("https://vcanteen.herokuapp.com/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
@@ -351,13 +354,17 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (!response.isSuccessful()) {
                                 Toast.makeText(context, "CODE: "+response.code(),Toast.LENGTH_LONG).show();
+                                System.out.println("error onResponse post review");
                                 return;
 
                             }
-                            progressDialog.dismiss();
+                            System.out.println("-------start");
                             Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
                             loadRecyclerViewData(context);
+                            historyTabFragment.loadRecyclerViewData(context);
+                            dialog.dismiss();
+                            progressDialog.dismiss();
+                            System.out.println("-------end");
 
                         }
 

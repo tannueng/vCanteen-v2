@@ -29,7 +29,6 @@ public class orderListData {
         this.orderStatus = orderStatus;
         this.type = type;
         this.hasRated = hasRated;
-        if(hasRated) System.out.println("found another true"+orderId);
     }
     //IN PROGRESS
     orderListData(String orderId, String orderPrice, String orderName, String orderNameExtra, String vendorName, String orderDate, String orderStatus, int type, @Nullable int orderEstimatedTime) {
