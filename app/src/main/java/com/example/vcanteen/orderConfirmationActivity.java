@@ -81,7 +81,7 @@ public class orderConfirmationActivity extends AppCompatActivity {
 
     public void orderMoreBackToHome(){
         orderStack.setEmpty();
-        Intent intent = new Intent(this, vendorListActivity.class);
+        Intent intent = new Intent(this, homev2Activity.class);
         startActivity(intent);
     }
 }

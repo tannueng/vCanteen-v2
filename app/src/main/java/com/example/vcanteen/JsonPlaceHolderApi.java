@@ -41,7 +41,7 @@ public interface JsonPlaceHolderApi {
     @GET("v1/orders/customers/{customerId}/history")
     Call<List<orderHistory>> getHistory(@Path("customerId") int customerId);
 
-    @GET("v1/orders/customers/{customerId}/in-progress")
+    @GET("v2/orders/customers/{customerId}/in-progress")
     Call<List<orderProgress>> getProgress(@Path("customerId") int customerId);
 
     @GET("/v1/orders/{orderId}/slot")

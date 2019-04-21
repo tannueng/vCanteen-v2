@@ -44,11 +44,8 @@ public class vendorListAdapter extends ArrayAdapter<vendorList> {
         ImageView vendorImage = convertView.findViewById(R.id.vendorImage);
 
         vendorName.setText(item.getRestaurantName());
-        //vendorImage.setImageBitmap(loadBitmap(item.getVendorImage()));
         Glide.with(context).load(item.getVendorImage()).apply(option).into(vendorImage);
         vendorImage.setClipToOutline(true);
-
-
         return convertView;
     }
 
