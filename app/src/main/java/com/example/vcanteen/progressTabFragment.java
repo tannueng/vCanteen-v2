@@ -165,7 +165,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
     }
 
-    public static void getSlotInfo(final Context context, final int orderId) {
+    public static void getSlotInfo(final Context context, final int orderId, final String vendorName, final String orderName,@Nullable String orderNameExtra ) {
         Retrofit retrofit2 = new Retrofit.Builder()
                 .baseUrl("https://vcanteen.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -190,7 +190,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                 slotString = Integer.toString(slot.getPickupSlot());
 //                            holder.pickupSlot.setText("321"); //slot.getPickupSlot()
 
-                showConfirmDialog(context,orderId,slot);
+                showConfirmDialog(context,orderId,slot, vendorName, orderName, orderNameExtra);
 
 
             }
@@ -204,7 +204,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
         });
     }
     static Dialog dialog;
-    private static void showConfirmDialog(final Context context, final int orderId, final pickupSlot slot) {
+    private static void showConfirmDialog(final Context context, final int orderId, final pickupSlot slot, final String vendorName, final String orderName, final String orderNameExtra) {
 
         //display popup confirm pickup
         dialog = new Dialog(context);
@@ -232,6 +232,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
                         System.out.println("My orderID is " + orderId);
                         putOrderSlot(context, orderId);
+                        showReviewDialog(context, orderId,vendorName, orderName, orderNameExtra );
                     }
                 });
 
@@ -353,14 +354,17 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (!response.isSuccessful()) {
                                 Toast.makeText(context, "CODE: "+response.code(),Toast.LENGTH_LONG).show();
+                                System.out.println("error onResponse post review");
                                 return;
 
                             }
-                            progressDialog.dismiss();
+                            System.out.println("-------start");
                             Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
                             loadRecyclerViewData(context);
                             historyTabFragment.loadRecyclerViewData(context);
+                            dialog.dismiss();
+                            progressDialog.dismiss();
+                            System.out.println("-------end");
 
                         }
 

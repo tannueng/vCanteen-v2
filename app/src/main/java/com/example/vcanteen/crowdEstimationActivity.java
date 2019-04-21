@@ -119,6 +119,9 @@ public class crowdEstimationActivity extends AppCompatActivity {
         lastestTimeStampText = findViewById(R.id.lastestTimeStampText);
         currentCanteenDensityValue = findViewById(R.id.currentCanteenDensityValue);
         refreshButton.setOnClickListener(v -> {
+            progressDialog = new ProgressDialog(crowdEstimationActivity.this);
+            progressDialog = ProgressDialog.show(crowdEstimationActivity.this, "",
+                    "Loading. Please wait...", true);
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://vcanteen.herokuapp.com/")
                     .addConverterFactory(GsonConverterFactory.create())
@@ -132,8 +135,10 @@ public class crowdEstimationActivity extends AppCompatActivity {
                 public void onResponse(Call<currentDensity> call, Response<currentDensity> response) {
                     if (!response.isSuccessful()) {
                         Toast.makeText(crowdEstimationActivity.this, "CODE: "+response.code(),Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                         return;
                     }
+                    progressDialog.dismiss();
                     currentDensity currentDensity;
                     currentDensity = response.body();
                     lastestTimeStampText.setText("Latest Data : Today "+currentDensity.getLatestTime());
@@ -142,7 +147,7 @@ public class crowdEstimationActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<currentDensity> call, Throwable t) {
-
+                    progressDialog.dismiss();
                 }
             });
 
