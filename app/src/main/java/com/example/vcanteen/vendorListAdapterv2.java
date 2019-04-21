@@ -41,8 +41,7 @@ public class vendorListAdapterv2 extends ArrayAdapter<vendorList> {
             ImageView vendorImage = convertView.findViewById(R.id.vendorImage);
             TextView estimate_time = (TextView) convertView.findViewById(R.id.estimate_time);
             vendorName.setText(item.getRestaurantName());
-            estimate_time.setText("waiting for v2");
-            //estimate_time.setText(item.getQueuingTime() + " mins");
+            estimate_time.setText(item.getQueuingTime() + " mins");
             //vendorImage.setImageBitmap(loadBitmap(item.getVendorImage()));
             Glide.with(context).load(item.getVendorImage()).apply(option).into(vendorImage);
             vendorImage.setClipToOutline(true);

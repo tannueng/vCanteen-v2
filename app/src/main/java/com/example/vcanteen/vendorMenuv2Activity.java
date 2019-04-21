@@ -346,6 +346,7 @@ public class vendorMenuv2Activity extends AppCompatActivity {
                 Toast.makeText(this, "Noodles Category", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.category_soup:
+                System.out.println("SOUP test " + availableList.get(1).getFoodCategory().equals("SOUP"));
                 for(int i = 0; i < availableList.size(); i++) {
                     if (availableList.get(i).getFoodCategory().equals("SOUP")) {
                         food temp = availableList.get(i);
