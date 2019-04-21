@@ -1,6 +1,7 @@
 package com.example.vcanteen;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ public class historyTabFragment extends Fragment {
 
     static SharedPreferences sharedPref;
 
+    static ProgressDialog progressDialog;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,6 +58,8 @@ public class historyTabFragment extends Fragment {
                 loadRecyclerViewData(getContext());
             }
         });
+
+        progressDialog = new ProgressDialog(getContext());
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
                 android.R.color.holo_orange_dark,
@@ -72,7 +77,7 @@ public class historyTabFragment extends Fragment {
         return view;
     }
 
-    private static void loadRecyclerViewData(final Context context) {
+    public static void loadRecyclerViewData(final Context context) {
         Retrofit retrofit = new Retrofit.Builder()
 //                .baseUrl("http://www.json-generator.com/api/json/get/")
                 .baseUrl("https://vcanteen.herokuapp.com/")
@@ -129,8 +134,11 @@ public class historyTabFragment extends Fragment {
     }
 
     public static void getOldSlotInfo(Context context, int orderId) {
+        progressDialog = ProgressDialog.show(context
+                , "",
+                "Loading. Please wait...", true);
         Retrofit retrofit2 = new Retrofit.Builder()
-                .baseUrl("http://vcanteen.herokuapp.com/")
+                .baseUrl("https://vcanteen.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit2.create(JsonPlaceHolderApi.class);
@@ -143,10 +151,13 @@ public class historyTabFragment extends Fragment {
                     Toast.makeText(context, "CODE: "+response.code(),
                             Toast.LENGTH_LONG).show();
                     System.out.println("OLDS onResponse getslot unsuccessful");
+                    progressDialog.dismiss();
                     return;
                 }
+                progressDialog.dismiss();
                 oldSlot oldSlot = response.body();
                 showTimeoutDialog(context,orderId,oldSlot);
+
 
 
             }
@@ -156,17 +167,15 @@ public class historyTabFragment extends Fragment {
                 Toast.makeText(context, "ERROR: "+t.getMessage(),
                         Toast.LENGTH_LONG).show();
                 System.out.println("OLDS some error");
+                progressDialog.dismiss();
             }
         });
-
-        //Mock Data
-        oldSlot oldSlot = new oldSlot();
-        oldSlot.setOldSlot(111);
-        showTimeoutDialog(context,orderId,oldSlot);
     }
 
     private static void showTimeoutDialog(Context context, int orderId, oldSlot oldSlot) {
         //display popup timeout
+
+
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.popup_timeout);
         oldSlotTextView = dialog.findViewById(R.id.old_slot_number);
@@ -183,8 +192,11 @@ public class historyTabFragment extends Fragment {
     }
 
     public static void getCancelReason(Context context, int orderId) {
+        progressDialog = ProgressDialog.show(context
+                , "",
+                "Loading. Please wait...", true);
         Retrofit retrofit2 = new Retrofit.Builder()
-                .baseUrl("http://vcanteen.herokuapp.com/")
+                .baseUrl("https://vcanteen.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit2.create(JsonPlaceHolderApi.class);
@@ -197,8 +209,10 @@ public class historyTabFragment extends Fragment {
                     Toast.makeText(context, "CODE: "+response.code(),
                             Toast.LENGTH_LONG).show();
                     System.out.println("CANC onResponse getCancelReason unsuccessful");
+                    progressDialog.dismiss();
                     return;
                 }
+                progressDialog.dismiss();
 
 
                 cancelReason reason = response.body();
@@ -215,6 +229,7 @@ public class historyTabFragment extends Fragment {
                 Toast.makeText(context, "ERROR: "+t.getMessage(),
                         Toast.LENGTH_LONG).show();
                 System.out.println("CANC some error");
+                progressDialog.dismiss();
             }
         });
     }
@@ -230,9 +245,6 @@ public class historyTabFragment extends Fragment {
 
         (dialog.findViewById(R.id.dismiss_btn)).setOnClickListener(v -> {
             dialog.dismiss();
-
-            reasonText.setText("");
-            System.out.println("cancel reason = "+reasonText.getText());
         });
 
 

@@ -71,9 +71,10 @@ public class crowdEstimationActivity extends AppCompatActivity {
 //        crowd.add(new hourlyCrowdStat("15:00",getIntent().getIntExtra("15",150)));
 //        crowd.add(new hourlyCrowdStat("16:00",getIntent().getIntExtra("16",150)));
 //        System.out.println("density "+preloadCrowdData);
+
         lastestTimeStampText.setText("Latest Data : Today "+preloadCrowdData.getLatestTime());
         currentCanteenDensityValue.setText(Integer.toString(preloadCrowdData.getPercentDensity())+"%");
-//        System.out.println(hourlyData.get(0).getCrowdStat());
+        System.out.println("percent"+preloadCrowdData.getPercentDensity());
 
         crowd = hourlyData;
 //        System.out.println(preloadCrowdData.hourlyCrowdStat.toArray().toString());

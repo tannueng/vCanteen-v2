@@ -58,7 +58,7 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
         sp_truemoneywallet_checkmark = findViewById(R.id.sp_truemoneywallet_checkmark);
 
 
-        reload();
+//        reload();
 
         //TODO getExtra from setting page
 
@@ -134,7 +134,7 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
 
         unlinkBtn.setOnClickListener(v -> {
             Retrofit retrofit2 = new Retrofit.Builder()
-                    .baseUrl("http://vcanteen.herokuapp.com/")
+                    .baseUrl("https://vcanteen.herokuapp.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             JsonPlaceHolderApi jsonPlaceHolderApi = retrofit2.create(JsonPlaceHolderApi.class);
@@ -149,9 +149,12 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
                         return;
                     }
                     System.out.println("onResponse done");
-                    reload();
+                    reload(progressDialog);
                     dialog.dismiss();
                     Toast.makeText(EditPaymentMethodActivity.this, "Successfully Unlinked Account", Toast.LENGTH_LONG).show();
+
+                    System.out.println("success unlink account");
+
                 }
 
                 @Override
@@ -204,7 +207,7 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
                             "Loading. Please wait...", true);
                     //Retrofit
                     Retrofit retrofit2 = new Retrofit.Builder()
-                            .baseUrl("http://vcanteen.herokuapp.com/")
+                            .baseUrl("https://vcanteen.herokuapp.com/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     JsonPlaceHolderApi jsonPlaceHolderApi = retrofit2.create(JsonPlaceHolderApi.class);
@@ -217,10 +220,11 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
                                 sp_kplus_link.setText("unlink");
                                 progressDialog.dismiss();
                                 dialog.dismiss();
-                                reload();
                                 return;
                             }
                             Toast.makeText(EditPaymentMethodActivity.this, "Successfully Linked Account ", Toast.LENGTH_LONG).show();
+                            reload(progressDialog);
+                            System.out.println("success link account");
                             progressDialog.dismiss();
                             dialog.dismiss();
                         }
@@ -248,9 +252,9 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
             }
         });
     }
-    public void reload() {
+    public void reload(@Nullable ProgressDialog progressDialog) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://vcanteen.herokuapp.com/")
+                .baseUrl("https://vcanteen.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
@@ -264,6 +268,7 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                     return;
                 }
+                progressDialog.dismiss();
                 paymentMethod methods = response.body(); //IMPORTANT
                 ArrayList<availablePaymentMethod> lists = methods.availablePaymentMethod; //IMPORTANT
                 for (availablePaymentMethod list :lists){ //just to print
@@ -283,6 +288,18 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
         });
     }
     public void mapping(ArrayList<availablePaymentMethod> payments) {
+        System.out.println("Mapping new Payment Method");
+
+        sp_cunex_link.setText("LINK");
+        sp_scbeasy_link.setText("LINK");
+        sp_kplus_link.setText("LINK");
+        sp_truemoneywallet_link.setText("LINK");
+
+        sp_cunex_checkmark.setVisibility(View.INVISIBLE);
+        sp_scbeasy_checkmark.setVisibility(View.INVISIBLE);
+        sp_kplus_checkmark.setVisibility(View.INVISIBLE);
+        sp_truemoneywallet_checkmark.setVisibility(View.INVISIBLE);
+
         for (availablePaymentMethod list :payments){
             System.out.println("received payment");
             System.out.println(list.getCustomerMoneyAccountId()+","+list.getServiceProvider());

@@ -62,7 +62,7 @@ public class reportBugActivity extends AppCompatActivity {
 
             //TODO Include retrofit here for sending
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://vcanteen.herokuapp.com/")
+                    .baseUrl("https://vcanteen.herokuapp.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);

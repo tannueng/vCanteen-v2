@@ -11,6 +11,6 @@ public class oldSlot {
         this.oldSlot = oldSlot;
     }
 
-    @SerializedName("slotID")
+    @SerializedName("slotId")
     public int oldSlot;
 }

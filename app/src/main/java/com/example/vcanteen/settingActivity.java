@@ -62,12 +62,11 @@ public class settingActivity extends AppCompatActivity {
         tappable_payment.setOnClickListener(v -> {
 
 //            progressDialog = new ProgressDialog(settingActivity.this);
-//            progressDialog = ProgressDialog.show(settingActivity.this
-//                    , "",
-//                    "Loading. Please wait...", true);
-            //TODO call retrofit for editpayment here
+            progressDialog = ProgressDialog.show(settingActivity.this
+                    , "",
+                    "Loading. Please wait...", true);
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://vcanteen.herokuapp.com/")
+                    .baseUrl("https://vcanteen.herokuapp.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
@@ -80,8 +79,10 @@ public class settingActivity extends AppCompatActivity {
                     if(!response.isSuccessful()) {
                         Toast.makeText(settingActivity.this, "CODE: "+response.code(),
                                 Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                         return;
                     }
+                    progressDialog.dismiss();
 
                     paymentMethod methods;
                     methods = response.body(); //IMPORTANT
@@ -103,7 +104,7 @@ public class settingActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<paymentMethod> call, Throwable t) {
-
+                    progressDialog.dismiss();
                 }
             });
 
