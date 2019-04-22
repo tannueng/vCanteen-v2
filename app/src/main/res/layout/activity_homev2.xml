@@ -99,7 +99,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="5"
                 android:fontFamily="@font/sfprotext_bold"
-                android:text="Loading..."
                 android:textColor="@color/black_text"
                 android:textSize="16sp" />
 
@@ -236,15 +235,16 @@
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:layout_alignBottom="@id/recommendationMenu"
-                            android:layout_alignParentBottom="true"
                             android:layout_alignParentRight="true"
-                            android:minHeight="0dp"
+                            android:layout_alignParentBottom="true"
                             android:layout_centerInParent="true"
                             android:layout_marginRight="8dp"
+                            android:clickable="false"
                             android:background="@drawable/button_bg_rounded_corner_pink"
                             android:fontFamily="@font/sfprotext_semibold"
+                            android:minHeight="0dp"
                             android:text="ORDER NOW"
-                            android:textColor="#ffffff"/>
+                            android:textColor="#ffffff" />
 
                     </RelativeLayout>
 
@@ -288,7 +288,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
                         android:layout_alignParentTop="true"
-                        android:background="@drawable/vendorimg" />
+                        android:background="@drawable/vendor_photo" />
 
                     <RelativeLayout
                         android:id="@+id/vendorsCardTextLayout"
@@ -319,6 +319,7 @@
                             android:layout_marginRight="8dp"
                             android:minHeight="0dp"
                             android:layout_marginBottom="15dp"
+                            android:clickable="false"
                             android:background="@drawable/button_bg_rounded_corner_pink"
                             android:fontFamily="@font/sfprotext_semibold"
                             android:text="BROWSE"
@@ -365,7 +366,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
                         android:layout_alignParentTop="true"
-                        android:background="@drawable/vendorimg" />
+                        android:scaleType="fitXY"
+                        android:background="@drawable/crowd_photo" />
 
                     <TextView
                         android:id="@+id/crowdEstimationOnPicValue"
@@ -374,6 +376,7 @@
                         android:layout_alignBottom="@id/crowdCardImage"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="5dp"
+                        android:adjustViewBounds="true"
                         android:fontFamily="@font/sfprotext_bold"
                         android:padding="2dp"
                         android:text="68%"
@@ -422,6 +425,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
                             android:layout_marginRight="8dp"
+                            android:clickable="false"
                             android:minHeight="0dp"
                             android:background="@drawable/button_bg_rounded_corner_pink"
                             android:fontFamily="@font/sfprotext_semibold"
@@ -469,7 +473,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="140dp"
                         android:layout_alignParentTop="true"
-                        android:background="@drawable/vendorimg" />
+                        android:background="@drawable/order_photo" />
 
                     <RelativeLayout
                         android:id="@+id/ordersCardTextLayout"
@@ -515,6 +519,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
                             android:layout_marginRight="8dp"
+                            android:clickable="false"
                             android:minHeight="0dp"
                             android:background="@drawable/button_bg_rounded_corner_pink"
                             android:fontFamily="@font/sfprotext_semibold"

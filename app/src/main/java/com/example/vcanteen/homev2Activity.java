@@ -110,6 +110,10 @@ public class homev2Activity extends AppCompatActivity {
         System.out.println("onCreate Homepage");
         progressDialog = new ProgressDialog(homev2Activity.this);
 
+        Glide.with(getApplicationContext()).load(R.drawable.crowd_photo).apply(option).into(crowdCardImage);
+        Glide.with(getApplicationContext()).load(R.drawable.order_photo).apply(option).into(ordersCardImage);
+        Glide.with(getApplicationContext()).load(R.drawable.vendor_photo).apply(option).into(vendorsCardImage);
+
         callRetrofitOnHomepage(customerId);
 
         recommendationCardView.setOnClickListener(v -> {
@@ -203,9 +207,6 @@ public class homev2Activity extends AppCompatActivity {
 
                 crowdEstimationOnPicValue.setText(info.getPercentDensity()+"%");
 
-                Glide.with(getApplicationContext()).load(R.drawable.crowd_photo).apply(option).into(crowdCardImage);
-                Glide.with(getApplicationContext()).load(R.drawable.order_photo).apply(option).into(ordersCardImage);
-                Glide.with(getApplicationContext()).load(R.drawable.vendor_photo).apply(option).into(vendorsCardImage);
 
                 progressDialog.dismiss();
             }
