@@ -36,7 +36,7 @@
         android:layout_marginTop="0dp"
         android:layout_marginRight="30dp"
         android:fontFamily="@font/sfprotext_semibold"
-        android:text="Please enter your E-mail?"
+        android:text="Please enter your E-mail"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="#FF4141"
         android:textSize="25dp"

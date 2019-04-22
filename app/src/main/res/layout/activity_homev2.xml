@@ -236,13 +236,15 @@
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:layout_alignBottom="@id/recommendationMenu"
+                            android:layout_alignParentBottom="true"
                             android:layout_alignParentRight="true"
+                            android:minHeight="0dp"
                             android:layout_centerInParent="true"
                             android:layout_marginRight="8dp"
                             android:background="@drawable/button_bg_rounded_corner_pink"
                             android:fontFamily="@font/sfprotext_semibold"
                             android:text="ORDER NOW"
-                            android:textColor="#ffffff" />
+                            android:textColor="#ffffff"/>
 
                     </RelativeLayout>
 
@@ -315,6 +317,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
                             android:layout_marginRight="8dp"
+                            android:minHeight="0dp"
                             android:layout_marginBottom="15dp"
                             android:background="@drawable/button_bg_rounded_corner_pink"
                             android:fontFamily="@font/sfprotext_semibold"
@@ -419,6 +422,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
                             android:layout_marginRight="8dp"
+                            android:minHeight="0dp"
                             android:background="@drawable/button_bg_rounded_corner_pink"
                             android:fontFamily="@font/sfprotext_semibold"
                             android:text="VIEW"
@@ -511,6 +515,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
                             android:layout_marginRight="8dp"
+                            android:minHeight="0dp"
                             android:background="@drawable/button_bg_rounded_corner_pink"
                             android:fontFamily="@font/sfprotext_semibold"
                             android:text="MY ORDERS"
