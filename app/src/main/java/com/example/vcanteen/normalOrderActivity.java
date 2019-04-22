@@ -1,5 +1,6 @@
 package com.example.vcanteen;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -48,6 +49,8 @@ public class normalOrderActivity extends AppCompatActivity {
     int oPrice;
     int mainAmount;
 
+    ProgressDialog progressDialog;
+
     ArrayList<food> foodList;
     food[] sendfoodList;
     SparseBooleanArray mCheckStates;
@@ -61,10 +64,9 @@ public class normalOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_normal_order);
 
+        progressDialog = new ProgressDialog(normalOrderActivity.this);
+
         restaurantNameString = getIntent().getStringExtra("sendRestaurantName"); //just add for minor fix in order confirmation
-
-
-
 
         orderPrice = (TextView) findViewById(R.id.orderPrice);
         foodPrice = (TextView) findViewById(R.id.baseComPrice);
@@ -87,6 +89,7 @@ public class normalOrderActivity extends AppCompatActivity {
         TextView subtractSign = findViewById(R.id.subtractSign);
         TextView addSign = findViewById(R.id.addSign);
 
+        callRetrofitNormalOrder();
 
         subtractSign.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -102,6 +105,65 @@ public class normalOrderActivity extends AppCompatActivity {
         });
 
 
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("https://vcanteen.herokuapp.com/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+//        Call<menuExtra> call = jsonPlaceHolderApi.getMenuExtra(1,chosenALaCarte.foodId);
+//
+//        call.enqueue(new Callback<menuExtra>() {
+//            @Override
+//            public void onResponse(Call<menuExtra> call, Response<menuExtra> response) {
+//                if (!response.isSuccessful()) {
+//                    Toast.makeText(normalOrderActivity.this, "CODE: "+response.code(),Toast.LENGTH_LONG).show();
+//                    return;
+//                }
+//                System.out.println("menu Extra success");
+//
+//                menuExtra menuExtra = response.body();
+//
+//                ArrayList<food> availableExtraList = new ArrayList<>(); //need to get from BE
+//                ArrayList<food> soldOutExtraList = new ArrayList<>();   //need to get from BE
+//
+//                ArrayList<extraList> lists = menuExtra.extraList;
+//
+//                for (extraList list : lists) {
+//                    availableExtraList.add(new food(list.foodId,list.foodName,list.foodPrice,"EXTRA", null));
+//                }
+//
+//                shownFoodList = new ArrayList<>(availableExtraList);
+//                shownFoodList.addAll(soldOutExtraList);
+//
+//                adapter = new foodListAdapter(normalOrderActivity.this,shownFoodList,availableExtraList.size());
+//                final ListView extraListShow = findViewById(R.id.extraList);
+//                extraListShow.setAdapter(adapter);
+//
+//                foodList = new ArrayList<>();
+//
+//                addToCartImg = (ImageView)findViewById(R.id.addToCartImg);
+//                addToCartImg.setOnClickListener(new View.OnClickListener(){
+//                    @Override
+//                    public void onClick(View v){
+//                        openCart();
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onFailure(Call<menuExtra> call, Throwable t) {
+//                System.out.println("menu Extra fail");
+//            }
+//        });
+
+
+    }
+
+    private void callRetrofitNormalOrder(){
+        progressDialog = ProgressDialog.show(normalOrderActivity.this
+                , "",
+                "Loading. Please wait...", true);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://vcanteen.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -146,6 +208,9 @@ public class normalOrderActivity extends AppCompatActivity {
                         openCart();
                     }
                 });
+
+                progressDialog.dismiss();
+
             }
 
             @Override
@@ -153,16 +218,6 @@ public class normalOrderActivity extends AppCompatActivity {
                 System.out.println("menu Extra fail");
             }
         });
-
-
-
-        //int numCheckBox = ... //how many checkbox are checked
-//        foodList = new food[2]; //[numCheckBox+1];
-//        foodList[0] = chosenALaCarte;
-//        foodList[1] = shownFoodList.get(1);
-
-        //adapter.mCheckStates.o
-
     }
 
     private void addMenuExtraToList(food inputFood, ArrayList<extraList> inputExtraList) {

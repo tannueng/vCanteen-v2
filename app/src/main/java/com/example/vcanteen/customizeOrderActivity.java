@@ -1,5 +1,6 @@
 package com.example.vcanteen;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
@@ -59,10 +60,14 @@ public class customizeOrderActivity extends AppCompatActivity {
 
     String restaurantNameString; //just add for minor fix in order confirmation
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customize_order);
+
+        progressDialog = new ProgressDialog(customizeOrderActivity.this);
 
         restaurantNameString = getIntent().getStringExtra("sendRestaurantName"); //just add for minor fix in order confirmation
 
@@ -70,6 +75,16 @@ public class customizeOrderActivity extends AppCompatActivity {
         orderPriceCombi = (TextView)findViewById(R.id.orderPriceCombi);
 
         foodList = new ArrayList<>();
+
+        callRetrofit();
+
+
+    }
+
+    private void callRetrofit(){
+        progressDialog = ProgressDialog.show(customizeOrderActivity.this
+                , "",
+                "Loading. Please wait...", true);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://vcanteen.herokuapp.com/")
@@ -87,6 +102,8 @@ public class customizeOrderActivity extends AppCompatActivity {
                 }
                 vendorCombinationMenu menu = response.body();
                 addCombinationToList(menu.baseList, menu.mainList,menu.extraList);
+
+                progressDialog.dismiss();
             }
 
             @Override
@@ -94,10 +111,6 @@ public class customizeOrderActivity extends AppCompatActivity {
                 System.out.println("Entered Menu Fail.....");
             }
         });
-
-
-
-
     }
 
     private void addCombinationToList(ArrayList<baseList> inputBaseList, ArrayList<mainList> inputMainList, ArrayList<extraList> inputExtraList) {
