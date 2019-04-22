@@ -214,9 +214,10 @@ public class cartActivity extends AppCompatActivity {
         newOrder checkout = new newOrder();
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         int i = sharedPref.getInt("customerId", 0);
-        System.out.println("id: "+i);
+        System.out.println("customer id: "+i);
         checkout.customerId = orderStack.getCustomerId();
         checkout.vendorId = orderStack.getVendorId();
+        System.out.println("ordering from vendor id: "+checkout.vendorId);
         checkout.order = orderStack.getOrderList();
         checkout.totalPrice = orderStack.getTotalPrice();
 //        checkout.createdAt = "2019-04-02 11:00:22";
