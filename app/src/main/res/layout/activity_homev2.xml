@@ -99,7 +99,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="5"
                 android:fontFamily="@font/sfprotext_bold"
-                android:text="John D."
+                android:text="Loading..."
                 android:textColor="@color/black_text"
                 android:textSize="16sp" />
 
