@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.Glide;
 
@@ -32,7 +34,10 @@ public class profilePageActivity extends AppCompatActivity {
         name.setText("" + customerSingleton.getFirstname() + " " + customerSingleton.getLastname());
         email.setText(""+customerSingleton.getEmail());
 
-        Glide.with(profilePageActivity.this).load(customerSingleton.getCustomerImage()).apply(option).into(profilePictureImage);
+        Glide.with(profilePageActivity.this)
+                .load(customerSingleton.getCustomerImage())
+                .apply(option)
+                .into(profilePictureImage);
 
         editProfileButton = findViewById(R.id.editProfileButton);
 
@@ -41,4 +46,10 @@ public class profilePageActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(profilePageActivity.this, homev2Activity.class));
+    }
+
 }

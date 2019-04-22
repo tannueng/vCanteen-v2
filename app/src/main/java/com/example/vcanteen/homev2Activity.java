@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -40,6 +41,8 @@ public class homev2Activity extends AppCompatActivity {
     private Button ordersButton;
     private RelativeLayout settingsLayout;
     private RelativeLayout profileLayout;
+
+    private CardView recommendationCardView, vendorsCardView, crowdCardView, ordersCardView;
 
     TextView firstAndLastName;
     ImageView profilePictureButton,crowdCardImage,vendorsCardImage,ordersCardImage;
@@ -81,10 +84,14 @@ public class homev2Activity extends AppCompatActivity {
                 });
 
         recommendationButton = findViewById(R.id.recommedationButton);
+        recommendationCardView = findViewById(R.id.recommendationCardView);
         recommendationCardImage = findViewById(R.id.recommendationCardImage);
         recommendationMenu = findViewById(R.id.recommendationMenu);
+        vendorsCardView = findViewById(R.id.vendorsCardView);
         vendorsButton = findViewById(R.id.vendorsButton);
         crowdButton = findViewById(R.id.crowdButton);
+        crowdCardView = findViewById(R.id.crowdCardView);
+        ordersCardView = findViewById(R.id.ordersCardView);
         ordersButton = findViewById(R.id.ordersButton);
         settingsLayout = findViewById(R.id.settingsLayout);
         profileLayout = findViewById(R.id.profileLayout);
@@ -105,7 +112,7 @@ public class homev2Activity extends AppCompatActivity {
 
         callRetrofitOnHomepage(customerId);
 
-        recommendationButton.setOnClickListener(v -> {
+        recommendationCardView.setOnClickListener(v -> {
             //TODO navigate to vendor_menu_page of the vendor who owns the menu
             Intent i = new Intent(homev2Activity.this, vendorMenuv2Activity.class);
             String chosenVendor = randomizedRestaurantName;
@@ -118,13 +125,13 @@ public class homev2Activity extends AppCompatActivity {
             startActivity(i);
         });
 
-        vendorsButton.setOnClickListener(v -> {
+        vendorsCardView.setOnClickListener(v -> {
             //TODO create retrofit here
             //TODO spinner
             startActivity(new Intent(homev2Activity.this, vendorListActivity.class));
         });
 
-        crowdButton.setOnClickListener(v -> {
+        crowdCardView.setOnClickListener(v -> {
             //TODO create retrofit here
             //TODO spinner
             Intent i = new Intent(homev2Activity.this, crowdEstimationActivity.class);
@@ -132,7 +139,7 @@ public class homev2Activity extends AppCompatActivity {
 
         });
 
-        ordersButton.setOnClickListener(v -> {
+        ordersCardView.setOnClickListener(v -> {
             //TODO create retrofit here
             //TODO spinner
             startActivity(new Intent(homev2Activity.this, OrderListActivity.class));
@@ -177,7 +184,10 @@ public class homev2Activity extends AppCompatActivity {
                 customerHome info = response.body();
                 firstAndLastName.setText(info.getCustomerInfo().getFirstnamev2()+" "+ info.getCustomerInfo().getLastnamev2().substring(0,1)+".");
 
-                Glide.with(getApplicationContext()).load(info.getCustomerInfo().getCustomerImagev2()).apply(option).into(profilePictureButton);
+                Glide.with(getApplicationContext())
+                        .load(info.getCustomerInfo().getCustomerImagev2())
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(profilePictureButton);
 
                 randomizedVendorId = info.getRecommendationInfo().getRecVendorId();
                 randomizedVendorImage = info.getRecommendationInfo().getRecVendorImage();

@@ -84,4 +84,9 @@ public class orderConfirmationActivity extends AppCompatActivity {
         Intent intent = new Intent(this, homev2Activity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(orderConfirmationActivity.this, homev2Activity.class));
+    }
 }
