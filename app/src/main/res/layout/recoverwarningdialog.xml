@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="0dp"
+        android:fontFamily="@font/sfprotext_semibold"
         android:text="Do you wish to reset your password?"
         android:textAlignment="center"
         android:textColor="#FF9C9C"
@@ -24,9 +25,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
-        android:text="New password will be sent to your email"
+        android:fontFamily="@font/sfprotext_regular"
+        android:text="New password will be sent to your email."
         android:textAlignment="center"
-        android:textColor="#C4C4C4"
+        android:textColor="@color/grey_text"
         android:textSize="12sp" />
 
     <LinearLayout
@@ -43,6 +45,7 @@
             android:layout_gravity="center|left"
             android:layout_margin="5dp"
             android:layout_marginRight="10dp"
+            android:fontFamily="@font/sfprotext_bold"
             android:text="OK"
             android:textSize="16sp" />
 
@@ -54,6 +57,7 @@
             android:layout_gravity="center|right"
             android:layout_margin="5dp"
             android:layout_marginLeft="10dp"
+            android:fontFamily="@font/sfprotext_bold"
             android:text="CANCEL"
             android:textColor="#C4C4C4"
             android:textSize="16sp" />

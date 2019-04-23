@@ -106,7 +106,7 @@ public class homev2Activity extends AppCompatActivity {
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         customerId = sharedPref.getInt("customerId",0);
-
+//        customerId = 3;
         System.out.println("onCreate Homepage");
         progressDialog = new ProgressDialog(homev2Activity.this);
 

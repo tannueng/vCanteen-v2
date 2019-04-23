@@ -57,7 +57,7 @@ public class password_login_page extends AppCompatActivity {
     private ImageButton next;
     private TextView errorMessage;
 
-    private Button pwrecoverbtn;
+    private TextView pwrecoverbtn;
     private Dialog confirmDialog;
     private Dialog recoverWarningDialog;
     private Button ok1btn;
@@ -249,7 +249,7 @@ public class password_login_page extends AppCompatActivity {
             }
         });
 
-        pwrecoverbtn = (Button) findViewById(R.id.password_recov_btn);
+        pwrecoverbtn = findViewById(R.id.password_recov_btn);
         pwrecoverbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -257,13 +257,10 @@ public class password_login_page extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                return true;
-            }
+        findViewById(R.id.relativeLayout).setOnTouchListener((v, event) -> {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            return true;
         });
     }
 

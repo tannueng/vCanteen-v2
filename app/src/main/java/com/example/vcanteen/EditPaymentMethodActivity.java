@@ -276,9 +276,6 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
                     System.out.println(list.getCustomerMoneyAccountId()+","+list.getServiceProvider());
                 }
                 mapping(lists);
-                Toast.makeText(EditPaymentMethodActivity.this, "Reloaded",
-                        Toast.LENGTH_LONG).show();
-
             }
 
             @Override
@@ -300,31 +297,35 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
         sp_kplus_checkmark.setVisibility(View.INVISIBLE);
         sp_truemoneywallet_checkmark.setVisibility(View.INVISIBLE);
 
+        sp_cunex_link.setPaintFlags(sp_cunex_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        sp_scbeasy_link.setPaintFlags(sp_scbeasy_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        sp_kplus_link.setPaintFlags(sp_kplus_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        sp_truemoneywallet_link.setPaintFlags(sp_truemoneywallet_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         for (availablePaymentMethod list :payments){
-            System.out.println("received payment");
-            System.out.println(list.getCustomerMoneyAccountId()+","+list.getServiceProvider());
+            System.out.println("received payment" + list.getCustomerMoneyAccountId()+","+list.getServiceProvider());
 
             if(list.getServiceProvider().equals("CU_NEX")) {
                 sp_cunex_link.setText("unlink");
-                sp_cunex_link.setPaintFlags(sp_cunex_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+//                sp_cunex_link.setPaintFlags(sp_cunex_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                 sp_cunex_checkmark.setVisibility(View.VISIBLE);
                 cunexId = list.getCustomerMoneyAccountId();
             }
             if(list.getServiceProvider().equals("SCB_EASY")) {
                 sp_scbeasy_link.setText("unlink");
-                sp_scbeasy_link.setPaintFlags(sp_scbeasy_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+//                sp_scbeasy_link.setPaintFlags(sp_scbeasy_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                 sp_scbeasy_checkmark.setVisibility(View.VISIBLE);
                 scbEasyId = list.getCustomerMoneyAccountId();
             }
             if(list.getServiceProvider().equals("K_PLUS")) {
                 sp_kplus_link.setText("unlink");
-                sp_kplus_link.setPaintFlags(sp_kplus_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+//                sp_kplus_link.setPaintFlags(sp_kplus_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                 sp_kplus_checkmark.setVisibility(View.VISIBLE);
                 kplusId = list.getCustomerMoneyAccountId();
             }
             if(list.getServiceProvider().equals("TRUEMONEY_WALLET")) {
                 sp_truemoneywallet_link.setText("unlink");
-                sp_truemoneywallet_link.setPaintFlags(sp_truemoneywallet_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+//                sp_truemoneywallet_link.setPaintFlags(sp_truemoneywallet_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                 sp_truemoneywallet_checkmark.setVisibility(View.VISIBLE);
                 trueMoneyWalletId = list.getCustomerMoneyAccountId();
             }

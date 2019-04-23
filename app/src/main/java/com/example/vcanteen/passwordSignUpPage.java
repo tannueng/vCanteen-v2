@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -71,23 +73,33 @@ public class passwordSignUpPage extends AppCompatActivity {
 
             if (passwordField.getText().toString().isEmpty() || confirmPasswordField.getText().toString().isEmpty()) {
                 inline.setText("Password cannot be empty. Please try again.");
+                inline.setVisibility(View.VISIBLE);
                 return;
             } else if (!(PASSWORD_PATTERN.matcher(password).matches()) || !(PASSWORD_PATTERN.matcher(confirmPassword).matches())) {
                 inline.setText("Only a-z A-Z 0-9 _ - * ‘ “ # & () @ are allowed.");
+                inline.setVisibility(View.VISIBLE);
             } else if (!password.equals(confirmPassword)) {
                 //password doesn't match
                 inline.setText("Passwords do not match. Please try again.");
+                inline.setVisibility(View.VISIBLE);
             } else if (password.length() < 8) {
                 inline.setText("Password must be longer than 8 characters.");
+                inline.setVisibility(View.VISIBLE);
             } else {
-                password = new String(Hex.encodeHex(DigestUtils.sha256(passwordField.getText().toString())));
+                String passwordHash = new String(Hex.encodeHex(DigestUtils.sha256(passwordField.getText().toString())));
                 Intent i = new Intent(this, basicInfoPageActivity.class);
                 i.putExtra("cachedEmail", email);
-                i.putExtra("cachedPassword",password);
+                i.putExtra("cachedPassword",passwordHash);
+                i.putExtra("cachedAccountType", "NORMAL");
+                System.out.println("From PW Sign Up : "+email+", "+", pw: "+password);
                 startActivity(i);
             }
+        });
 
-
+        findViewById(R.id.relativeLayout).setOnTouchListener((v, event) -> {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            return true;
         });
     }
 }

@@ -143,6 +143,14 @@ public interface JsonPlaceHolderApi {
                                         @Field("accountNumber") String accountNumber,
                                         @Field("firebaseToken") String firebaseToken);
 
+    @FormUrlEncoded
+    @PUT("/v2/user-authentication/customer/verify/email")
+    Call<LoginResponse> checkEmail(@Field("email") String email);
+
+    @FormUrlEncoded
+    @PUT("/v2/user-authentication/customer/verify/facebook")
+    Call<LoginResponse> sendLoginFacebook(@Field("email") String email, @Field("firebaseToken") String firebaseToken);
+
 
 
 }

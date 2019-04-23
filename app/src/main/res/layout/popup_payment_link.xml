@@ -42,12 +42,13 @@
 
             <ImageView
                 android:id="@+id/close_x"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_alignEnd="@+id/accountNumber"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="0dp"
+                android:padding="4dp"
                 app:srcCompat="@drawable/close_x" />
 
             <TextView

@@ -29,7 +29,7 @@
             android:fontFamily="@font/sfprotext_bold"
             android:text="@string/order_name"
             android:textColor="@color/black_text"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:paddingTop="4dp"
             android:text="@string/order_name_extra"
             android:textColor="@color/grey_text"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/vendorName"
@@ -56,7 +56,7 @@
             android:paddingTop="4dp"
             android:text="@string/vendor_name"
             android:textColor="@color/black_text"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/orderId"
@@ -69,7 +69,7 @@
             android:paddingTop="4dp"
             android:text="@string/order_id"
             android:textColor="@color/black_text"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
 
         <TextView
@@ -95,7 +95,7 @@
             android:fontFamily="@font/sfprotext_bold"
             android:text="@string/order_price"
             android:textAlignment="textEnd"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/blank"
@@ -106,7 +106,7 @@
             android:layout_marginEnd="8dp"
             android:layout_toStartOf="@+id/pickup_tab"
             android:fontFamily="@font/sfprotext_regular"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/orderDate"
@@ -121,7 +121,7 @@
             android:text="@string/order_date"
             android:textAlignment="textEnd"
             android:textColor="@color/black_text"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/orderStatus"
@@ -137,7 +137,7 @@
             android:paddingTop="4dp"
             android:text="@string/order_status"
             android:textAlignment="textEnd"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
 
     </RelativeLayout>

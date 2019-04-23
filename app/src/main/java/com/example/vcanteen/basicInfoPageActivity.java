@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class basicInfoPageActivity extends AppCompatActivity {
 
     String cachedEmail, cachedPassword;
-    String firstName, lastName;
+    String firstName, lastName, customerImage;
     EditText firstNameField, lastNameField;
     Button clearFirstName, clearLastName;
     TextView inline;
@@ -36,6 +36,7 @@ public class basicInfoPageActivity extends AppCompatActivity {
 
         cachedEmail = getIntent().getStringExtra("cachedEmail");
         cachedPassword = getIntent(). getStringExtra("cachedPassword");
+        customerImage = getIntent().getStringExtra("cachedCustomerImage");
 
         clearFirstName.setOnClickListener(v -> {
             firstNameField.getText().clear();
@@ -58,6 +59,8 @@ public class basicInfoPageActivity extends AppCompatActivity {
                 i.putExtra("cachedLastName", lastName);
                 i.putExtra("cachedEmail", cachedEmail);
                 i.putExtra("cachedPassword", cachedPassword);
+                i.putExtra("cachedAccountType", getIntent().getStringExtra("cachedAccountType"));
+                i.putExtra("cachedCustomerImage", customerImage);
                 startActivity(i);
             }
         });

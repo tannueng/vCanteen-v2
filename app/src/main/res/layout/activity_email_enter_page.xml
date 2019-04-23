@@ -12,13 +12,12 @@
 
     <TextView
         android:id="@+id/Main_Title_Text"
-        android:layout_width="301dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="70dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="20dp"
         android:autoText="false"
         android:fontFamily="@font/sfprotext_bold"
         android:text="Welcome!"
@@ -29,13 +28,13 @@
         android:id="@+id/Secondary_Title_Text"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
+        android:layout_below="@id/Main_Title_Text"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
         android:fontFamily="@font/sfprotext_semibold"
-        android:text="Please enter your E-mail"
-        android:layout_below="@id/Main_Title_Text"
+        android:text="Please enter your E-mail."
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="#FF4141"
         android:textSize="25dp" />
@@ -46,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/Secondary_Title_Text"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/sfprotext_semibold"
         android:text="EMAIL"
         android:textAppearance="@style/TextAppearance.AppCompat"
@@ -66,7 +66,8 @@
         android:layout_marginRight="6dp"
         android:fontFamily="@font/sfprotext_medium"
         android:text="or"
-        android:textColor="#979797" />
+        android:textColor="#979797"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/inlineError"
@@ -75,7 +76,7 @@
         android:layout_below="@+id/emailFillGroup"
         android:layout_marginStart="30dp"
         android:fontFamily="@font/sfprotext_semibold"
-        android:text="Please enter your email"
+        android:text="Please enter your email."
         android:textColor="#FF4141"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
@@ -86,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/EMAIL"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <EditText
@@ -95,7 +96,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
             android:backgroundTint="@android:color/darker_gray"
             android:ems="10"
             android:fontFamily="@font/sfprotext_medium"
@@ -115,10 +115,10 @@
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/inlineError"
+        android:layout_alignTop="@+id/or"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="-1dp"
         android:layout_marginBottom="30dp"
         android:layout_toRightOf="@+id/or"
         android:fontFamily="@font/sfprotext_semibold"

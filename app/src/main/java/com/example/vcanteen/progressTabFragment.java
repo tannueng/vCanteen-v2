@@ -262,7 +262,8 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 //                                            System.out.println("Current - orderStatus : "+String.valueOf(.orderStatus.getText()));
                     return;
                 }
-
+                loadRecyclerViewData(context);
+                historyTabFragment.loadRecyclerViewData(context);
                 //Show review dialog
 //                showReviewDialog(context, orderId);
             }
@@ -360,8 +361,6 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                             }
                             System.out.println("-------start");
                             Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show();
-                            loadRecyclerViewData(context);
-                            historyTabFragment.loadRecyclerViewData(context);
                             dialog.dismiss();
                             progressDialog.dismiss();
                             System.out.println("-------end");

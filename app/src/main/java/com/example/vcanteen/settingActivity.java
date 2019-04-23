@@ -132,9 +132,6 @@ public class settingActivity extends AppCompatActivity {
             ArrayList<availablePaymentMethod> lists = methods.availablePaymentMethod;
 
             for (availablePaymentMethod list :lists){
-                System.out.println("payment");
-                System.out.println(list.getCustomerMoneyAccountId()+","+list.getServiceProvider());
-
                 paymentList.add(new paymentList(list.getCustomerMoneyAccountId(), list.getServiceProvider()));
             }
 //>>>>>>> Stashed changes
@@ -152,8 +149,8 @@ public class settingActivity extends AppCompatActivity {
                 logoutWarningDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 logoutWarningDialog.setContentView(R.layout.logoutwarning);
 
-                confirmLogoutBtn = (Button) logoutWarningDialog.findViewById(R.id.logout_confirm_btn);
-                cancelLogoutBtn = (Button) logoutWarningDialog.findViewById(R.id.cancel_logout_btn);
+                confirmLogoutBtn = logoutWarningDialog.findViewById(R.id.logout_confirm_btn);
+                cancelLogoutBtn = logoutWarningDialog.findViewById(R.id.cancel_logout_btn);
 
                 confirmLogoutBtn.setEnabled(true);
                 cancelLogoutBtn.setEnabled(true);
@@ -179,6 +176,7 @@ public class settingActivity extends AppCompatActivity {
                         }).start();
                         sharedPref.edit().putString("token", "NO TOKEN JA EDOK").commit();
                         sharedPref.edit().putInt("customerId", 0);
+                        sharedPref.edit().putString("email","").commit();
                         logoutWarningDialog.cancel();
 
 

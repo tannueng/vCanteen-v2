@@ -73,7 +73,7 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
                             return;
                         }
                         sharedPref.edit().putString("token", response.body().getCustomerSessionToken()).commit();
-                        sharedPref.edit().putInt("vendor_id", response.body().getCustomerId()).commit();
+                        sharedPref.edit().putInt("customerId", response.body().getCustomerId()).commit();
                         sharedPref.edit().putString("email", cachedEmail).commit();
                     }
 

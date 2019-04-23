@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 
 import com.example.vcanteen.Data.Customers;
+import com.example.vcanteen.Data.LoginResponse;
 import com.example.vcanteen.Data.RecoverPass;
 import com.example.vcanteen.Data.TokenResponse;
 import com.facebook.AccessToken;
@@ -31,7 +32,6 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -45,11 +45,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
@@ -150,93 +151,130 @@ public class emailActivity extends AppCompatActivity {
                         "Loading. Please wait...", true);
                 GraphRequest request = GraphRequest.newMeRequest(
                         AccessToken.getCurrentAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
-                                System.out.println("ON COMPLETED GRAPHREQUEST");
-                                final Intent intent = new Intent(emailActivity.this, vendorListActivity.class);
-                                email = object.optString("email");
-                                System.out.println("DEBUG EMAIL:"+email);
-                                first_name = object.optString("first_name");
-                                last_name = object.optString("last_name");
+                        (object, response) -> {
+                            System.out.println("ON COMPLETED GRAPHREQUEST");
+                            final Intent intent = new Intent(emailActivity.this, homev2Activity.class);
+                            email = object.optString("email");
+                            System.out.println("DEBUG EMAIL:"+email);
+                            first_name = object.optString("first_name");
+                            last_name = object.optString("last_name");
 
-                                profile_url = null;
-                                try {
-                                    profile_url = (String) object.getJSONObject("picture").getJSONObject("data").get("url");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                            profile_url = null;
+                            try {
+                                profile_url = (String) object.getJSONObject("picture").getJSONObject("data").get("url");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println(email+", "+ first_name+", "+ last_name+", "+ profile_url);
+                            final String account_type = "FACEBOOK";
+
+
+                            //////
+                            Retrofit retrofit = new Retrofit.Builder()
+                                    .baseUrl("https://vcanteen.herokuapp.com/")
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
+
+                            JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+                            Call<LoginResponse> call = jsonPlaceHolderApi.checkEmail(email);
+
+                            call.enqueue(new Callback<LoginResponse>() {
+                                @Override
+                                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                                    if(response.code()==404) {
+                                        //Email is not in the Database
+                                    }
+                                    LoginResponse response1 = response.body();
+                                    if(response1.getAccountType().equals("FACEBOOK")) {
+
+//TODO CONTINUE HERE
+
+                                        Call<LoginResponse> call2 = jsonPlaceHolderApi.sendLoginFacebook(email, firebaseToken);
+
+                                    } else if (response1.getAccountType().equals("NORMAL")) {
+
+                                    }
                                 }
-                                System.out.println(email+", "+ first_name+", "+ last_name+", "+ profile_url);
-                                final String account_type = "FACEBOOK";
 
-                                // get firebase token
-                                System.out.println("FB: "+email);
-                                mAuth.signInWithEmailAndPassword(email, "firebaseOnlyNaja")
-                                        .addOnCompleteListener(emailActivity.this, new OnCompleteListener<AuthResult>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                                if (task.isSuccessful()) {
-                                                    System.out.println("SUCCESS");
-                                                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                                    dbUsers = FirebaseDatabase.getInstance().getReference("users").child(uid);
+                                @Override
+                                public void onFailure(Call<LoginResponse> call, Throwable t) {
 
-                                                    dbUsers.addValueEventListener(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                            for(DataSnapshot dsUser: dataSnapshot.getChildren())
-                                                                firebaseToken = dsUser.getValue(String.class);
-                                                            System.out.println(firebaseToken);
-                                                        }
+                                }
+                            });
 
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                                        }
-                                                    });
-                                                    Customers postCustomer = new Customers(email, first_name, last_name, account_type, profile_url, "firebaseOnlyNaja", firebaseToken);
-                                                    System.out.println(postCustomer.toString());
-                                                    postCustomer = new Customers(email, first_name, last_name, account_type, profile_url, null, firebaseToken);
-                                                    Call<TokenResponse> call = jsonPlaceHolderApi.createCustomer(postCustomer);
 
-                                                    // HTTP POST
-                                                    call.enqueue(new Callback<TokenResponse>() {
-                                                        @Override
-                                                        public void onResponse(Call<TokenResponse> call, final Response<TokenResponse> response) {
-                                                            if(!response.isSuccessful())
-                                                                Toast.makeText(getApplicationContext(), "Error Occured, please try again.", Toast.LENGTH_SHORT);
+
+
+                            // get firebase token
+                            System.out.println("FB: "+email);
+                            mAuth.signInWithEmailAndPassword(email, "firebaseOnlyNaja")
+                                    .addOnCompleteListener(emailActivity.this, new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                System.out.println("SUCCESS");
+                                                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                dbUsers = FirebaseDatabase.getInstance().getReference("users").child(uid);
+
+                                                dbUsers.addValueEventListener(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        for(DataSnapshot dsUser: dataSnapshot.getChildren())
+                                                            firebaseToken = dsUser.getValue(String.class);
+                                                        System.out.println("Firebase Token : "+firebaseToken);
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                    }
+                                                });
+                                                Customers postCustomer = new Customers(email, first_name, last_name, account_type, profile_url, "firebaseOnlyNaja", firebaseToken);
+                                                System.out.println(postCustomer.toString());
+                                                postCustomer = new Customers(email, first_name, last_name, account_type, profile_url, null, firebaseToken);
+                                                Call<TokenResponse> call = jsonPlaceHolderApi.createCustomer(postCustomer);
+
+                                                // HTTP POST
+                                                call.enqueue(new Callback<TokenResponse>() {
+                                                    @Override
+                                                    public void onResponse(Call<TokenResponse> call, final Response<TokenResponse> response) {
+                                                        if(!response.isSuccessful())
+                                                            Toast.makeText(getApplicationContext(), "Error Occurred, please try again.", Toast.LENGTH_SHORT);
 //                                        TokenResponse tokenResponse = response.body();
 //                                        System.out.println(tokenResponse.statusCode);
 //                                        System.out.println(response.body().toString());
-                                                            if(response.code() != 200)
-                                                                Toast.makeText(getApplicationContext(), "Either email or password is incorrect.", Toast.LENGTH_SHORT).show();
-                                                            else {
-                                                                System.out.println(response.body().toString());
-                                                                sharedPref.edit().putInt("customerId", response.body().getCustID()).commit();
-                                                                sharedPref.edit().putString("token", response.body().getToken()).commit();
-                                                                sharedPref.edit().putString("email", email).commit();
-                                                                sharedPref.edit().putString("account_type", account_type).commit();
-                                                                sharedPref.edit().putString("firebaseToken", firebaseToken).commit();
-                                                                progressDialog.dismiss();
-                                                                startActivity(intent);
-                                                            }
-                                                        }
-
-                                                        @Override
-                                                        public void onFailure(Call<TokenResponse> call, Throwable t) {
-                                                            System.out.println("ERROR ESUS");
+                                                        if(response.code() != 200)
+                                                            Toast.makeText(getApplicationContext(), "Either email or password is incorrect.", Toast.LENGTH_SHORT).show();
+                                                        else {
+                                                            //successfully logged in with facebook
+                                                            System.out.println(response.body().toString());
+                                                            sharedPref.edit().putInt("customerId", response.body().getCustID()).commit();
+                                                            sharedPref.edit().putString("token", response.body().getToken()).commit();
+                                                            sharedPref.edit().putString("email", email).commit();
+                                                            sharedPref.edit().putString("account_type", account_type).commit();
+                                                            sharedPref.edit().putString("firebaseToken", firebaseToken).commit();
                                                             progressDialog.dismiss();
-                                                            Toast.makeText(getApplicationContext(), "An error occured. Please try again.", Toast.LENGTH_SHORT).show();
+
+                                                            startActivity(intent);
                                                         }
-                                                    });
-                                                } else {
-                                                    System.out.println("Firebase login FAIL");
-                                                    Toast.makeText(getApplicationContext(), "This account does not appeared on Firebase Databse", Toast.LENGTH_SHORT).show();
-                                                    LoginManager.getInstance().logOut();
-                                                    progressDialog.dismiss();
-                                                }
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(Call<TokenResponse> call, Throwable t) {
+                                                        System.out.println("ERROR ONRESPONSE");
+                                                        progressDialog.dismiss();
+                                                        Toast.makeText(getApplicationContext(), "An error occured. Please try again.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                            } else {
+                                                System.out.println("Firebase login FAIL");
+                                                Toast.makeText(getApplicationContext(), "This account does not appeared on Firebase Database", Toast.LENGTH_SHORT).show();
+                                                LoginManager.getInstance().logOut();
+                                                progressDialog.dismiss();
                                             }
-                                        });
-                            }
+                                        }
+                                    });
                         });
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "email,id,name,first_name,last_name,link,picture.type(large)");
@@ -269,7 +307,7 @@ public class emailActivity extends AppCompatActivity {
             inline.setVisibility(View.VISIBLE);
             return;
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailField.getText().toString()).matches()) {
-            inline.setVisibility(View.INVISIBLE);
+            inline.setVisibility(View.VISIBLE);
             return;
         }
         progressDialog = new ProgressDialog(emailActivity.this);
@@ -291,15 +329,9 @@ public class emailActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                System.out.println(response.code());
-                System.out.println(new RecoverPass(email).toString());
-                if(response.code()!= 200 && response.code() != 409) {
-                    //wrong password
-                    inline.setText("Incorrect Password.");
-                    inline.setVisibility(View.VISIBLE);
-//                    error2.setVisibility(View.VISIBLE);
-                    progressDialog.dismiss();
-                } else if (response.code() == 409) {
+                System.out.println("Verify Email: "+response.code());
+//                System.out.println(new RecoverPass(email).toString());
+                if (response.code() == 409) {
                     //email only for Facebook
                     inline.setText("This account can only be logged into with Facebook");
 //                    inline.setTextSize(10);
@@ -355,6 +387,12 @@ public class emailActivity extends AppCompatActivity {
         in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sharedPref.edit().putString("token", "NO TOKEN JA EDOK").commit();
+        sharedPref.edit().putInt("customerId", 0);
+        sharedPref.edit().putString("email","").commit();
+    }
 }
 

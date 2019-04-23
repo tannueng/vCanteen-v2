@@ -43,11 +43,11 @@
     <string name="popup_payment_link_title_text">Link Payment</string>
     <string name="popup_payment_link_service_provider">SCB EASY</string>
     <string name="popup_payment_link_account_number_text">ACCOUNT NUMBER</string>
-    <string name="cunex_text">CUNEX</string>
+    <string name="cunex_text">CU NEX</string>
     <string name="scbeasy_text">SCB EASY</string>
     <string name="kplus_text">K PLUS</string>
     <string name="truemoneywallet_text">TrueMoney Wallet</string>
-    <string name="sp_link_status">LINK</string>
+    <string name="sp_link_status">  LINK  </string>
     <string name="unlink_account_text">Unlink your account</string>
     <string name="unlink_description_text">Do you wish to unlink serviceProvider\n from your account?</string>
     <string-array name="day_of_week">

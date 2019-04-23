@@ -18,6 +18,17 @@ public class LoginResponse {
     @SerializedName("customerSessionToken")
     private String customerSessionToken;
 
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
+    @SerializedName("accountType")
+    public String accountType;
+
     public LoginResponse(String customerSessionToken, int customerId) {
         this.customerSessionToken = customerSessionToken;
         this.customerId = customerId;
