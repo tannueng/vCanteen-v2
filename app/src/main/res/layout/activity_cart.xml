@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,53 +11,78 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:layout_constraintBottom_toTopOf="@+id/textView18"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+
+        app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="MY CART"
         app:titleMarginStart="25dp"
-        app:titleTextAppearance="@style/Toolbar.TitleText"/>
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/myCartText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
+        android:layout_below="@id/toolbar"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
         android:fontFamily="@font/sfprotext_bold"
         android:text="My Cart"
         android:textColor="#BDBDBD"
         android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        android:textStyle="bold" />
 
     <View
         android:id="@+id/divider5"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_below="@id/myCartText"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:background="?android:attr/listDivider" />
+
+
+    <TextView
+        android:id="@+id/orderTotalItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sfprotext_bold"
+        android:text="Total ... item(s)"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/paymentContainer"
+        />
+
+    <TextView
+        android:id="@+id/orderTotalPrice1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/sfprotext_bold"
+        android:text="70 ฿"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/paymentContainer"
+        android:layout_alignParentRight="true"/>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/paymentContainer"
         android:layout_width="381dp"
         android:layout_height="197dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/box"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:background="@drawable/box">
 
         <TextView
             android:id="@+id/textView8"
@@ -176,42 +201,13 @@
 
     <ListView
         android:id="@+id/orderList"
-        android:layout_width="395dp"
-        android:layout_height="300dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider5" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/myCartText"
+        android:layout_above="@id/orderTotalItems"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
-    <TextView
-        android:id="@+id/orderTotalItems"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/sfprotext_bold"
-        android:text="Total ... item(s)"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderList" />
 
-    <TextView
-        android:id="@+id/orderTotalPrice1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
-        android:fontFamily="@font/sfprotext_bold"
-        android:text="70 ฿"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderList"
-        tools:ignore="DuplicateIds" />
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
