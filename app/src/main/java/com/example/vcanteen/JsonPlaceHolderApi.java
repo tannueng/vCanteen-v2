@@ -1,5 +1,6 @@
 package com.example.vcanteen;
 
+import com.example.vcanteen.Data.LoginResponse;
 import com.example.vcanteen.POJO.BugReport;
 import com.example.vcanteen.POJO.cancelReason;
 import com.example.vcanteen.POJO.currentDensity;
@@ -132,15 +133,15 @@ public interface JsonPlaceHolderApi {
 
     @FormUrlEncoded
     @POST("/v2/user-authentication/customer/new")
-    Call<Void> postNewCustomer(@Field("email") String email,
-                               @Field("password") String password,
-                               @Field("firstName") String firstName,
-                               @Field("lastName") String lastName,
-                               @Field("customerImage") String customerImage,
-                               @Field("accountType")String accountType,
-                               @Field("serviceProvider") String serviceProvider,
-                               @Field("accountNumber") String accountNumber,
-                               @Field("firebaseToken") String firebaseToken);
+    Call<LoginResponse> postNewCustomer(@Field("email") String email,
+                                        @Field("password") String password,
+                                        @Field("firstName") String firstName,
+                                        @Field("lastName") String lastName,
+                                        @Field("customerImage") String customerImage,
+                                        @Field("accountType")String accountType,
+                                        @Field("serviceProvider") String serviceProvider,
+                                        @Field("accountNumber") String accountNumber,
+                                        @Field("firebaseToken") String firebaseToken);
 
 
 

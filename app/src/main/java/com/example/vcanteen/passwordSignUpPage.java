@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.util.regex.Pattern;
 
 public class passwordSignUpPage extends AppCompatActivity {
@@ -63,6 +66,7 @@ public class passwordSignUpPage extends AppCompatActivity {
 
         nextBtn.setOnClickListener(v -> {
             password = passwordField.getText().toString();
+
             confirmPassword = confirmPasswordField.getText().toString();
 
             if (passwordField.getText().toString().isEmpty() || confirmPasswordField.getText().toString().isEmpty()) {
@@ -76,6 +80,7 @@ public class passwordSignUpPage extends AppCompatActivity {
             } else if (password.length() < 8) {
                 inline.setText("Password must be longer than 8 characters.");
             } else {
+                password = new String(Hex.encodeHex(DigestUtils.sha256(passwordField.getText().toString())));
                 Intent i = new Intent(this, basicInfoPageActivity.class);
                 i.putExtra("cachedEmail", email);
                 i.putExtra("cachedPassword",password);

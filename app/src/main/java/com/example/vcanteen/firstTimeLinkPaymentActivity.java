@@ -1,15 +1,20 @@
 package com.example.vcanteen;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.vcanteen.Data.LoginResponse;
 import com.example.vcanteen.POJO.currentDensity;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -17,15 +22,18 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
 
     Spinner serviceProviderSpinner;
     EditText accountNumberField;
-    String serviceProvider, accountNumber;
+    String serviceProvider, accountNumber, firebaseToken;
     Button linkButton;
     TextView inline;
-    String cachedEmail, cachedPassword, cachedFirstName, cachedLastName;
+    String cachedEmail, cachedPassword, cachedFirstName, cachedLastName, cachedCustomerImage, cachedAccountType;
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_time_link_payment);
+
+        sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
 
         accountNumberField = findViewById(R.id.accountNumberBox);
         linkButton = findViewById(R.id.linkButton);
@@ -55,7 +63,25 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
                         .build();
 
                 JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-//                Call<currentDensity> call = jsonPlaceHolderApi.postNewCustomer();
+                Call<LoginResponse> call = jsonPlaceHolderApi.postNewCustomer(cachedEmail,cachedPassword,cachedFirstName,cachedLastName,cachedCustomerImage,cachedAccountType,serviceProvider,accountNumber,firebaseToken);
+
+                call.enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(firstTimeLinkPaymentActivity.this, "CODE: "+response.code(),Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        sharedPref.edit().putString("token", response.body().getCustomerSessionToken()).commit();
+                        sharedPref.edit().putInt("vendor_id", response.body().getCustomerId()).commit();
+                        sharedPref.edit().putString("email", cachedEmail).commit();
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
