@@ -80,18 +80,18 @@
         tools:layout_editor_absoluteY="24dp" />
 
     <Button
-        android:id="@+id/clear_text_btn"
+        android:id="@+id/firstNameClearBtn"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_below="@id/firstNameTitle"
         android:layout_alignRight="@id/firstNameBox"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
 
         android:background="@drawable/ic_delete" />
 
     <TextView
-        android:id="@+id/firstNameBoxError"
+        android:id="@+id/blank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/firstNameBox"
@@ -108,7 +108,7 @@
         android:id="@+id/lastNameTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/firstNameBoxError"
+        android:layout_below="@+id/blank"
         android:layout_marginStart="30dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/sfprotext_semibold"
@@ -147,18 +147,16 @@
         android:background="@drawable/ic_delete" />
 
     <TextView
-        android:id="@+id/lastNameBoxError"
+        android:id="@+id/inline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/lastNameBox"
+        android:layout_alignLeft="@id/firstNameTitle"
+        android:fontFamily="@font/sfprotext_semibold"
         android:text="lastNameBox Error"
         android:textColor="#FF4141"
-        android:visibility="invisible"
-        android:fontFamily="@font/sfprotext_semibold"
         android:textSize="14dp"
-        android:layout_alignLeft="@id/firstNameTitle"
-        android:layout_marginTop="-6dp"
-        />
+        android:visibility="invisible" />
 
     <ImageButton
         android:id="@+id/next_button"

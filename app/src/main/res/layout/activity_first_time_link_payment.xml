@@ -30,35 +30,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/paymentDropdown"
-                android:layout_below="@id/Main_Title_Text"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/dropdownbg"
-                android:orientation="horizontal">
+    <LinearLayout
+        android:id="@+id/paymentDropdown"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/Main_Title_Text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:entries="@array/serviceProvider"
+        android:background="@drawable/dropdownbg"
+        android:orientation="horizontal">
 
-                <Spinner
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="7"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:spinnerMode="dropdown"/>
+        <Spinner
+            android:id="@+id/paymentSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="7"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
 
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_angle_arrow_down" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:src="@drawable/ic_angle_arrow_down" />
 
-            </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/accountNumberTitle"
@@ -94,7 +97,7 @@
 
 
     <TextView
-        android:id="@+id/accountNumberError"
+        android:id="@+id/inline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/accountNumberBox"
@@ -113,7 +116,7 @@
         android:id="@+id/linkButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/accountNumberError"
+        android:layout_below="@id/inline"
         android:background="@drawable/button_bg_rounded_corner_pink"
         android:layout_marginTop="15dp"
         android:paddingLeft="35dp"

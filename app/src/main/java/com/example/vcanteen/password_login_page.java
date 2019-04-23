@@ -109,7 +109,7 @@ public class password_login_page extends AppCompatActivity {
         passwdField = findViewById(R.id.passwordBox);
         showBtn = findViewById(R.id.show_pw_btn);
         next = findViewById(R.id.next_button);
-        errorMessage = findViewById(R.id.error1);
+        errorMessage = findViewById(R.id.inlineError);
 
         showBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -130,4 +130,18 @@ public interface JsonPlaceHolderApi {
                                   @Field("email") String email,
                                   @Field("profileImage") String profileImage);
 
+    @FormUrlEncoded
+    @POST("/v2/user-authentication/customer/new")
+    Call<Void> postNewCustomer(@Field("email") String email,
+                               @Field("password") String password,
+                               @Field("firstName") String firstName,
+                               @Field("lastName") String lastName,
+                               @Field("customerImage") String customerImage,
+                               @Field("accountType")String accountType,
+                               @Field("serviceProvider") String serviceProvider,
+                               @Field("accountNumber") String accountNumber,
+                               @Field("firebaseToken") String firebaseToken);
+
+
+
 }

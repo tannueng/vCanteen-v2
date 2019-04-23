@@ -12,14 +12,13 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,9 +70,9 @@ public class emailActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private ProgressDialog progressDialog;
     private String email;
-    private TextView error1;
-    private TextView error2;
-    private EditText emailbox2;
+    private TextView inline;
+//    private TextView error2;
+    private EditText emailField;
 
     private final String url = "https://vcanteen.herokuapp.com/";
     private boolean exit = false;
@@ -93,14 +92,10 @@ public class emailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_enter_page);
 
-        LinearLayout layout = (LinearLayout) findViewById(R.id.email);
-        layout.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View view, MotionEvent ev) {
-                hideKeyboard(view);
-                return false;
-            }
+        RelativeLayout layout = findViewById(R.id.emailRelative);
+        layout.setOnTouchListener((view, ev) -> {
+            hideKeyboard(view);
+            return false;
         });
 
         FirebaseApp.initializeApp(emailActivity.this);
@@ -110,21 +105,15 @@ public class emailActivity extends AppCompatActivity {
 //        AppEventsLogger.activateApp(this);
 //        LoginManager.getInstance().logInWithReadPermissions(emailActivity.this, Arrays.asList("public_profile", "email"));
 
-        next_button = (ImageButton) findViewById(R.id.next_button /*xml next_button */);
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-        emailbox2 = (EditText) findViewById(R.id.editEmail);
-        final Context context = this;
+        next_button = findViewById(R.id.next_button /*xml next_button */);
+        loginButton = findViewById(R.id.login_button); //facebook login button
+        emailField = findViewById(R.id.editEmail);
 
-        next_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openpassword_login_page();
-            }
-        });
-        final Button cleartxtbtn = (Button) findViewById(R.id.clear_text_btn);
-        final EditText emailbox = (EditText) findViewById(R.id.editEmail);
-        error1 = (TextView) findViewById(R.id.error1);
-        error2 = (TextView) findViewById(R.id.error2);
+        final Context context = this;
+        final Button cleartxtbtn = findViewById(R.id.clear_text_btn);
+        final EditText emailbox = findViewById(R.id.editEmail);
+        inline = findViewById(R.id.inlineError);
+//        error2 = findViewById(R.id.error2);
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
 
@@ -138,14 +127,19 @@ public class emailActivity extends AppCompatActivity {
                 .build();
         final JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-
-        cleartxtbtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                emailbox.getText().clear();
-            }
+        //////////////CLEAR BUTTON//////////////////
+        cleartxtbtn.setOnClickListener(v -> {
+            emailbox.getText().clear();
         });
 
 
+        ////////////////NEXT BUTTON TAPPED/////////////
+        next_button.setOnClickListener(v -> {
+            openpassword_login_page();
+        });
+
+
+        //////////////FACEBOOK LOGIN BUTTON//////////////
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -266,30 +260,33 @@ public class emailActivity extends AppCompatActivity {
 
     }
 
+    ///////AFTER PRESSED NEXT BUTTON//////////
     public void openpassword_login_page() {
-        if (TextUtils.isEmpty(emailbox2.getText().toString())) {
-            error2.setVisibility(View.INVISIBLE);
-            error1.setText("Please enter your email.");
-            error1.setTextSize(18);
-            error1.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(emailField.getText().toString())) {
+//            error2.setVisibility(View.INVISIBLE);
+            inline.setText("Please enter your email.");
+//            inline.setTextSize(18);
+            inline.setVisibility(View.VISIBLE);
             return;
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailbox2.getText().toString()).matches()) {
-            error1.setVisibility(View.INVISIBLE);
-            error2.setVisibility(View.VISIBLE);
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailField.getText().toString()).matches()) {
+            inline.setVisibility(View.INVISIBLE);
             return;
         }
         progressDialog = new ProgressDialog(emailActivity.this);
         progressDialog = ProgressDialog.show(emailActivity.this, "",
                 "Loading. Please wait...", true);
+
         final Intent pwloginintent = new Intent(this, password_login_page.class);
-        //check for email validation here
+        final Intent pwSignUpIntent = new Intent(this, passwordSignUpPage.class);
+
+        ///////////check for email validation here///////////
         Gson gson = new GsonBuilder().serializeNulls().create();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        email = emailbox2.getText().toString();
+        email = emailField.getText().toString();
         Call<Void> call = jsonPlaceHolderApi.verifyEmail(new RecoverPass(email));
         call.enqueue(new Callback<Void>() {
             @Override
@@ -297,24 +294,34 @@ public class emailActivity extends AppCompatActivity {
                 System.out.println(response.code());
                 System.out.println(new RecoverPass(email).toString());
                 if(response.code()!= 200 && response.code() != 409) {
-                    error1.setVisibility(View.INVISIBLE);
-                    error2.setVisibility(View.VISIBLE);
+                    //wrong password
+                    inline.setText("Incorrect Password.");
+                    inline.setVisibility(View.VISIBLE);
+//                    error2.setVisibility(View.VISIBLE);
                     progressDialog.dismiss();
                 } else if (response.code() == 409) {
-                    error1.setText("This account can only be logged into with Facebook");
-                    error1.setTextSize(10);
-                    error1.setVisibility(View.VISIBLE);
-                    error2.setVisibility(View.INVISIBLE);
+                    //email only for Facebook
+                    inline.setText("This account can only be logged into with Facebook");
+//                    inline.setTextSize(10);
+                    inline.setVisibility(View.VISIBLE);
                     progressDialog.dismiss();
-                } else {
-                    emailbox2.setInputType(InputType.TYPE_CLASS_TEXT);
+                } else if (response.code() == 404){
+                    emailField.setInputType(InputType.TYPE_CLASS_TEXT);
                     String customerEmail = null;
-                    customerEmail = emailbox2.getText().toString();
+                    customerEmail = emailField.getText().toString();
+
+                    pwSignUpIntent.putExtra("cacheEmail", customerEmail);
+                    startActivity(pwSignUpIntent);
+                }
+
+                else {
+                    emailField.setInputType(InputType.TYPE_CLASS_TEXT);
+                    String customerEmail = null;
+                    customerEmail = emailField.getText().toString();
 
                     pwloginintent.putExtra("cachedemail", customerEmail);
                     progressDialog.dismiss();
                     startActivity(pwloginintent);
-
                 }
             }
 

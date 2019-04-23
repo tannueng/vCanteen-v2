@@ -57,6 +57,12 @@
         <item>Thursday</item>
         <item>Friday</item>
     </string-array>
+    <string-array name="serviceProvider">
+        <item>CU NEX</item>
+        <item>SCB EASY</item>
+        <item>K PLUS</item>
+        <item>TrueMoney Wallet</item>
+    </string-array>
     <string name="tutorial_one_title">NO MORE\nWAITING\nIN QUEUE</string>
     <string name="tutorial_two_title">JUST PAY &amp;\nPICK UP</string>
     <string name="tutorial_one_desc">Order before arriving? See what’s\navailable on the menu of your favourite\nvendor today? It couldn’t get any better!</string>
