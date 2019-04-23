@@ -222,6 +222,8 @@ public class customizeOrderActivity extends AppCompatActivity {
 
     public void openCart(){
 
+        if(b==null) return;
+
         foodList.add(b); // add base
 
         //add Main to orderStack
