@@ -67,4 +67,5 @@
     <string name="tutorial_two_title">JUST PAY &amp;\nPICK UP</string>
     <string name="tutorial_one_desc">Order before arriving? See what’s\navailable on the menu of your favourite\nvendor today? It couldn’t get any better!</string>
     <string name="tutorial_two_desc">We make it simple. Choose or customize\nyour menu, order, pay, and just enjoy\nchatting with your friends until your\norder is ready.</string>
+    <string name="mustBeText">Must be letter, number or these character . , _ - * ‘  # &amp; () $ @ ! ?</string>
 </resources>

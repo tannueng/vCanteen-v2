@@ -181,7 +181,14 @@ public class emailActivity extends AppCompatActivity {
                             call.enqueue(new Callback<LoginResponse>() {
                                 @Override
                                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                                    if(response.code()==404) {
+                                    if(response.code() != 200 && response.code() != 404){
+                                        // SERVER ERROR
+                                        progressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Oops. Something went wrong :( , please try again later...", Toast.LENGTH_SHORT).show();
+                                        System.out.println(" ==================== Error Code :: "+response.code()+" ==================== ");
+
+
+                                    }else if(response.code()==404) {
                                         //Email is not in the Database
                                     }
                                     LoginResponse response1 = response.body();

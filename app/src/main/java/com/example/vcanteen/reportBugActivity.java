@@ -20,6 +20,7 @@ import com.facebook.share.Share;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +35,9 @@ public class reportBugActivity extends AppCompatActivity {
     private TextView counter;
     private TextView inline;
     SharedPreferences sharedPref;
+
+    private static final Pattern TEXT_PATTERN =
+            Pattern.compile("^[a-zA-Z0-9. ,_\\-*‘\"#&()$@!?]+$");  // Text Constraint
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,12 @@ public class reportBugActivity extends AppCompatActivity {
                 return;
             }
 
+            if(!TEXT_PATTERN.matcher(reportText.getText().toString()).matches()) {
+                System.out.println("btn print:"+reportText.getText().toString());
+                inline.setText("Must be letter, number or these character . , _ - * ‘ \" # & () $ @ ! ?");
+                inline.setVisibility(View.VISIBLE);
+                return;
+            }
             //TODO Check Emoji
 
             BugReport report = new BugReport();
@@ -97,7 +107,26 @@ public class reportBugActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 counter.setText(s.toString().length()+"/300");
 
-                if(s.toString().length()>0) {
+                if(!TEXT_PATTERN.matcher(reportText.getText().toString()).matches()) {
+                    if(s.toString().isEmpty()) {
+                        inline.setText("This field cannot be blank.");
+                        inline.setVisibility(View.VISIBLE);
+                        return;
+                    }
+
+                    System.out.println("print:"+reportText.getText().toString());
+                    inline.setText("Must be letter, number or these character . , _ - * ‘ \" # & () $ @ ! ?");
+                    inline.setVisibility(View.VISIBLE);
+                    return;
+                }
+//                else if(!TEXT_PATTERN.matcher(s.toString()).matches()) {
+//
+//                    System.out.println("print:"+s.toString());
+//                    inline.setText("Must be letter, number or these character . , _ - * ‘ \" # & () $ @ ! ?");
+//                    inline.setVisibility(View.VISIBLE);
+//                    return;
+//                }
+                else {
                     inline.setVisibility(View.INVISIBLE);
                 }
             }

@@ -31,6 +31,7 @@ import com.example.vcanteen.POJO.pickupSlot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,6 +53,9 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
     public static RatingBar ratingBar;
     static TextView descriptionText;
     static ProgressDialog progressDialog;
+
+    private static final Pattern TEXT_PATTERN =
+            Pattern.compile("^[a-zA-Z0-9. ,_\\-*‘\"#&()$@!?]+$");  // Text Constraint
 
     static SharedPreferences sharedPref;
     @Nullable
@@ -281,6 +285,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
         //display popup confirm pickup
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.popup_vendor_rating);
+
         TextView restaurantName = dialog.findViewById(R.id.restaurantName);
         TextView orderName = dialog.findViewById(R.id.orderName);
         TextView orderNameExtra = dialog.findViewById(R.id.orderNameExtra);
@@ -292,7 +297,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
         descriptionText = dialog.findViewById(R.id.description_text);
         EditText reviewBox = dialog.findViewById(R.id.reviewBox);
         TextView counter = dialog.findViewById(R.id.counter);
-        TextView inlineError = dialog.findViewById(R.id.inlineError);
+        TextView inline = dialog.findViewById(R.id.inlineError);
 
         AtomicReference<Double> score = new AtomicReference<>(0.0);
         double score2 = 0.0;
@@ -319,22 +324,17 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
             @Override
             public void afterTextChanged(Editable s) {
                 counter.setText(s.toString().length()+"/300");
-//                final Pattern PASSWORD_PATTERN =
-//                        Pattern.compile("^[a-zA-Z0-9@!#$%^&+-=].*$");  // Password Constraint
-//                // (?=\S+$) = no space is allowed.
-//                // special characters that are allowed @ ! # $ % ^ & + = -
-//
-////                _ - * ‘ “ # & () @
-//                if(!PASSWORD_PATTERN.matcher(reviewBox.getText().toString()).matches()) {
-//                    inlineError.setVisibility(View.VISIBLE);
-//                } else {
-//                    inlineError.setVisibility(View.INVISIBLE);
-//                }
+                if(!TEXT_PATTERN.matcher(reviewBox.getText().toString()).matches()) {
+                    System.out.println("print:"+reviewBox.getText().toString());
+                    inline.setText("Must be letter, number or these character . , _ - * ‘ \" # & () $ @ ! ?");
+                    inline.setVisibility(View.VISIBLE);
+                    return;
+                }
             }
         });
 
 
-        (dialog.findViewById(R.id.closeButton))
+        (dialog.findViewById(R.id.close_x))
                 .setOnClickListener(v -> dialog.dismiss());
 
         (dialog.findViewById(R.id.sendButton))

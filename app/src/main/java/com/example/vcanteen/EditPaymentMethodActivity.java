@@ -149,7 +149,7 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
                         return;
                     }
                     System.out.println("onResponse done");
-                    reload(progressDialog);
+                    reload();
                     dialog.dismiss();
                     Toast.makeText(EditPaymentMethodActivity.this, "Successfully Unlinked Account", Toast.LENGTH_LONG).show();
 
@@ -223,7 +223,7 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
                                 return;
                             }
                             Toast.makeText(EditPaymentMethodActivity.this, "Successfully Linked Account ", Toast.LENGTH_LONG).show();
-                            reload(progressDialog);
+                            reload();
                             System.out.println("success link account");
                             progressDialog.dismiss();
                             dialog.dismiss();
@@ -252,7 +252,7 @@ public class EditPaymentMethodActivity extends AppCompatActivity {
             }
         });
     }
-    public void reload(@Nullable ProgressDialog progressDialog) {
+    public void reload() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://vcanteen.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())

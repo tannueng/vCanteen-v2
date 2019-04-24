@@ -4,6 +4,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
 
+    @SerializedName("customerId")
+    private int customerId;
+
+    @SerializedName("customerSessionToken")
+    private String customerSessionToken;
+
+    @SerializedName("accountType")
+    public String accountType;
+
+
+    public String getAccountType() {        return accountType;    }
+
     public int getCustomerId() {
         return customerId;
     }
@@ -12,22 +24,10 @@ public class LoginResponse {
         this.customerId = customerId;
     }
 
-    @SerializedName("customerId")
-    private int customerId;
-
-    @SerializedName("customerSessionToken")
-    private String customerSessionToken;
-
-    public String getAccountType() {
-        return accountType;
-    }
-
     public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
 
-    @SerializedName("accountType")
-    public String accountType;
 
     public LoginResponse(String customerSessionToken, int customerId) {
         this.customerSessionToken = customerSessionToken;
