@@ -67,21 +67,21 @@ public class homev2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homev2);
 
-        mAuth = FirebaseAuth.getInstance();
-
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (task.isSuccessful()) {
-                            String token = task.getResult().getToken();
-                            System.out.println(token);
-                            saveToken(token);
-                        } else {
-
-                        }
-                    }
-                });
+//        mAuth = FirebaseAuth.getInstance();
+//
+//        FirebaseInstanceId.getInstance().getInstanceId()
+//                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+//                        if (task.isSuccessful()) {
+//                            String token = task.getResult().getToken();
+//                            System.out.println(token);
+//                            saveToken(token);
+//                        } else {
+//
+//                        }
+//                    }
+//                });
 
         recommendationButton = findViewById(R.id.recommedationButton);
         recommendationCardView = findViewById(R.id.recommendationCardView);
@@ -103,6 +103,7 @@ public class homev2Activity extends AppCompatActivity {
         ordersCardImage = findViewById(R.id.ordersCardImage);
 
         customerSingleton = com.example.vcanteen.customerSingleton.getInstance();
+        orderStack = com.example.vcanteen.orderStack.getInstance();
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         customerId = sharedPref.getInt("customerId",0);
@@ -121,7 +122,7 @@ public class homev2Activity extends AppCompatActivity {
             Intent i = new Intent(homev2Activity.this, vendorMenuv2Activity.class);
             String chosenVendor = randomizedRestaurantName;
             String vendorUrl = randomizedVendorImage;
-            orderStack.setCustomerId(sharedPref.getInt("customerId", 0));
+            orderStack.setCustomerId(customerId);
             orderStack.setVendorId(randomizedVendorId);
             i.putExtra("vendor id", randomizedVendorId);
             i.putExtra("vendor url", vendorUrl);
@@ -144,8 +145,6 @@ public class homev2Activity extends AppCompatActivity {
         });
 
         ordersCardView.setOnClickListener(v -> {
-            //TODO create retrofit here
-            //TODO spinner
             startActivity(new Intent(homev2Activity.this, OrderListActivity.class));
         });
 

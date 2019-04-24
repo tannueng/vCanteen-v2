@@ -121,6 +121,8 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
                             sharedPref.edit().putString("email", cachedEmail).commit();
                             progressDialog.dismiss();
 
+                            //TODO callhomepage here
+
                             startActivity(new Intent(firstTimeLinkPaymentActivity.this,homev2Activity.class));
 
                         }

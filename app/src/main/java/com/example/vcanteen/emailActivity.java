@@ -214,7 +214,6 @@ public class emailActivity extends AppCompatActivity {
 //                                    LoginResponse response1 = response.body();
 //                                    if(response1.getAccountType().equals("FACEBOOK")) {
 //
-////TODO CONTINUE HERE
 //
 //                                        Call<LoginResponse> call2 = jsonPlaceHolderApi.sendLoginFacebook(email, firebaseToken);
 //
@@ -359,9 +358,14 @@ public class emailActivity extends AppCompatActivity {
                                             first_name = json.optString("first_name");
                                             last_name = json.optString("last_name");
 
-                                            String account_type = "FACEBOOK";
+                                            profile_url = null;
+                                            try {
+                                                profile_url = (String) json.getJSONObject("picture").getJSONObject("data").get("url");
+                                            } catch (JSONException e) {
+                                                System.out.println("error with fb profile pic");
+                                                e.printStackTrace();
+                                            }
                                             passwd = "firebaseOnlyNaja";
-
 
                                             progressDialog = new ProgressDialog(emailActivity.this);
                                             progressDialog = ProgressDialog.show(emailActivity.this, "",
@@ -411,6 +415,7 @@ public class emailActivity extends AppCompatActivity {
 
                     }
                 });
+
     }
 
     private void firebaseLogin(String email, String password) {
@@ -432,7 +437,7 @@ public class emailActivity extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     for(DataSnapshot dsUser: dataSnapshot.getChildren())
                                         firebaseToken = dsUser.getValue(String.class);
-                                    System.out.println("==============firebaseLogin receive firebase token"+firebaseToken);
+                                    System.out.println("==============firebaseLogin receive firebase token : "+firebaseToken);
                                 }
 
                                 @Override
@@ -454,8 +459,6 @@ public class emailActivity extends AppCompatActivity {
 
 
                         } else {
-//                            errorMessage.setText("Email or Password is Incorrect");
-//                            errorMessage.setVisibility(View.VISIBLE);
                             System.out.println("FIREBASE LOGIN FAIL");
                             progressDialog.dismiss();
                         }
@@ -688,6 +691,9 @@ public class emailActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (progressDialog!=null && progressDialog.isShowing() ){
+            progressDialog.cancel();
+        }
         sharedPref.edit().putString("token", "NO TOKEN JA EDOK").commit();
         sharedPref.edit().putInt("customerId", 0);
         sharedPref.edit().putString("email","").commit();
