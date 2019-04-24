@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/paymentDropdown"
         android:layout_width="250dp"
         android:layout_height="40dp"
@@ -38,30 +38,30 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:entries="@array/serviceProvider"
-        android:background="@drawable/dropdownbg"
-        android:orientation="horizontal">
+        android:background="@drawable/dropdownbg">
 
         <Spinner
             android:id="@+id/paymentSpinner"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="7"
+            android:layout_centerVertical="true"
             android:background="@android:color/transparent"
+            android:entries="@array/serviceProvider"
             android:gravity="center"
             android:spinnerMode="dropdown" />
 
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_alignEnd="@+id/paymentSpinner"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="0dp"
             android:clickable="false"
+            android:focusableInTouchMode="false"
             android:src="@drawable/ic_angle_arrow_down" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/accountNumberTitle"

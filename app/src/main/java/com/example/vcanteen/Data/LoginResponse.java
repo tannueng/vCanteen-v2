@@ -41,4 +41,12 @@ public class LoginResponse {
     public void setCustomerSessionToken(String customerSessionToken) {
         this.customerSessionToken = customerSessionToken;
     }
+    @Override
+    public String toString() {
+        return "TokenResponse{" +
+                "customerId='" + customerId + '\'' +
+                ", customerSessionToken='" + customerSessionToken + '\'' +
+                ", accountType='" + accountType + '\'' +
+                '}';
+    }
 }

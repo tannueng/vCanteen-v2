@@ -57,19 +57,6 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/or"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/inlineError"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="6dp"
-        android:fontFamily="@font/sfprotext_medium"
-        android:text="or"
-        android:textColor="#979797"
-        android:textSize="16sp" />
-
-    <TextView
         android:id="@+id/inlineError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -115,10 +102,11 @@
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/or"
+        android:layout_below="@+id/inlineError"
         android:layout_gravity="center_horizontal"
+        android:layout_marginStart="30dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="-1dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="30dp"
         android:layout_toRightOf="@+id/or"
         android:fontFamily="@font/sfprotext_semibold"
