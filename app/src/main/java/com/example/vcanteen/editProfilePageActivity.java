@@ -50,7 +50,7 @@ public class editProfilePageActivity extends AppCompatActivity {
             Pattern.compile("^\\w.+@\\w+\\..{2,3}(.{1,})?$");
 
     private static final Pattern EMAIL_CHARACTER_PATTERN =
-            Pattern.compile("^[a-zA-Z0-9.]+@[a-zA-Z0-9.]+\\..{2,3}(.{2,3})?$");
+            Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.]+\\..{2,3}(.{2,3})?$");
 
     private EditText firstNameBox, lastNameBox, emailBox;
     private TextView firstNameError, lastNameError, emailError;
@@ -111,7 +111,10 @@ public class editProfilePageActivity extends AppCompatActivity {
         saveAndExitButton.setEnabled(false);
 
         if(customerSingleton.getCustomerImage()!=null){
-            Glide.with(editProfilePageActivity.this).load(customerSingleton.getCustomerImage()).apply(option).into(profilePicture);
+            Glide.with(editProfilePageActivity.this)
+                    .load(customerSingleton.getCustomerImage())
+                    .apply(RequestOptions.circleCropTransform())//.apply(option)
+                    .into(profilePicture);
             originalImageUrl = ""+customerSingleton.getCustomerImage();
             imageUrl = originalImageUrl;
         }
@@ -188,14 +191,20 @@ public class editProfilePageActivity extends AppCompatActivity {
                     if(firstNameBox.getText().toString().length()==0){
                         firstNameError.setVisibility(View.VISIBLE);
                         firstNameError.setText("This field cannot be blank.");
+                    }else {
+                        firstNameError.setVisibility(View.INVISIBLE);
                     }
                     if(lastNameBox.getText().toString().length()==0){
                         lastNameError.setVisibility(View.VISIBLE);
                         lastNameError.setText("This field cannot be blank.");
+                    }else{
+                        lastNameError.setVisibility(View.INVISIBLE);
                     }
                     if(emailBox.getText().toString().length()==0){
                         emailError.setVisibility(View.VISIBLE);
                         emailError.setText("This field cannot be blank.");
+                    }else{
+                        emailError.setVisibility(View.INVISIBLE);
                     }
                 } // Case 2 : Wrong name format a-z, A-Z
                 else if(!(NAME_PATTERN.matcher(firstNameBox.getText().toString()).matches()) || !(NAME_PATTERN.matcher(lastNameBox.getText().toString()).matches())){
@@ -217,7 +226,7 @@ public class editProfilePageActivity extends AppCompatActivity {
                 } // Case 4 : Contains other characters than a-z, A-Z, 0-9, or a period in email
                 else if(!(EMAIL_CHARACTER_PATTERN.matcher(emailBox.getText().toString()).matches())){
                     emailError.setVisibility(View.VISIBLE);
-                    emailError.setText("Only a-z, A-Z, 0-9, or a period is allowed.");
+                    emailError.setText("Only a-z, A-Z, 0-9, -, _, or a period is allowed.");
                     firstNameError.setVisibility(View.INVISIBLE);
                     lastNameError.setVisibility(View.INVISIBLE);
                 } // BEST CASE : If all conditions are met

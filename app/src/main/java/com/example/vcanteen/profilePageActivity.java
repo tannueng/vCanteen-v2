@@ -36,7 +36,7 @@ public class profilePageActivity extends AppCompatActivity {
 
         Glide.with(profilePageActivity.this)
                 .load(customerSingleton.getCustomerImage())
-                .apply(option)
+                .apply(RequestOptions.circleCropTransform())//.apply(option)
                 .into(profilePictureImage);
 
         editProfileButton = findViewById(R.id.editProfileButton);
