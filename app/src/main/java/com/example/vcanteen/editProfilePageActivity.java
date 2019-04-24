@@ -289,7 +289,10 @@ public class editProfilePageActivity extends AppCompatActivity {
 
 
             //Picasso.with(this).load(mImageUri).into(mImageView);
-            Glide.with(this).load(mImageUri).apply(option).into(profilePicture);
+            Glide.with(this)
+                    .load(mImageUri)
+                    .apply(RequestOptions.circleCropTransform())//.apply(option)
+                    .into(profilePicture);
             uploadFile();
 
         }
