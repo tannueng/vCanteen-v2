@@ -80,7 +80,7 @@ public class cartActivity extends AppCompatActivity {
         confirmImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(total!=0 || unavailableService.size()!=4) {
+                if(total!=0 && paymentList.size()!=0){ //|| unavailableService.size()!=4) {
                     //setUnlocked(confirmImgButton);
                     showPopUp();
                 }
@@ -274,10 +274,8 @@ public class cartActivity extends AppCompatActivity {
                     unavailableService.get(k).setTextColor(Color.parseColor("#E0E0E0"));
                 }
 
-                if(unavailableService.size()==4){
+                if(paymentList.size()==0){
                     setLocked(confirmImgButton);
-                }else{
-                    setUnlocked(confirmImgButton);
                 }
 
                 progressDialog.dismiss();
