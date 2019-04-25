@@ -22,7 +22,7 @@ public class Splash extends AppCompatActivity {
     private final int SPLASH_TIME_OUT = 1000;
     private SharedPreferences sharedPref;
 
-    private final String url = "http://vcanteen.herokuapp.com/";
+    private final String url = "https://vcanteen.herokuapp.com/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

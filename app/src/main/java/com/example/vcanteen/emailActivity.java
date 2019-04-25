@@ -529,6 +529,7 @@ public class emailActivity extends AppCompatActivity {
                         sharedPref.edit().putString("token", response.body().getCustomerSessionToken()).commit();
                         sharedPref.edit().putInt("customerId", response.body().getCustomerId()).commit();
                         sharedPref.edit().putString("email", email).commit();
+                        sharedPref.edit().putString("account_type",response.body().getAccountType()).commit();
                         //sharedPref.edit().putString("account_type", account_type).commit();
 
                         System.out.println("==================Account Type :::: "+response.body().getAccountType()+" ==================");
@@ -606,6 +607,7 @@ public class emailActivity extends AppCompatActivity {
             inline.setVisibility(View.VISIBLE);
             return;
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailField.getText().toString()).matches()) {
+            inline.setText("Invalid email address.");
             inline.setVisibility(View.VISIBLE);
             return;
         }
@@ -631,28 +633,31 @@ public class emailActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 System.out.println("Verify Email: "+response.code());
 //                System.out.println(new RecoverPass(email).toString());
-                if (response.code() == 409||response.body().accountType.equals("FACEBOOK")) {
+
+                if (response.code() == 404){
+                    //TO Password Sign Up
+                    emailField.setInputType(InputType.TYPE_CLASS_TEXT);
+                    String customerEmail = null;
+                    customerEmail = emailField.getText().toString();
+                    System.out.println("email from email page (putExtra) : "+customerEmail);
+                    pwSignUpIntent.putExtra("cachedEmail", customerEmail);
+                    startActivity(pwSignUpIntent);
+                    return;
+                }
+
+                if (response.code() == 200&&response.body().accountType.equals("FACEBOOK")) { //error may be null
                     //email only for Facebook
                     inline.setText("This account can only be logged into with Facebook");
 //                    inline.setTextSize(10);
                     inline.setVisibility(View.VISIBLE);
                     progressDialog.dismiss();
-                } else if (response.code() == 404){
-                    //TO Password Sign Up
+                } else {
+                    //200 NORMAL
                     emailField.setInputType(InputType.TYPE_CLASS_TEXT);
                     String customerEmail = null;
                     customerEmail = emailField.getText().toString();
 
-                    pwSignUpIntent.putExtra("cacheEmail", customerEmail);
-                    startActivity(pwSignUpIntent);
-                }
-
-                else {
-                    emailField.setInputType(InputType.TYPE_CLASS_TEXT);
-                    String customerEmail = null;
-                    customerEmail = emailField.getText().toString();
-
-                    pwloginintent.putExtra("cachedemail", customerEmail);
+                    pwloginintent.putExtra("cachedEmail", customerEmail);
                     progressDialog.dismiss();
                     startActivity(pwloginintent);
                 }
@@ -673,19 +678,27 @@ public class emailActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private static String encodeTobase64(Bitmap image) {
-        Bitmap immagex = image;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-
-        Log.e("LOOK", imageEncoded);
-        return imageEncoded;
-    }
+//    private static String encodeTobase64(Bitmap image) {
+//        Bitmap immagex = image;
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//        byte[] b = baos.toByteArray();
+//        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+//
+//        Log.e("LOOK", imageEncoded);
+//        return imageEncoded;
+//    }
     protected void hideKeyboard(View view)    {
         InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (progressDialog!=null && progressDialog.isShowing() ){
+            progressDialog.cancel();
+        }
     }
 
     @Override
@@ -694,9 +707,15 @@ public class emailActivity extends AppCompatActivity {
         if (progressDialog!=null && progressDialog.isShowing() ){
             progressDialog.cancel();
         }
-        sharedPref.edit().putString("token", "NO TOKEN JA EDOK").commit();
-        sharedPref.edit().putInt("customerId", 0);
-        sharedPref.edit().putString("email","").commit();
+        sharedPref.edit().putString("token", "NO TOKEN JA EDOK").apply();
+        sharedPref.edit().putInt("customerId", 0).apply();
+        sharedPref.edit().putString("email","").apply();
+        sharedPref.edit().putString("account_type", "").apply();
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }
 

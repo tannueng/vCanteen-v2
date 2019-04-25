@@ -99,7 +99,7 @@ public class historyTabFragment extends Fragment {
                 data = new ArrayList<>();
                 List<orderHistory> posts = response.body();
 //                showData(response.body());
-                System.out.println("checkpoint");
+//                System.out.println("checkpoint");
 
                 for (orderHistory post : posts) {
                     data.add(new orderListData(
@@ -114,7 +114,7 @@ public class historyTabFragment extends Fragment {
                             post.isHasRated()
 //                            true
                     ));
-                    if(post.isHasRated()) System.out.println("found true"+post.getOrderId());
+//                    if(post.isHasRated()) System.out.println("found true"+post.getOrderId());
 
                 }
                 DifferentRowAdapter adapter = new DifferentRowAdapter(data);

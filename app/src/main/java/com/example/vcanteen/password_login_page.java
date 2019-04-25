@@ -102,11 +102,12 @@ public class password_login_page extends AppCompatActivity {
             if (extras == null) {
                 email = null;
             } else {
-                email = extras.getString("cachedemail");
+                email = extras.getString("cachedEmail");
             }
         } else {
-            email = (String) savedInstanceState.getSerializable("cachedemail");
+            email = (String) savedInstanceState.getSerializable("cachedEmail");
         }
+
 
         passwdField = findViewById(R.id.passwordBox);
         showBtn = findViewById(R.id.show_pw_btn);

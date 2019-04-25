@@ -137,7 +137,6 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                 }
                 mSwipeRefreshLayout.setRefreshing(false);
                 List<orderProgress> posts = response.body();
-                System.out.println(posts.toString());
                 if(posts.isEmpty()) {
                     Toast.makeText(context, "In-Progress is empty!", Toast.LENGTH_SHORT).show();
                     return;

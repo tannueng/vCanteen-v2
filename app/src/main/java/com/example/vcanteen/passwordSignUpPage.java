@@ -43,7 +43,6 @@ public class passwordSignUpPage extends AppCompatActivity {
         inline = findViewById(R.id.inline);
         nextBtn = findViewById(R.id.next_button);
 
-
         showPasswordBtn.setOnClickListener(v -> {
 
             if (showPasswordBtn.getText() == "SHOW") {
@@ -75,12 +74,12 @@ public class passwordSignUpPage extends AppCompatActivity {
                 inline.setText("Password cannot be empty. Please try again.");
                 inline.setVisibility(View.VISIBLE);
                 return;
-            } else if (!(PASSWORD_PATTERN.matcher(password).matches()) || !(PASSWORD_PATTERN.matcher(confirmPassword).matches())) {
-                inline.setText("Only a-z A-Z 0-9 _ - * ‘ “ # & () @ are allowed.");
-                inline.setVisibility(View.VISIBLE);
             } else if (!password.equals(confirmPassword)) {
                 //password doesn't match
                 inline.setText("Passwords do not match. Please try again.");
+                inline.setVisibility(View.VISIBLE);
+            } else if (!(PASSWORD_PATTERN.matcher(password).matches()) || !(PASSWORD_PATTERN.matcher(confirmPassword).matches())) {
+                inline.setText("Only a-z A-Z 0-9 _ - * ‘ “ # & () @ are allowed.");
                 inline.setVisibility(View.VISIBLE);
             } else if (password.length() < 8) {
                 inline.setText("Password must be longer than 8 characters.");

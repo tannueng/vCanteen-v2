@@ -61,6 +61,7 @@ public class homev2Activity extends AppCompatActivity {
     public String randomizedRestaurantName;
     public orderStack orderStack;
     FirebaseAuth mAuth;
+    String accountType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,15 +108,16 @@ public class homev2Activity extends AppCompatActivity {
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         customerId = sharedPref.getInt("customerId",0);
+        accountType = sharedPref.getString("account_type", "UNKNOWN");
 //        customerId = 3;
-        System.out.println("onCreate Homepage");
+//        System.out.println("onCreate Homepage : ");
         progressDialog = new ProgressDialog(homev2Activity.this);
 
         Glide.with(getApplicationContext()).load(R.drawable.crowd_photo).apply(option).into(crowdCardImage);
         Glide.with(getApplicationContext()).load(R.drawable.order_photo).apply(option).into(ordersCardImage);
         Glide.with(getApplicationContext()).load(R.drawable.vendor_photo).apply(option).into(vendorsCardImage);
 
-        callRetrofitOnHomepage(customerId);
+        callRetrofitOnHomepage(customerId, accountType);
 
         recommendationCardView.setOnClickListener(v -> {
             //TODO navigate to vendor_menu_page of the vendor who owns the menu
@@ -163,11 +165,12 @@ public class homev2Activity extends AppCompatActivity {
 
     }
 
-    private void callRetrofitOnHomepage(int customerId) {
+    private void callRetrofitOnHomepage(int customerId, String accountType) {
         progressDialog = ProgressDialog.show(homev2Activity.this
                 , "",
                 "Loading. Please wait...", true);
         System.out.println("customerId : "+customerId);
+        System.out.println("accountType : "+accountType);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://vcanteen.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -285,6 +288,6 @@ public class homev2Activity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        callRetrofitOnHomepage(customerId);
+        callRetrofitOnHomepage(customerId, accountType);
     }
 }

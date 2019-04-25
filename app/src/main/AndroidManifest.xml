@@ -14,44 +14,57 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".tutorialMain" />
-        <activity android:name=".tutorialTwo" />
-        <activity android:name=".tutorialOne" />
-        <activity android:name=".crowdEstimationActivity" />
-        <activity android:name=".editProfilePageActivity" />
-        <activity android:name=".profilePageActivity" />
-        <activity android:name=".firstTimeLinkPaymentActivity" />
-        <activity android:name=".basicInfoPageActivity" />
-        <activity android:name=".passwordSignUpPage" />
-        <activity android:name=".homev2Activity" />
-        <activity android:name=".Splash">
+        <activity android:name=".tutorialMain" android:screenOrientation="portrait"/>
+        <activity android:name=".tutorialTwo" android:screenOrientation="portrait"/>
+        <activity android:name=".tutorialOne" android:screenOrientation="portrait"/>
+        <activity android:name=".crowdEstimationActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".editProfilePageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".profilePageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".firstTimeLinkPaymentActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".basicInfoPageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".passwordSignUpPage" android:screenOrientation="portrait"/>
+        <activity android:name=".homev2Activity" android:screenOrientation="portrait"/>
+        <activity android:name=".Splash" android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+                <action
+                    android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".paymentSplash" />
-        <activity android:name=".orderConfirmationActivity" />
-        <activity android:name=".password_login_page" />
-        <activity android:name=".vendorListActivity" />
-        <activity android:name=".processingPaymentActivity" />
-        <activity android:name=".cartActivity" />
-        <activity android:name=".normalOrderActivity" />
-        <activity android:name=".customizeOrderActivity" />
-        <activity
-            android:name=".vendorMenuv2Activity"
+        <activity android:name=".paymentSplash" android:screenOrientation="portrait"/>
+        <activity android:name=".orderConfirmationActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".password_login_page" android:screenOrientation="portrait"/>
+        <activity android:name=".vendorListActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".processingPaymentActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".cartActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".normalOrderActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".customizeOrderActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".vendorMenuv2Activity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask" />
-        <activity android:name=".changePasswordActivity" />
-        <activity android:name=".settingActivity" />
-        <activity android:name=".emailActivity" />
-        <activity android:name=".OrderListActivity" />
-        <activity android:name=".reportBugActivity" />
-        <activity android:name=".EditPaymentMethodActivity" />
+        <activity android:name=".changePasswordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".settingActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".emailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".OrderListActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.example.vcanteen.MESSAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".reportBugActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".EditPaymentMethodActivity" android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -73,6 +86,13 @@
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
 
