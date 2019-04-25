@@ -5,7 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.ColorDrawable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -58,12 +61,16 @@ public class cartActivity extends AppCompatActivity {
     SharedPreferences sharedPref;
 
     ProgressDialog progressDialog;
+    TextView textInPaymentContainer;
+    ConstraintLayout paymentContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         progressDialog = new ProgressDialog(cartActivity.this);
+        paymentContainer = findViewById(R.id.paymentContainer);
+        textInPaymentContainer = findViewById(R.id.textView8);
         orderStack = com.example.vcanteen.orderStack.getInstance();
         restaurantNameString = getIntent().getStringExtra("sendRestaurantName"); //just add for minor fix in order confirmation
         paymentList = new ArrayList<>(); // need to get from BE
@@ -73,7 +80,8 @@ public class cartActivity extends AppCompatActivity {
         confirmImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(total!=0) {
+                if(total!=0 && paymentList.size()!=0){ //|| unavailableService.size()!=4) {
+                    //setUnlocked(confirmImgButton);
                     showPopUp();
                 }
             }
@@ -267,6 +275,10 @@ public class cartActivity extends AppCompatActivity {
                     unavailableService.get(k).setTextColor(Color.parseColor("#E0E0E0"));
                 }
 
+                if(paymentList.size()==0){
+                    setLocked(confirmImgButton);
+                }
+
                 progressDialog.dismiss();
             }
 
@@ -353,6 +365,8 @@ public class cartActivity extends AppCompatActivity {
         orderTotalPriceTop.setText("" + orderStack.totalPrice +" ฿");
 
         if(total == 0){
+            setLocked(confirmImgButton);
+            confirmImgButton.setEnabled(false);
             scbEasy.setEnabled(false);
             scbEasy.setTextColor(Color.parseColor("#E0E0E0"));
             kplus.setEnabled(false);
@@ -361,7 +375,31 @@ public class cartActivity extends AppCompatActivity {
             trueMoney.setTextColor(Color.parseColor("#E0E0E0"));
             cunex.setEnabled(false);
             cunex.setTextColor(Color.parseColor("#E0E0E0"));
+        }else{
+            setUnlocked(confirmImgButton);
+            confirmImgButton.setEnabled(true);
         }
 
     }
+
+    public void  setLocked(ImageView v)
+    {
+        paymentContainer.setBackgroundResource(R.drawable.box_disable);
+                //setBackgroundResource(R.drawable.box);
+        textInPaymentContainer.setTextColor(Color.parseColor("#AEAEAE"));
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);  //0 means grayscale
+        ColorMatrixColorFilter cf = new ColorMatrixColorFilter(matrix);
+        v.setColorFilter(cf);
+        v.setImageAlpha(128);   // 128 = 0.5
+    }
+
+    public void  setUnlocked(ImageView v)
+    {
+        v.setColorFilter(null);
+        v.setImageAlpha(255);
+        textInPaymentContainer.setTextColor(Color.parseColor("#FF9C9C"));
+        paymentContainer.setBackgroundResource(R.drawable.box);
+    }
+
 }
