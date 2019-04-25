@@ -1,6 +1,8 @@
 package com.example.vcanteen;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -284,6 +286,8 @@ public class homev2Activity extends AppCompatActivity {
         });
 
     }
+
+
 
     @Override
     protected void onRestart() {

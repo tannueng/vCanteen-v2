@@ -2,11 +2,15 @@ package com.example.vcanteen;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -65,6 +69,8 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
         recyclerView = view.findViewById(R.id.progress_recycler);
         slotNumber = view.findViewById(R.id.pickup_slot_number);
         cv = view.findViewById(R.id.cardView_done);
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(mHandler, new IntentFilter("com.example.vcanteen_FCM-MESSAGE"));
+
 
         sharedPref = this.getActivity().getSharedPreferences("myPref", MODE_PRIVATE);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
@@ -153,6 +159,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
+                System.out.println("Done Loading");
 
 
             }
@@ -265,8 +272,10 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 //                                            System.out.println("Current - orderStatus : "+String.valueOf(.orderStatus.getText()));
                     return;
                 }
+                System.out.println("start reloading page");
                 loadRecyclerViewData(context);
                 historyTabFragment.loadRecyclerViewData(context);
+
                 //Show review dialog
 //                showReviewDialog(context, orderId);
             }
@@ -388,4 +397,16 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
         dialog.show();
     }
 
+    private BroadcastReceiver mHandler = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            loadRecyclerViewData(getContext());
+        }
+    };
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mHandler);
+    }
 }

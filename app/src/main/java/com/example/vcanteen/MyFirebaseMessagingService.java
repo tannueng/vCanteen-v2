@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -16,6 +18,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
+        System.out.println("received message");
         Intent intent = new Intent(this, OrderListActivity.class);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(
@@ -25,11 +28,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 PendingIntent.FLAG_CANCEL_CURRENT
         );
 
-        if (remoteMessage.getNotification() != null) {
+        if(remoteMessage.getData().size()>0) {
             String title = remoteMessage.getNotification().getTitle();
-            String body = remoteMessage.getNotification().getBody();
+            String message = remoteMessage.getNotification().getBody();
+            Intent intent2 = new Intent("com.example.vcanteen_FCM-MESSAGE");
 
-//            NotificationHelper.displayNotification(getApplicationContext(), title, body);
+            intent2.putExtra("title", title);
+            intent2.putExtra("message", message);
+            LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(this);
+            localBroadcastManager.sendBroadcast(intent2);
+
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "Orders")
                     .setContentTitle(remoteMessage.getNotification().getTitle())
                     .setContentText(remoteMessage.getNotification().getBody())
@@ -45,5 +53,21 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             notificationManager.notify(1, notificationBuilder.build());
         }
+
+        if (remoteMessage.getNotification() != null) {
+
+
+
+
+//            NotificationHelper.displayNotification(getApplicationContext(), title, body);
+
+        }
     }
+
+    @Override
+    public void onNewToken(String mToken) {
+        super.onNewToken(mToken);
+        Log.e("TOKEN",mToken);
+    }
+
 }
