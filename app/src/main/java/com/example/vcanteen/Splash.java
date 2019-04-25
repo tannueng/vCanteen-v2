@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.vcanteen.Data.Token;
@@ -40,46 +41,66 @@ public class Splash extends AppCompatActivity {
                 .build();
         final JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-        Token token = new Token(sharedPref.getString("email", "empty email"), sharedPref.getString("token", "empty token"));
-        Call<TokenVerification> call = jsonPlaceHolderApi.verifyToken(token);
+        boolean first = sharedPref.getBoolean("firstRun", true);
 
-        if (sharedPref.getBoolean("firstrun", true)){
-            startTutorial();
-            sharedPref.edit().putBoolean("firstrun", false).commit();
-        } else {
-            // POST DATA FOR TOKEN VERIFICATION
-            call.enqueue(new Callback<TokenVerification>() {
-                @Override
-                public void onResponse(Call<TokenVerification> call, final Response<TokenVerification> response) {
-                    if (!response.isSuccessful())
-                        Toast.makeText(getApplicationContext(), "Error Occured, please try again.", Toast.LENGTH_SHORT);
-                    if (response.code() != 200) {
-                        //do smth
-                        Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
-                    } else {
-                        System.out.println(response.body().isExpired());
-                        final boolean expired = response.body().isExpired();
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            public void run() {
-                                // yourMethod();
-                                if (expired)
-                                    startActivity(new Intent(Splash.this, emailActivity.class));
-                                else
-                                    startActivity(new Intent(Splash.this, homev2Activity.class));
+
+        Handler handlerFirst = new Handler();
+        handlerFirst.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (first) {
+                    startTutorial();
+                    Log.e("myTag", String.valueOf(sharedPref.getBoolean("firstRun", true)));
+                    sharedPref.edit().putBoolean("firstRun", false).commit();
+                    Log.e("myTag", String.valueOf(sharedPref.getBoolean("firstRun", true)));
+                    Log.e("myTag", "finish startTutorial");
+//                    return;
+                } else {
+                    // POST DATA FOR TOKEN VERIFICATION
+                    Log.e("myTag", "start call enqueue");
+                    Token token = new Token(sharedPref.getString("email", "empty email"), sharedPref.getString("token", "empty token"));
+                    Call<TokenVerification> call = jsonPlaceHolderApi.verifyToken(token);
+
+                    call.enqueue(new Callback<TokenVerification>() {
+                        @Override
+                        public void onResponse(Call<TokenVerification> call, final Response<TokenVerification> response) {
+                            Log.e("myTag", "Pass the onResponse already!!");
+                            if (!response.isSuccessful())
+                                Toast.makeText(getApplicationContext(), "Error Occured, please try again.", Toast.LENGTH_SHORT);
+                            if (response.code() != 200) {
+                                //do smth
+                                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+                            } else {
+                                System.out.println(response.body().isExpired());
+                                final boolean expired = response.body().isExpired();
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        Log.e("myTag", "reach handler postDelayed");
+                                        // yourMethod();
+                                        if (expired)
+                                            startActivity(new Intent(Splash.this, emailActivity.class));
+                                        else
+                                            startActivity(new Intent(Splash.this, homev2Activity.class));
+                                    }
+                                }, 1000);
                             }
-                        }, 1000);
-                    }
 
+                        }
+
+                        @Override
+                        public void onFailure(Call<TokenVerification> call, Throwable t) {
+
+                        }
+
+                    });
                 }
+                Log.e("myTag", "finished if/else");
 
-                @Override
-                public void onFailure(Call<TokenVerification> call, Throwable t) {
+            }
 
-                }
-            });
-        }
-
+        }, 3000);
+        Log.e("myTag", "finished first postDelayed");
 
 
 //        updateWithToken(AccessToken.getCurrentAccessToken());
@@ -116,7 +137,7 @@ public class Splash extends AppCompatActivity {
 
     public void startTutorial(){
         Intent intent = new Intent(this, tutorialMain.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 }
