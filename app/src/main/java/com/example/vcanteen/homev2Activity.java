@@ -192,10 +192,16 @@ public class homev2Activity extends AppCompatActivity {
                 customerHome info = response.body();
                 firstAndLastName.setText(info.getCustomerInfo().getFirstnamev2()+" "+ info.getCustomerInfo().getLastnamev2().substring(0,1)+".");
 
-                Glide.with(getApplicationContext())
-                        .load(info.getCustomerInfo().getCustomerImagev2())
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(profilePictureButton);
+                String hvPhoto = "" + info.getCustomerInfo().getCustomerImagev2() + "";
+                //System.out.println("Image is "+info.getCustomerInfo().getCustomerImagev2() +  " . end photo");
+                if(!hvPhoto.equals("null")) {
+                    Glide.with(getApplicationContext())
+                            .load(info.getCustomerInfo().getCustomerImagev2())
+                            .apply(RequestOptions.circleCropTransform())
+                            .into(profilePictureButton);
+                }else{
+                    profilePictureButton.setImageResource(R.drawable.round_profile_img);
+                }
 
                 randomizedVendorId = info.getRecommendationInfo().getRecVendorId();
                 randomizedVendorImage = info.getRecommendationInfo().getRecVendorImage();
