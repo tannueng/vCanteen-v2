@@ -229,6 +229,12 @@ public class editProfilePageActivity extends AppCompatActivity {
                     emailError.setText("Only a-z, A-Z, 0-9, -, _, or a period is allowed.");
                     firstNameError.setVisibility(View.INVISIBLE);
                     lastNameError.setVisibility(View.INVISIBLE);
+                } // Case 5 : Not G-mail account
+                else if (!emailBox.getText().toString().trim().toLowerCase().contains("@gmail.com")){
+                    emailError.setVisibility(View.VISIBLE);
+                    emailError.setText("Must be Gmail account only");
+                    firstNameError.setVisibility(View.INVISIBLE);
+                    lastNameError.setVisibility(View.INVISIBLE);
                 } // BEST CASE : If all conditions are met
                 else {
                     confirmProfileChangeDialog = new Dialog(editProfilePageActivity.this);
