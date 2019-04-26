@@ -93,8 +93,8 @@ public class reportBugActivity extends AppCompatActivity {
 
                 }
             });
-
             reportText.setText("");
+            inline.setVisibility(View.INVISIBLE);
             Toast.makeText(this, "Bug report successfully submitted", Toast.LENGTH_LONG).show();
         });
 
