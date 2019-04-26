@@ -191,8 +191,23 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
             public void onResponse(Call<pickupSlot> call, Response<pickupSlot> response) {
                 if(!response.isSuccessful()) {
                     if(response.code()==404) {
+                        progressDialog.dismiss();
                         Toast.makeText(context, "The order "+orderId+" has expired. ",
                                 Toast.LENGTH_LONG).show();
+                        dialog = new Dialog(context);
+                        dialog.setContentView(R.layout.popup_order_find_slot_over_timeout);
+                        dialog.setCancelable(true);
+                        TextView overtime = dialog.findViewById(R.id.popup_order_overtime_title);
+                        overtime.setText("The order "+orderId+" has expired");
+                        Button dismiss_btn = dialog.findViewById(R.id.dismiss_btn);
+                        dismiss_btn.setOnClickListener(v -> {
+                            dialog.dismiss();
+                        });
+                        dialog.show();
+                        loadRecyclerViewData(context);
+                        DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     }
 
                     System.out.println("PROG onResponse getslot unsuccessful");

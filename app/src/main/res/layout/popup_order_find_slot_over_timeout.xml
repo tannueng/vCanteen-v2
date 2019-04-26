@@ -33,13 +33,13 @@
             android:paddingBottom="16dp">
 
             <TextView
-                android:id="@+id/popup_order_done_title"
+                android:id="@+id/popup_order_overtime_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/order_done_title"
                 android:fontFamily="@font/sfprotext_semibold"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="The order ... has expired."
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
@@ -55,29 +55,14 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/pickup_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/sfprotext_bold"
-                    android:background="@drawable/button_bg_rounded_corner_pink"
-                    android:text="@string/pickup_text"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12sp" />
-
-                <Space
-                    android:layout_width="16dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <Button
                     android:id="@+id/dismiss_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/colorWhite"
-                    android:fontFamily="@font/sfprotext_semibold"
+                    android:background="@drawable/button_bg_rounded_corner_pink"
+                    android:fontFamily="@font/sfprotext_bold"
+                    android:minHeight="30dp"
                     android:text="@string/dismiss_text"
-                    android:textColor="@color/grey_text"
+                    android:textColor="@color/colorWhite"
                     android:textSize="12sp" />
 
             </LinearLayout>
