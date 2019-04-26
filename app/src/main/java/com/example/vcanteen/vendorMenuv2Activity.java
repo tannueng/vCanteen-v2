@@ -164,7 +164,7 @@ public class vendorMenuv2Activity extends AppCompatActivity {
                 search_icon.setVisibility(View.INVISIBLE);
                 searchKeyword = searchBox.getText().toString().trim();
                 if(searchKeyword.isEmpty()) {
-                    return;
+                    setResultListAdapter(availableList);
                 } else {
                     resultList = new ArrayList<>();
                     if(currentCategory.equals("ALL")) {

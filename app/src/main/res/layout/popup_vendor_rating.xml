@@ -58,7 +58,7 @@
         android:text="@string/mustBeText"
         android:textColor="#FF4141"
         android:textSize="12sp"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/orderNameExtra"

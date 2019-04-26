@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -24,6 +25,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.content.Context.POWER_SERVICE;
 
 public class progressTabFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "ProgressTabFragment";
@@ -309,7 +312,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                         Toast.LENGTH_LONG).show();
             }
         });
-        System.out.println("ENDD");
+        System.out.println("END");
     }
 
     public static void showReviewDialog(final Context context, int orderId, String vendorName, String orderName1, @Nullable String orderNameExtra1) {
@@ -370,7 +373,12 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
 
         (dialog.findViewById(R.id.close_x))
-                .setOnClickListener(v -> dialog.dismiss());
+                .setOnClickListener(v -> {
+                    dialog.dismiss();
+                    DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                });
 
         (dialog.findViewById(R.id.sendButton))
                 .setOnClickListener(v -> {
@@ -409,11 +417,21 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                         }
                     });
 
-                    Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show(); //TODO need to remove on real usage
+                    Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                     dialog.dismiss();
+                    /*dialog.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+
+                        }
+                    })*/
+                    DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
                 });
+
         dialog.findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
