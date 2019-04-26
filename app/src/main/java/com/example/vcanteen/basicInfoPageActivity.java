@@ -3,6 +3,7 @@ package com.example.vcanteen;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,10 +59,13 @@ public class basicInfoPageActivity extends AppCompatActivity {
             firstName = firstNameField.getText().toString();
             lastName = lastNameField.getText().toString();
             if(firstName.isEmpty()||lastName.isEmpty()) {
+                inline.setVisibility(View.VISIBLE);
                 inline.setText("Please fill in both fields.");
             } else if (!(NAME_PATTERN.matcher(firstName).matches()) || !(NAME_PATTERN.matcher(lastName).matches())) {
+                inline.setVisibility(View.VISIBLE);
                 inline.setText("Name can only contain a-z, A-Z.");
             } else {
+                inline.setVisibility(View.INVISIBLE);
                 Intent i = new Intent(this, firstTimeLinkPaymentActivity.class);
                 i.putExtra("cachedFirstName", firstName);
                 i.putExtra("cachedLastName", lastName);
