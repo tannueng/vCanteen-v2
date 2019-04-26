@@ -63,6 +63,7 @@ public class cartActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     TextView textInPaymentContainer;
     ConstraintLayout paymentContainer;
+    boolean thereIsSelectedPaymentMethod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +75,16 @@ public class cartActivity extends AppCompatActivity {
         orderStack = com.example.vcanteen.orderStack.getInstance();
         restaurantNameString = getIntent().getStringExtra("sendRestaurantName"); //just add for minor fix in order confirmation
         paymentList = new ArrayList<>(); // need to get from BE
-
+        thereIsSelectedPaymentMethod = false;
         showpopup = new Dialog(this);
         confirmImgButton = (ImageView)findViewById(R.id.confirmImgButton);
         confirmImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(total!=0 && paymentList.size()!=0){ //|| unavailableService.size()!=4) {
+                if(total!=0 && paymentList.size()!=0 && (thereIsSelectedPaymentMethod==false)){
+                    Toast.makeText(cartActivity.this, "Please select payment method.",Toast.LENGTH_LONG).show();
+                }
+                if(total!=0 && paymentList.size()!=0 && thereIsSelectedPaymentMethod){ //|| unavailableService.size()!=4) {
                     //setUnlocked(confirmImgButton);
                     showPopUp();
                 }
@@ -300,24 +304,28 @@ public class cartActivity extends AppCompatActivity {
                 if (checked)
                     scbEasy.setTextColor(Color.parseColor("#FF5A5A"));
                 unClickRadioButton(kplus,cunex,trueMoney);
+                thereIsSelectedPaymentMethod = true;
                 selectedServiceProvider = scbEasy.getText().toString();
                 break;
             case R.id.kplus:
                 if (checked)
                     kplus.setTextColor(Color.parseColor("#FF5A5A"));
                 unClickRadioButton(cunex,scbEasy,trueMoney);
+                thereIsSelectedPaymentMethod = true;
                 selectedServiceProvider = kplus.getText().toString();
                 break;
             case R.id.cunex:
                 if (checked)
                     cunex.setTextColor(Color.parseColor("#FF5A5A"));
                 unClickRadioButton(kplus,scbEasy,trueMoney);
+                thereIsSelectedPaymentMethod = true;
                 selectedServiceProvider = cunex.getText().toString();
                 break;
             case R.id.trueMoney:
                 if (checked)
                     trueMoney.setTextColor(Color.parseColor("#FF5A5A"));
                 unClickRadioButton(kplus,scbEasy,cunex);
+                thereIsSelectedPaymentMethod = true;
                 selectedServiceProvider = trueMoney.getText().toString();
                 break;
         }
