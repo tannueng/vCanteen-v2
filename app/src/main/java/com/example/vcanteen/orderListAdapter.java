@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.content.Intent;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import static android.content.Intent.getIntent;
@@ -34,6 +35,7 @@ public class orderListAdapter extends ArrayAdapter {
         TextView orderPrice;
         TextView orderNameExtra;
         TextView removeTextButton;
+        ImageView trashIcon;
     }
 
     @Override
@@ -51,6 +53,7 @@ public class orderListAdapter extends ArrayAdapter {
         holder.orderPrice=(TextView) convertView.findViewById(R.id.orderPrice);
         holder.orderNameExtra = (TextView) convertView.findViewById(R.id.orderNameExtra);
         holder.removeTextButton = (TextView) convertView.findViewById(R.id.removeTextButton);
+        holder.trashIcon = (ImageView) convertView.findViewById(R.id.trash_icon);
 
         //assign data
         holder.orderName.setText(orderStack.orderList.get(position).orderName);
@@ -64,6 +67,15 @@ public class orderListAdapter extends ArrayAdapter {
 
 
         holder.removeTextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderposition = position;
+                ((cartActivity) c).updateOrder();
+                notifyDataSetChanged();
+            }
+        });
+
+        holder.trashIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 orderposition = position;
