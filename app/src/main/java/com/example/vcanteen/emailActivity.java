@@ -358,6 +358,12 @@ public class emailActivity extends AppCompatActivity {
                                             first_name = json.optString("first_name");
                                             last_name = json.optString("last_name");
 
+                                            if(!email.trim().toLowerCase().contains("@gmail.com")){
+                                                inline.setText("Must be Gmail account only");
+                                                inline.setVisibility(View.VISIBLE);
+                                                return;
+                                            }
+
                                             profile_url = null;
                                             try {
                                                 profile_url = (String) json.getJSONObject("picture").getJSONObject("data").get("url");
@@ -608,6 +614,10 @@ public class emailActivity extends AppCompatActivity {
             return;
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailField.getText().toString()).matches()) {
             inline.setText("Invalid email address.");
+            inline.setVisibility(View.VISIBLE);
+            return;
+        } else if(!emailField.getText().toString().trim().toLowerCase().contains("@gmail.com")){
+            inline.setText("Must be Gmail account only");
             inline.setVisibility(View.VISIBLE);
             return;
         }
