@@ -329,7 +329,7 @@ public class emailActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
 
         System.out.println("went in fblogin");
-        LoginManager.getInstance().logOut();
+//        LoginManager.getInstance().logOut();
         // Set permissions
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
 

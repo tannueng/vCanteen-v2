@@ -44,6 +44,7 @@ public class passwordSignUpPage extends AppCompatActivity {
         nextBtn = findViewById(R.id.next_button);
 
         showPasswordBtn.setOnClickListener(v -> {
+            System.out.println("show1 pressed");
 
             if (showPasswordBtn.getText() == "SHOW") {
                 showPasswordBtn.setText("HIDE");
@@ -56,6 +57,7 @@ public class passwordSignUpPage extends AppCompatActivity {
 
         showConfirmedPasswordBtn.setOnClickListener(v -> {
 
+            System.out.println("show2 pressed");
             if (showConfirmedPasswordBtn.getText() == "SHOW") {
                 showConfirmedPasswordBtn.setText("HIDE");
                 confirmPasswordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
@@ -78,13 +80,14 @@ public class passwordSignUpPage extends AppCompatActivity {
                 //password doesn't match
                 inline.setText("Passwords do not match. Please try again.");
                 inline.setVisibility(View.VISIBLE);
-            } else if (!(PASSWORD_PATTERN.matcher(password).matches()) || !(PASSWORD_PATTERN.matcher(confirmPassword).matches())) {
-                inline.setText("Only a-z A-Z 0-9 _ - * ‘ “ # & () @ are allowed.");
-                inline.setVisibility(View.VISIBLE);
             } else if (password.length() < 8) {
                 inline.setText("Password must be longer than 8 characters.");
                 inline.setVisibility(View.VISIBLE);
-            } else {
+            } else if (!(PASSWORD_PATTERN.matcher(password).matches()) || !(PASSWORD_PATTERN.matcher(confirmPassword).matches())) {
+                inline.setText("Only a-z A-Z 0-9 _ - * ‘ “ # & () @ are allowed.");
+                inline.setVisibility(View.VISIBLE);
+            }  else {
+                inline.setVisibility(View.INVISIBLE);
                 String passwordHash = new String(Hex.encodeHex(DigestUtils.sha256(passwordField.getText().toString())));
                 Intent i = new Intent(this, basicInfoPageActivity.class);
                 i.putExtra("cachedEmail", email);

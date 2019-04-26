@@ -82,6 +82,7 @@ public class cartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(total!=0 && paymentList.size()!=0){ //|| unavailableService.size()!=4) {
                     //setUnlocked(confirmImgButton);
+
                     showPopUp();
                 }
             }
