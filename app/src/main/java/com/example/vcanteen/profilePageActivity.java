@@ -34,10 +34,15 @@ public class profilePageActivity extends AppCompatActivity {
         name.setText("" + customerSingleton.getFirstname() + " " + customerSingleton.getLastname());
         email.setText(""+customerSingleton.getEmail());
 
-        Glide.with(profilePageActivity.this)
-                .load(customerSingleton.getCustomerImage())
-                .apply(RequestOptions.circleCropTransform())//.apply(option)
-                .into(profilePictureImage);
+        String hvPhoto = "" + customerSingleton.getCustomerImage() + "";
+        if(hvPhoto.equals("null")){
+            profilePictureImage.setImageResource(R.drawable.round_profile_img);
+        }else {
+            Glide.with(profilePageActivity.this)
+                    .load(customerSingleton.getCustomerImage())
+                    .apply(RequestOptions.circleCropTransform())//.apply(option)
+                    .into(profilePictureImage);
+        }
 
         editProfileButton = findViewById(R.id.editProfileButton);
 
