@@ -73,6 +73,8 @@ public class password_login_page extends AppCompatActivity {
     private DatabaseReference dbUsers;
     private String firebaseToken;
 
+    private boolean isHidden = true;
+
     // vcanteen.herokuapp.com/
     private final String url = "https://vcanteen.herokuapp.com/";
 
@@ -117,13 +119,15 @@ public class password_login_page extends AppCompatActivity {
         showBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (showBtn.getText() == "SHOW") {
+                //show and hide password
+                if (isHidden){//showBtn.getText() == "SHOW") {
                     showBtn.setText("HIDE");
                     passwdField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    isHidden = false;
                 } else {
                     showBtn.setText("SHOW");
                     passwdField.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    isHidden = true;
                 }
             }
         });

@@ -60,6 +60,10 @@ public class changePasswordActivity extends AppCompatActivity {
     private String y;
     private String z;
 
+    private boolean isHidden = true;
+    private boolean isHidden2 = true;
+    private boolean isHidden3 = true;
+
     private final String url = "https://vcanteen.herokuapp.com/";
 
     @Override
@@ -89,14 +93,16 @@ public class changePasswordActivity extends AppCompatActivity {
         showHide1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (showHide1.getText() == "SHOW") {
+                if (isHidden){//showHide1.getText() == "SHOW") {
                     showHide1.setText("HIDE");
                     currentPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     currentPassword.setSelection(currentPassword.length());
+                    isHidden = false;
                 } else {
                     showHide1.setText("SHOW");
                     currentPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     currentPassword.setSelection(currentPassword.length());
+                    isHidden = true;
                 }
             }
         });
@@ -104,14 +110,16 @@ public class changePasswordActivity extends AppCompatActivity {
         showHide2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (showHide2.getText() == "SHOW") {
+                if (isHidden2){//showHide2.getText() == "SHOW") {
                     showHide2.setText("HIDE");
                     newPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     newPassword.setSelection(newPassword.length());
+                    isHidden2 = false;
                 } else {
                     showHide2.setText("SHOW");
                     newPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     newPassword.setSelection(newPassword.length());
+                    isHidden2 = true;
                 }
             }
         });
@@ -120,14 +128,16 @@ public class changePasswordActivity extends AppCompatActivity {
         showHide3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (showHide3.getText() == "SHOW") {
+                if (isHidden3){//showHide3.getText() == "SHOW") {
                     showHide3.setText("HIDE");
                     confirmNewPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     confirmNewPassword.setSelection(confirmNewPassword.length());
+                    isHidden3 = false;
                 } else {
                     showHide3.setText("SHOW");
                     confirmNewPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     confirmNewPassword.setSelection(confirmNewPassword.length());
+                    isHidden3=true;
                 }
             }
         });
