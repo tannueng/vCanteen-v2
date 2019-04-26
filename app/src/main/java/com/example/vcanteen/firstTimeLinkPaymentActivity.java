@@ -217,7 +217,7 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
                         } else {
                             if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                                 progressDialog.dismiss();
-                                //Toast.makeText(FourDigitPage.this, "FirebaseAuthUserCollisionException", Toast.LENGTH_LONG).show();
+                                Toast.makeText(firstTimeLinkPaymentActivity.this, "Email exists in Firebase", Toast.LENGTH_LONG).show();
                                 System.out.println("============== Firebase Collision because acctype is "+cachedAccountType+"================");
                                 if (cachedAccountType.equals("FACEBOOK")){
                                     sendToSignUp(firebaseToken,"FACEBOOK");
