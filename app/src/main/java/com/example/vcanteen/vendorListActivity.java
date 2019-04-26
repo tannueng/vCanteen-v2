@@ -121,7 +121,7 @@ public class vendorListActivity extends AppCompatActivity {
 
     private void getVendorList() {
         ProgressDialog pd = new ProgressDialog(vendorListActivity.this);
-        pd.setMessage("loading");
+        pd.setMessage("Loading. Please wait...");
         pd.show();
         String url = "https://vcanteen.herokuapp.com/";
 

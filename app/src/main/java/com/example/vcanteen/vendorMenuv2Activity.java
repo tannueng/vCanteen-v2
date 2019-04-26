@@ -242,7 +242,7 @@ public class vendorMenuv2Activity extends AppCompatActivity {
     }
     public void getMenuList() {
         ProgressDialog pd = new ProgressDialog(vendorMenuv2Activity.this);
-        pd.setMessage("loading");
+        pd.setMessage("Loading. PLease wait...");
         pd.show();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://vcanteen.herokuapp.com/")
