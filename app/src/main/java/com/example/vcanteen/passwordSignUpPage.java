@@ -26,6 +26,8 @@ public class passwordSignUpPage extends AppCompatActivity {
     Button showPasswordBtn, showConfirmedPasswordBtn;
     TextView inline;
     ImageButton nextBtn;
+    private boolean isHidden = true;
+    private boolean isHidden2 = true;
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^[a-zA-Z0-9@!#$%^&+-=](?=\\S+$).*$");  // Password Constraint
 
@@ -38,32 +40,40 @@ public class passwordSignUpPage extends AppCompatActivity {
 
         passwordField = findViewById(R.id.passwordBox);
         confirmPasswordField = findViewById(R.id.passwordConfirmBox);
-        showPasswordBtn = findViewById(R.id.show_pw_btn);
-        showConfirmedPasswordBtn = findViewById(R.id.show_pw_confirmation_btn);
+        showPasswordBtn = findViewById(R.id.show_pw_btn_signup);
+        showConfirmedPasswordBtn = findViewById(R.id.show_pw_confirmation_btn_signup);
         inline = findViewById(R.id.inline);
         nextBtn = findViewById(R.id.next_button);
 
-        showPasswordBtn.setOnClickListener(v -> {
-            System.out.println("show1 pressed");
+        showPasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //System.out.println("show1 pressed");
 
-            if (showPasswordBtn.getText() == "SHOW") {
-                showPasswordBtn.setText("HIDE");
-                passwordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-            } else {
-                showPasswordBtn.setText("SHOW");
-                passwordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                if (isHidden) {//showPasswordBtn.getText() == "SHOW") {
+                    showPasswordBtn.setText("HIDE");
+                    passwordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    isHidden = false;
+                } else {
+                    showPasswordBtn.setText("SHOW");
+                    passwordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    isHidden = true;
+                }
+                System.out.println("show1 pressed");
             }
         });
 
         showConfirmedPasswordBtn.setOnClickListener(v -> {
 
             System.out.println("show2 pressed");
-            if (showConfirmedPasswordBtn.getText() == "SHOW") {
+            if (isHidden2){//showConfirmedPasswordBtn.getText() == "SHOW") {
                 showConfirmedPasswordBtn.setText("HIDE");
                 confirmPasswordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                isHidden2 = false;
             } else {
                 showConfirmedPasswordBtn.setText("SHOW");
                 confirmPasswordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                isHidden2 = true;
             }
         });
 
