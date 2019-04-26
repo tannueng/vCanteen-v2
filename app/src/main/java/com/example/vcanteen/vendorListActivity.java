@@ -290,7 +290,7 @@ public class vendorListActivity extends AppCompatActivity {
         final ArrayList<food> availableList = new ArrayList<>();
         ArrayList<food> soldOutList = new ArrayList<>();
         for (availableList list : inputList) {
-            availableList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "A LA CARTE", list.getFoodCategory()));
+            availableList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "A LA CARTE", list.getCategory()));
         }
         final ArrayList<food> shownFoodList = new ArrayList<>(availableList);
         shownFoodList.addAll(soldOutList);

@@ -1,7 +1,9 @@
 package com.example.vcanteen;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -15,13 +17,17 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.InputStream;
@@ -40,6 +46,8 @@ import android.widget.Toast;
 
 import com.example.vcanteen.POJO.orderProgress;
 
+import org.w3c.dom.Text;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,20 +64,23 @@ public class vendorMenuv2Activity extends AppCompatActivity {
     int restaurantNumber;
     String restaurantUrl;
     Bitmap bitmap;
-
+    EditText searchBox;
+    Button search_btn;
+    TextView no_result1;
+    TextView no_result2;
+    ImageView search_icon;
 
     vendorAlacarteMenu menuVendor;
     vendorAlacarteMenu menuVendorAvailable;
     vendorAlacarteMenu menuVendorSoldOut;
 
     String searchKeyword;
+    String currentCategory = "ALL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor_menu_v2);
-
-        System.out.println("entered vendor menu");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -79,6 +90,15 @@ public class vendorMenuv2Activity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.menuPage);
+        layout.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev) {
+                hideKeyboard(view);
+                return false;
+            }
+        });
         orderStack = com.example.vcanteen.orderStack.getInstance();
 
         //orderStack = getIntent().getExtras().getParcelable("orderStack"); // delete if don't want from home activity
@@ -91,16 +111,12 @@ public class vendorMenuv2Activity extends AppCompatActivity {
         ImageView vendorPic = findViewById(R.id.vendorPic);
         bitmap = getBitmapFromURL(restaurantUrl);
         vendorPic.setImageBitmap(bitmap);
+        searchBox = findViewById(R.id.searchBox);
+        search_btn = findViewById(R.id.search_btn);
+        no_result1 = findViewById(R.id.no_result1);
+        no_result2 = findViewById(R.id.no_result2);
+        search_icon = findViewById(R.id.search_icon);
         getMenuList();
-        EditText searchBox = findViewById(R.id.searchBox);
-        Button search_btn = findViewById(R.id.search_btn);
-        search_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                searchKeyword = searchBox.getText().toString().trim();
-            }
-        });
 
         //menuVendor = new vendorAlacarteMenu(getIntent().getExtras().getParcelable("vendorMenu"));
         //menuVendorAvailable = getIntent().getExtras().getParcelable("vendorMenuAvailable");
@@ -139,13 +155,54 @@ public class vendorMenuv2Activity extends AppCompatActivity {
 //        if(hasCombination==false){
 //            tappable_customize.setVisibility(View.GONE);
 //        }
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                no_result1.setVisibility(View.INVISIBLE);
+                no_result2.setVisibility(View.INVISIBLE);
+                search_icon.setVisibility(View.INVISIBLE);
+                searchKeyword = searchBox.getText().toString().trim();
+                if(searchKeyword.isEmpty()) {
+                    return;
+                } else {
+                    resultList = new ArrayList<>();
+                    if(currentCategory.equals("ALL")) {
+                        for(int i = 0; i < availableList.size(); i++) {
+                            String currentMenu = availableList.get(i).getFoodName().toLowerCase();
+                            if((currentMenu.indexOf(searchKeyword) != -1)) {
+                                resultList.add(availableList.get(i));
+                            }
+                            hideKeyboard(v);
+                            setResultListAdapter(resultList);
+                        }
+                    } else {
+                        for(int i = 0; i < availableList.size(); i++) {
+                            String currentMenu = availableList.get(i).getFoodName().toLowerCase();
+                            String currentCategory2 = availableList.get(i).getFoodCategory();
+                            if((currentMenu.indexOf(searchKeyword) != -1) && (currentCategory.equals(currentCategory2))) {
+                                resultList.add(availableList.get(i));
+                            }
+                            hideKeyboard(v);
+                            setResultListAdapter(resultList);
+                        }
+                    }
+                    if(resultList.size() == 0) {
+                        hideKeyboard(v);
+                        no_result1.setVisibility(View.VISIBLE);
+                        no_result2.setVisibility(View.VISIBLE);
+                        search_icon.setVisibility(View.VISIBLE);
+                    }
 
+                }
+            }
+        });
     }
     protected ArrayList<food> shownFoodList;
     protected ArrayList<food> availableList;
     protected ArrayList<food> soldOutList;
     protected ListView menuList;
     protected ListAdapter testAdapter1;
+    protected ListAdapter resultAdapter;
 
     private void addAlacarteToList(ArrayList<availableList> inputAvailableList, ArrayList<soldOutList> inputSoldOutList) {
 
@@ -155,7 +212,7 @@ public class vendorMenuv2Activity extends AppCompatActivity {
         soldOutList = new ArrayList<>();   //need to get from BE
 
         for(availableList list : inputAvailableList) {
-            availableList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "A LA CARTE", list.getFoodCategory()));
+            availableList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "A LA CARTE", list.getCategory()));
         }
         for(soldOutList list : inputSoldOutList) {
             soldOutList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "A LA CARTE", null));
@@ -267,113 +324,110 @@ public class vendorMenuv2Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.sort_price:
-                /*for(resultList list : availableList) {
-                    availableList.add(new food(list.getFoodId(), list.getFoodName(), list.getFoodPrice(), "A LA CARTE"));
-                }*/
-                /*List<String> result = Arrays.asList(availableList.list.getFoodName());
-                ArrayList<food> cloneAvailable = availableList;
-                String name = cloneAvailable.get();
-                Collections.sort(result);
-                System.out.println(result);*/
-                //availableList.toString();
-                //resultList = Collections.sort(availableList);
-                for(int i = 0; i < availableList.size(); i++) {
-                    if (availableList.get(i).getFoodPrice() <= (availableList.get(i+1).getFoodPrice())) {
-                        //food temp = new food(availableList.get(i).getFoodId(), availableList.get(i).getFoodName(), availableList.get(i).getFoodPrice(), availableList.get(i).getFoodType(), availableList.get(i).getFoodCategory());
-                        System.out.println("sort price: i = " + availableList.get(i));
-                        resultList.add(availableList.get(i));
-                    } else {
-                        //food temp = new food(availableList.get(i).getFoodId(), availableList.get(i).getFoodName(), availableList.get(i).getFoodPrice(), availableList.get(i).getFoodType(), availableList.get(i).getFoodCategory());
-                        //System.out.println("i+1 = " + availableList.get(i));
-                        resultList.add(availableList.get(i+1));
+                currentCategory = "ALL";
+                resultList = availableList;
+                for(int i = 1; i <= resultList.size()-1; i++) {
+                    for(int j = 0; j <= resultList.size()-2; j++) {
+                        if(resultList.get(j).getFoodPrice() > resultList.get(j+1).getFoodPrice()) {
+                            food temp = resultList.get(j);
+                            resultList.set(j, resultList.get(j+1));
+                            resultList.set(j+1, temp);
+                        }
                     }
                 }
                 setResultListAdapter(resultList);
                 Toast.makeText(this, "Sorted by Price", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.sort_az:
-                for(int i = 0; i < availableList.size(); i++) {
-                    if (availableList.get(i).getFoodName().compareTo(availableList.get(i+1).getFoodName()) > 0) {
-                        food temp = availableList.get(i);
-                        System.out.println("sort name" + temp.toString());
-                        resultList.add(temp);
-                    } else {
-                        food temp = availableList.get(i+1);
-                        resultList.add(temp);
+                currentCategory = "ALL";
+                resultList = availableList;
+                for(int i = 1; i <= resultList.size()-1; i++) {
+                    for(int j = 0; j <= resultList.size()-2; j++) {
+                        if (resultList.get(j).getFoodName().compareTo(resultList.get(j+1).getFoodName()) > 0) {
+                            food temp = resultList.get(j);
+                            resultList.set(j, resultList.get(j+1));
+                            resultList.set(j+1, temp);
+                        }
                     }
                 }
                 setResultListAdapter(resultList);
                 Toast.makeText(this, "Sorted by Name", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.category_all:
+                currentCategory = "ALL";
+                no_result1.setVisibility(View.INVISIBLE);
+                no_result2.setVisibility(View.INVISIBLE);
+                search_icon.setVisibility(View.INVISIBLE);
                 testAdapter1 = new menuListAdapterv2(this,shownFoodList,availableList.size());
+                menuList = findViewById(R.id.menuList);
                 menuList.setAdapter(testAdapter1);
+
                 menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         if(position < availableList.size()) {
                             Intent passALaCarte = new Intent(vendorMenuv2Activity.this, normalOrderActivity.class);
                             passALaCarte.putExtra("chosenFood", shownFoodList.get(position));
+                            //passALaCarte.putExtra("orderStack", orderStack);
                             passALaCarte.putExtra("sendRestaurantName", restaurantNameString); //just add for minor fix in order confirmation
                             startActivity(passALaCarte);
                         }else{
-                            menuList.getChildAt(position).setEnabled(false);
+                            menuList.getChildAt(position).setClickable(false);
                         }
                     }
                 });
                 Toast.makeText(this, "All", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.category_meat:
+                currentCategory = "MEAT";
+                resultList = new ArrayList<>();
                 for(int i = 0; i < availableList.size(); i++) {
-                    if (availableList.get(i).getFoodCategory().equals("MEAT")) {
-                        food temp = availableList.get(i);
-                        //System.out.println(availableList.get(i));
-                        resultList.add(temp);
+                    if(String.valueOf(availableList.get(i).getFoodCategory()).equals("MEAT")) {
+                        resultList.add(availableList.get(i));
                     }
                 }
                 setResultListAdapter(resultList);
                 Toast.makeText(this, "Meat Category", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.category_noodles:
+                currentCategory = "NOODLES";
+                resultList = new ArrayList<>();
                 for(int i = 0; i < availableList.size(); i++) {
-                    if (availableList.get(i).getFoodCategory().equals("NOODLE")) {
-                        food temp = availableList.get(i);
-                        //System.out.println(availableList.get(i));
-                        resultList.add(temp);
+                    if(String.valueOf(availableList.get(i).getFoodCategory()).equals("NOODLES")) {
+                        resultList.add(availableList.get(i));
                     }
                 }
                 setResultListAdapter(resultList);
                 Toast.makeText(this, "Noodles Category", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.category_soup:
-                System.out.println("SOUP test " + availableList.get(1).getFoodCategory().equals("SOUP"));
+                currentCategory = "SOUP";
+                resultList = new ArrayList<>();
                 for(int i = 0; i < availableList.size(); i++) {
-                    if (availableList.get(i).getFoodCategory().equals("SOUP")) {
-                        food temp = availableList.get(i);
-                        //System.out.println(availableList.get(i));
-                        resultList.add(temp);
+                    if(String.valueOf(availableList.get(i).getFoodCategory()).equals("SOUP")) {
+                        resultList.add(availableList.get(i));
                     }
                 }
                 setResultListAdapter(resultList);
                 Toast.makeText(this, "Soup Category", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.category_spicy:
+                currentCategory = "SPICY";
+                resultList = new ArrayList<>();
                 for(int i = 0; i < availableList.size(); i++) {
-                    if (availableList.get(i).getFoodCategory().equals("SPICY")) {
-                        food temp = availableList.get(i);
-                        //System.out.println(availableList.get(i));
-                        resultList.add(temp);
+                    if(String.valueOf(availableList.get(i).getFoodCategory()).equals("SPICY")) {
+                        resultList.add(availableList.get(i));
                     }
                 }
                 setResultListAdapter(resultList);
                 Toast.makeText(this, "Spicy Category", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.category_vegan:
+                currentCategory = "VEGAN";
+                resultList = new ArrayList<>();
                 for(int i = 0; i < availableList.size(); i++) {
-                    if (availableList.get(i).getFoodCategory().equals("VEGAN")) {
-                        food temp = availableList.get(i);
-                        //System.out.println(availableList.get(i));
-                        resultList.add(temp);
+                    if(String.valueOf(availableList.get(i).getFoodCategory()).equals("VEGAN")) {
+                        resultList.add(availableList.get(i));
                     }
                 }
                 setResultListAdapter(resultList);
@@ -388,8 +442,11 @@ public class vendorMenuv2Activity extends AppCompatActivity {
         getMenuList();
     }
     public void setResultListAdapter(ArrayList<food> resultList) {
-        testAdapter1 = new menuListAdapterv2(this,resultList,resultList.size());
-        menuList.setAdapter(testAdapter1);
+        no_result1.setVisibility(View.INVISIBLE);
+        no_result2.setVisibility(View.INVISIBLE);
+        search_icon.setVisibility(View.INVISIBLE);
+        resultAdapter = new menuListAdapterv2(this,resultList,resultList.size());
+        menuList.setAdapter(resultAdapter);
         menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -403,5 +460,9 @@ public class vendorMenuv2Activity extends AppCompatActivity {
                 }
             }
         });
+    }
+    protected void hideKeyboard(View view)    {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

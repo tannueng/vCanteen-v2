@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menuPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vendorMenuv2Activity"
     android:focusable="true"
-    android:focusableInTouchMode="true" >
+    android:focusableInTouchMode="true"
+    tools:context=".vendorMenuv2Activity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -17,7 +18,7 @@
 
         app:title="VENDOR MENU"
         app:titleMarginStart="25dp"
-        app:titleTextAppearance="@style/Toolbar.TitleText"/>
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
 
     <ImageView
         android:id="@+id/search_icon"
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/search_icon"
         android:layout_centerHorizontal="true"
-        android:text="TextView"
+        android:text="No Result Found"
         android:textSize="18sp"
         android:textStyle="bold"
         android:visibility="invisible"
@@ -46,10 +47,9 @@
         android:layout_below="@id/no_result1"
         android:layout_centerInParent="true"
         android:layout_marginTop="3dp"
+        android:text="We can’t find any items matching with your search."
         android:textAlignment="center"
-        android:visibility="invisible"
-        tools:text="We can’t find any items
-matching with your search." />
+        android:visibility="invisible" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -85,7 +85,6 @@ matching with your search." />
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
 
     </android.support.constraint.ConstraintLayout>
@@ -180,9 +179,9 @@ matching with your search." />
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/constraintLayout"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_below="@+id/constraintLayout">
+        android:layout_marginBottom="5dp">
 
         <EditText
             android:id="@+id/searchBox"
@@ -193,12 +192,11 @@ matching with your search." />
             android:layout_marginEnd="100dp"
             android:backgroundTint="@android:color/darker_gray"
             android:fontFamily="@font/sfprotext_semibold"
+            android:hint="Search for menu"
             android:inputType="textNoSuggestions"
             android:textColor="#333333"
             android:textSize="12sp"
-            android:hint="Search for menu"
-            tools:ignore="MissingConstraints"
-            />
+            tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/search_btn"

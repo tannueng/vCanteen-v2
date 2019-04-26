@@ -27,7 +27,7 @@ public class food implements Parcelable {
                 ", \"foodName\": "+"\""+foodName+"\""+
                 ", \"foodPrice\": "+"\""+foodPrice+"\""+
                 ", \"foodType\": "+"\""+foodType+"\""+
-                ", \"foodCategory\": "+"\""+foodCategory+"\""+
+                ", \"Category\": "+"\""+foodCategory+"\""+
                 "}";
     }
 

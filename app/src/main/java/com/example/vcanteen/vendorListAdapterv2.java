@@ -33,7 +33,9 @@ public class vendorListAdapterv2 extends ArrayAdapter<vendorList> {
         if(vendorStatus.equals("CLOSED")){
             convertView = LayoutInflater.from(context).inflate(R.layout.vendor_listview_disabled_v2, parent, false);
             TextView vendorName = (TextView) convertView.findViewById(R.id.vendorName);
+            ImageView vendorImage = convertView.findViewById(R.id.vendorImage);
             vendorName.setText(item.getRestaurantName());
+            Glide.with(context).load(item.getVendorImage()).apply(option).into(vendorImage);
             convertView.setEnabled(false);
         } else {
             convertView = LayoutInflater.from(context).inflate(R.layout.vendor_listview_v2, parent, false);
@@ -41,8 +43,8 @@ public class vendorListAdapterv2 extends ArrayAdapter<vendorList> {
             ImageView vendorImage = convertView.findViewById(R.id.vendorImage);
             TextView estimate_time = (TextView) convertView.findViewById(R.id.estimate_time);
             vendorName.setText(item.getRestaurantName());
-            estimate_time.setText(item.getQueuingTime() + " mins");
             Glide.with(context).load(item.getVendorImage()).apply(option).into(vendorImage);
+            estimate_time.setText(item.getQueuingTime() + " mins");
             vendorImage.setClipToOutline(true);
         }
         return convertView;

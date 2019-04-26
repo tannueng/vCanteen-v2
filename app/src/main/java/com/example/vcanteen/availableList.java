@@ -9,7 +9,7 @@ public class availableList {
     int foodId;
     String foodName;
     int foodPrice;
-    String foodCategory;
+    String category;
 
     public int getFoodId() {
         return foodId;
@@ -35,12 +35,12 @@ public class availableList {
         this.foodPrice = foodPrice;
     }
 
-    public String getFoodCategory() {
-        return foodCategory;
+    public String getCategory() {
+        return category;
     }
 
-    public void setFoodCategory(String foodCategory) {
-        this.foodCategory = foodCategory;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
 
