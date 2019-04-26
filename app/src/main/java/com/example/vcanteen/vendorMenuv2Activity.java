@@ -69,6 +69,7 @@ public class vendorMenuv2Activity extends AppCompatActivity {
     TextView no_result1;
     TextView no_result2;
     ImageView search_icon;
+    android.support.constraint.ConstraintLayout tappable_customize;
 
     vendorAlacarteMenu menuVendor;
     vendorAlacarteMenu menuVendorAvailable;
@@ -143,7 +144,7 @@ public class vendorMenuv2Activity extends AppCompatActivity {
         restaurantName.setText(""+restaurantNameString);// delete if don't want from home activity   //just add for minor fix in order confirmation
 
         // to open cutomize order activity
-        android.support.constraint.ConstraintLayout tappable_customize = (android.support.constraint.ConstraintLayout)findViewById(R.id.tappable_customize);
+        tappable_customize = (android.support.constraint.ConstraintLayout)findViewById(R.id.tappable_customize);
         tappable_customize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -261,6 +262,9 @@ public class vendorMenuv2Activity extends AppCompatActivity {
                 System.out.println("Received Restaurant URL: "+menu.getVendorInfo().vendorImage);
                 minCombinationPrice = findViewById(R.id.minCombinationPrice);
                 minCombinationPrice.setText("Starting from "+ menu.getMinCombinationPrice() +" ฿");
+                if(menu.getMinCombinationPrice()==0){
+                    tappable_customize.setVisibility(View.GONE);
+                }
                 addAlacarteToList(menu.availableList, menu.soldOutList);
                 pd.dismiss();
             }
