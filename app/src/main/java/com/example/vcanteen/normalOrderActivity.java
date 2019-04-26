@@ -2,6 +2,7 @@ package com.example.vcanteen;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -56,6 +57,8 @@ public class normalOrderActivity extends AppCompatActivity {
     SparseBooleanArray mCheckStates;
     ArrayList<food> shownFoodList;
 
+    Rect delegateArea = new Rect();
+
     String restaurantNameString; //just add for minor fix in order confirmation
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -88,6 +91,12 @@ public class normalOrderActivity extends AppCompatActivity {
         orderQuantity = (TextView) findViewById(R.id.orderQuantity);
         TextView subtractSign = findViewById(R.id.subtractSign);
         TextView addSign = findViewById(R.id.addSign);
+
+        subtractSign.getHitRect(delegateArea);
+        delegateArea.bottom += 4;
+        delegateArea.left += 3;
+        delegateArea.right += 3;
+        delegateArea.top += 4;
 
         callRetrofitNormalOrder();
 
