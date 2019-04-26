@@ -82,7 +82,7 @@ public class cartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(total!=0 && paymentList.size()!=0 && (thereIsSelectedPaymentMethod==false)){
-                    Toast.makeText(cartActivity.this, "Please select payment method.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(cartActivity.this, "Please select payment method.",Toast.LENGTH_SHORT).show();
                 }
                 if(total!=0 && paymentList.size()!=0 && thereIsSelectedPaymentMethod){ //|| unavailableService.size()!=4) {
                     //setUnlocked(confirmImgButton);

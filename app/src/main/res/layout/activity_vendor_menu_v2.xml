@@ -51,6 +51,19 @@
         android:textAlignment="center"
         android:visibility="invisible" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:clickable="true"
+        android:onClick="openCartActivity"
+        android:src="@drawable/ic_cart"
+        app:backgroundTint="#FCFCFC" />
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -89,92 +102,6 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@+id/searchBar"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="vertical">
-
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/tappable_customize"
-            android:layout_width="match_parent"
-            android:layout_height="66dp">
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/sfprotext_semibold"
-                android:text="Customize Your Menu"
-
-                android:textColor="#333333"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/minCombinationPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:fontFamily="@font/sfprotext_regular"
-                android:text="Starting from"
-
-                android:textColor="@color/colorAccent"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_add_sign"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </android.support.constraint.ConstraintLayout>
-
-        <View
-            android:id="@+id/divider3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-
-        <ListView
-            android:id="@+id/menuList"
-            android:layout_width="match_parent"
-            android:layout_height="500dp" />
-
-
-    </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
-        android:clickable="true"
-        android:onClick="openCartActivity"
-        android:src="@drawable/ic_cart"
-        app:backgroundTint="#FCFCFC" />
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
@@ -191,11 +118,11 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="100dp"
             android:backgroundTint="@android:color/darker_gray"
-            android:fontFamily="@font/sfprotext_semibold"
+            android:fontFamily="@font/sfprotext_medium"
             android:hint="Search for menu"
             android:inputType="textNoSuggestions"
             android:textColor="#333333"
-            android:textSize="12sp"
+            android:textSize="14sp"
             tools:ignore="MissingConstraints" />
 
         <Button
@@ -216,5 +143,96 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchBar"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical">
+
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/listDivider" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/tappable_customize"
+                android:layout_width="match_parent"
+                android:layout_height="66dp">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:gravity="center_vertical"
+                    android:text="Customize Your Menu"
+                    android:textColor="#333333"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_conversion_absoluteHeight="19dp"
+                    tools:layout_conversion_absoluteWidth="151dp" />
+
+                <TextView
+                    android:id="@+id/minCombinationPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:text="Starting from"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_conversion_absoluteHeight="17dp"
+                    tools:layout_conversion_absoluteWidth="75dp" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_add_sign"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_conversion_absoluteHeight="24dp"
+                    tools:layout_conversion_absoluteWidth="24dp" />
+            </android.support.constraint.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/listDivider" />
+
+            <ListView
+                android:id="@+id/menuList"
+                android:layout_width="wrap_content"
+                android:layout_height="578dp"
+                android:fillViewport="true" />
+
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

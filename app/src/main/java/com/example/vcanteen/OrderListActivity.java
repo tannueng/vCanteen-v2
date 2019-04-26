@@ -2,6 +2,7 @@ package com.example.vcanteen;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -59,6 +60,11 @@ public class OrderListActivity extends AppCompatActivity {
         adapter.addFragment(new progressTabFragment(), "IN PROGRESS");
         adapter.addFragment(new historyTabFragment(), "HISTORY");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(OrderListActivity.this, homev2Activity.class));
     }
 
 

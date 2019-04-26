@@ -176,7 +176,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
     }
 
     public static void getSlotInfo(final Context context, final int orderId, final String vendorName, final String orderName,@Nullable String orderNameExtra) {
-        progressDialog = new ProgressDialog(context);
+//        progressDialog = new ProgressDialog(context);
         progressDialog = ProgressDialog.show(context, "","Loading. Please wait...", true);
 
         Retrofit retrofit2 = new Retrofit.Builder()
