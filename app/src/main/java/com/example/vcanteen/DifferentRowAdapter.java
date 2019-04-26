@@ -328,13 +328,13 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 public void onClick(View v) {
 
 
-                    progressDialog = ProgressDialog.show(context
-                            , "",
-                            "Loading. Please wait...", true);
+//                    progressDialog = ProgressDialog.show(context
+//                            , "",
+//                            "Loading. Please wait...", true);
 
                     System.out.println("onClick DONE Detected. "+String.valueOf(orderId.getText()));
                     int order = Integer.parseInt(String.valueOf(orderId.getText()).substring(10));
-                    progressTabFragment.getSlotInfo(itemView.getContext(),order, vendorName.getText().toString(), orderName.getText().toString(), orderNameExtra.getText().toString(),progressDialog);
+                    progressTabFragment.getSlotInfo(itemView.getContext(),order, vendorName.getText().toString(), orderName.getText().toString(), orderNameExtra.getText().toString());
 
                 }
             });
