@@ -1,5 +1,7 @@
 package com.example.vcanteen;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,8 @@ import java.util.List;
 
 public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<orderListData> mList;
+    ProgressDialog progressDialog;
+    Context context;
     public DifferentRowAdapter(List<orderListData> list) {
         this.mList = list;
     }
@@ -233,7 +237,7 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         }
     }
-    public static class DoneViewHolder extends RecyclerView.ViewHolder {
+    public class DoneViewHolder extends RecyclerView.ViewHolder {
         private CardView cv;
         public TextView orderId;
         private TextView orderPrice;
@@ -324,9 +328,13 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 public void onClick(View v) {
 
 
+                    progressDialog = ProgressDialog.show(context
+                            , "",
+                            "Loading. Please wait...", true);
+
                     System.out.println("onClick DONE Detected. "+String.valueOf(orderId.getText()));
                     int order = Integer.parseInt(String.valueOf(orderId.getText()).substring(10));
-                    progressTabFragment.getSlotInfo(itemView.getContext(),order, vendorName.getText().toString(), orderName.getText().toString(), orderNameExtra.getText().toString());
+                    progressTabFragment.getSlotInfo(itemView.getContext(),order, vendorName.getText().toString(), orderName.getText().toString(), orderNameExtra.getText().toString(),progressDialog);
 
                 }
             });

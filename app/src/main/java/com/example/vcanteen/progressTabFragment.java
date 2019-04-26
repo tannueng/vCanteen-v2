@@ -175,7 +175,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
     }
 
-    public static void getSlotInfo(final Context context, final int orderId, final String vendorName, final String orderName,@Nullable String orderNameExtra ) {
+    public static void getSlotInfo(final Context context, final int orderId, final String vendorName, final String orderName,@Nullable String orderNameExtra ,ProgressDialog progressDialog) {
         Retrofit retrofit2 = new Retrofit.Builder()
                 .baseUrl("https://vcanteen.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -187,12 +187,17 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
             @Override
             public void onResponse(Call<pickupSlot> call, Response<pickupSlot> response) {
                 if(!response.isSuccessful()) {
-                    Toast.makeText(context, "CODE: "+response.code(),
-                            Toast.LENGTH_LONG).show();
+                    if(response.code()==404) {
+                        Toast.makeText(context, "The order "+orderId+" has expired. ",
+                                Toast.LENGTH_LONG).show();
+                    }
+
                     System.out.println("PROG onResponse getslot unsuccessful");
                     return;
                 }
 
+
+                progressDialog.dismiss();
 
                 pickupSlot slot = response.body();
                 System.out.println("SLOT A = "+response.body());
@@ -332,6 +337,10 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
             @Override
             public void afterTextChanged(Editable s) {
                 counter.setText(s.toString().length()+"/300");
+                if(reviewBox.getText().toString().isEmpty()) {
+                    inline.setVisibility(View.INVISIBLE);
+                    return;
+                }
                 if(!TEXT_PATTERN.matcher(reviewBox.getText().toString()).matches()) {
                     System.out.println("print:"+reviewBox.getText().toString());
                     inline.setText("Must be letter, number or these character . , _ - * ‘ \" # & () $ @ ! ?");
