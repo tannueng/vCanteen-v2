@@ -331,7 +331,7 @@ public class emailActivity extends AppCompatActivity {
         System.out.println("went in fblogin");
 //        LoginManager.getInstance().logOut();
         // Set permissions
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
+//        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
 
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -358,7 +358,9 @@ public class emailActivity extends AppCompatActivity {
                                             first_name = json.optString("first_name");
                                             last_name = json.optString("last_name");
 
-                                            if(!email.trim().toLowerCase().contains("@gmail.com")){
+                                            System.out.println("email:"+email);
+
+                                            if(!email.isEmpty()&&!email.trim().toLowerCase().contains("@gmail.com")){
                                                 inline.setText("Must be Gmail account only");
                                                 inline.setVisibility(View.VISIBLE);
                                                 return;
@@ -367,6 +369,7 @@ public class emailActivity extends AppCompatActivity {
                                             profile_url = null;
                                             try {
                                                 profile_url = (String) json.getJSONObject("picture").getJSONObject("data").get("url");
+                                                System.out.println("rcv email:"+ profile_url);
                                             } catch (JSONException e) {
                                                 System.out.println("error with fb profile pic");
                                                 e.printStackTrace();
@@ -377,6 +380,11 @@ public class emailActivity extends AppCompatActivity {
                                             progressDialog = ProgressDialog.show(emailActivity.this, "",
                                                     "Loading. Please wait...", true);
 
+                                            if(email.isEmpty()) {
+                                                System.out.println("email from json is empty");
+                                                progressDialog.dismiss();
+                                                return;
+                                            }
                                             mAuth.createUserWithEmailAndPassword(email, passwd)
                                                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                         @Override
@@ -519,6 +527,8 @@ public class emailActivity extends AppCompatActivity {
                     i.putExtra("cachedLastName", last_name);
                     i.putExtra("cachedAccountType","FACEBOOK");
                     i.putExtra("cachedFirebaseToken",firebaseToken);
+                    i.putExtra("cachedCustomerImage", profile_url );
+                    System.out.println("intent profile url"+profile_url);
                     startActivity(i);
 
                 /*} else if(response.code()==409) {

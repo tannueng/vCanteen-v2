@@ -22,8 +22,8 @@
 
     <ImageView
         android:id="@+id/search_icon"
-        android:layout_width="180dp"
-        android:layout_height="217dp"
+        android:layout_width="105dp"
+        android:layout_height="115dp"
         android:layout_centerInParent="true"
         android:visibility="invisible"
         app:srcCompat="@drawable/ic_search" />
@@ -34,7 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/search_icon"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/sfprotext_bold"
         android:text="No Result Found"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
         android:visibility="invisible"
@@ -47,6 +49,7 @@
         android:layout_below="@id/no_result1"
         android:layout_centerInParent="true"
         android:layout_marginTop="3dp"
+        android:fontFamily="@font/sfprotext_regular"
         android:text="We can’t find any items matching with your search."
         android:textAlignment="center"
         android:visibility="invisible" />
@@ -158,7 +161,9 @@
         <ListView
             android:id="@+id/menuList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/linearLayout"
+            android:layout_alignBottom="@+id/linearLayout" />
 
 
     </LinearLayout>

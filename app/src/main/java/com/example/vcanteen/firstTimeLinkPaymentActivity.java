@@ -66,6 +66,7 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
         cachedPassword = getIntent().getStringExtra("cachedPassword");
         cachedFirstName = getIntent().getStringExtra("cachedFirstName");
         cachedLastName = getIntent().getStringExtra("cachedLastName");
+        cachedCustomerImage = getIntent().getStringExtra("cachedCustomerImage");
         cachedAccountType = getIntent().getStringExtra("cachedAccountType");
         firebaseToken = getIntent().getStringExtra("cachedFirebaseToken");
 
@@ -217,7 +218,7 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
                         } else {
                             if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                                 progressDialog.dismiss();
-                                Toast.makeText(firstTimeLinkPaymentActivity.this, "Email exists in Firebase", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(firstTimeLinkPaymentActivity.this, "Email exists in Firebase", Toast.LENGTH_LONG).show();
                                 System.out.println("============== Firebase Collision because acctype is "+cachedAccountType+"================");
                                 if (cachedAccountType.equals("FACEBOOK")){
                                     sendToSignUp(firebaseToken,"FACEBOOK");

@@ -44,6 +44,7 @@ public class basicInfoPageActivity extends AppCompatActivity {
         cachedAccountType = getIntent().getStringExtra("cachedAccountType");
         cachedFirebaseToken = getIntent().getStringExtra("cachedFirebaseToken");
 
+        System.out.println("into basic info url check : "+cachedCustomerImage);
         firstNameField.setText(cachedFirstName);
         lastNameField.setText(cachedLastName);
 
