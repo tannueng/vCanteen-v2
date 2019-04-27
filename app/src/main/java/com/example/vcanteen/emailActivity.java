@@ -413,12 +413,13 @@ public class emailActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancel() {
-
+                        System.out.println("fb cancel");
                     }
 
                     @Override
                     public void onError(FacebookException error) {
-
+                        System.out.println("fb error");
+                        System.out.println("============== FacebookException: " + error.getMessage() +" ==========");
                     }
                 });
 
