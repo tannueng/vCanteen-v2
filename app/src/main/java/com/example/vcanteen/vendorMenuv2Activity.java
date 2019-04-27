@@ -198,6 +198,12 @@ public class vendorMenuv2Activity extends AppCompatActivity {
                 }
             }
         });
+        findViewById(R.id.menuPage).setOnTouchListener((v, event) -> {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            return true;
+        });
+
     }
     protected ArrayList<food> shownFoodList;
     protected ArrayList<food> availableList;

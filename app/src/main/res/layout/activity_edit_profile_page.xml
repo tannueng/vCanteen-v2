@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".editProfilePageActivity">
@@ -16,7 +17,7 @@
 
         app:title="EDIT PROFILE"
         app:titleMarginStart="25dp"
-        app:titleTextAppearance="@style/Toolbar.TitleText"/>
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
 
     <RelativeLayout
         android:id="@+id/profilePictureImage"
@@ -26,135 +27,135 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp">
 
-    <ImageView
-        android:id="@+id/profilePicture"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/round_profile_img"
-        android:layout_centerHorizontal="true"
-        />
+        <ImageView
+            android:id="@+id/profilePicture"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/round_profile_img" />
         <!--android:background="@drawable/round_vendor_img"-->
 
-    <Button
-        android:id="@+id/editProfileImageButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:drawableTop="@drawable/ic_edit"
-        android:paddingTop="10dp"
-        android:background="@drawable/round_white_rect"
-        android:elevation="3dp"/>
+        <Button
+            android:id="@+id/editProfileImageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/round_white_rect"
+            android:drawableTop="@drawable/ic_edit"
+            android:elevation="3dp"
+            android:paddingTop="10dp" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/primaryPink"
-        android:layout_marginTop="25dp"
-        android:text="First Name"
-        android:fontFamily="@font/sfprotext_semibold"
-        android:textSize="16sp"
         android:layout_below="@id/profilePictureImage"
-        android:layout_marginLeft="40dp"/>
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="First Name"
+        android:textColor="@color/primaryPink"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/lastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/primaryPink"
-        android:layout_marginTop="20dp"
-        android:text="Last Name"
-        android:fontFamily="@font/sfprotext_semibold"
-        android:textSize="16sp"
         android:layout_below="@id/firstName"
         android:layout_alignRight="@id/firstName"
-        android:layout_marginLeft="40dp"/>
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="Last Name"
+        android:textColor="@color/primaryPink"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/primaryPink"
-        android:layout_marginTop="20dp"
-        android:text="Email"
-        android:fontFamily="@font/sfprotext_semibold"
-        android:textSize="16sp"
         android:layout_below="@id/lastName"
         android:layout_alignRight="@id/firstName"
-        android:layout_marginLeft="40dp"/>
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="Email"
+        android:textColor="@color/primaryPink"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/firstNameBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="John"
-        android:fontFamily="@font/sfprotext_semibold"
-        android:textSize="14sp"
-        android:textColor="#333333"
         android:layout_below="@id/profilePictureImage"
         android:layout_alignBaseline="@id/firstName"
-        android:layout_toRightOf="@id/firstName"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="40dp"/>
+        android:layout_marginRight="40dp"
+        android:layout_toRightOf="@id/firstName"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="John"
+        android:textColor="#333333"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/lastNameBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Doe"
-        android:fontFamily="@font/sfprotext_semibold"
-        android:textSize="14sp"
-        android:textColor="#333333"
         android:layout_alignBaseline="@id/lastName"
-        android:layout_toRightOf="@id/lastName"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="40dp"/>
+        android:layout_marginRight="40dp"
+        android:layout_toRightOf="@id/lastName"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:text="Doe"
+        android:textColor="#333333"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/emailBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/email"
-        android:layout_toRightOf="@id/email"
         android:layout_marginLeft="10dp"
-        android:text="isezinfo@gmail.com"
+        android:layout_marginRight="40dp"
+        android:layout_toRightOf="@id/email"
         android:fontFamily="@font/sfprotext_semibold"
-        android:textSize="14sp"
+        android:text="isezinfo@gmail.com"
         android:textColor="#333333"
-        android:layout_marginRight="40dp"/>
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/firstNameError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/firstNameBox"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="-8dp"
+        android:layout_toRightOf="@id/firstName"
+        android:fontFamily="@font/sfprotext_semibold"
         android:text="firstNameError"
         android:textColor="#FF4141"
-        android:fontFamily="@font/sfprotext_semibold"
         android:textSize="8sp"
-        android:layout_toRightOf="@id/firstName"
-        android:layout_marginTop="-8dp"
-        android:layout_marginLeft="15dp"
 
         android:visibility="invisible"
 
         />
+
     <TextView
         android:id="@+id/lastNameError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/lastNameBox"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="-8dp"
+        android:layout_toRightOf="@id/lastName"
+        android:fontFamily="@font/sfprotext_semibold"
         android:text="lastNameError"
         android:textColor="#FF4141"
-        android:fontFamily="@font/sfprotext_semibold"
         android:textSize="8sp"
-        android:layout_toRightOf="@id/lastName"
-        android:layout_marginTop="-8dp"
-        android:layout_marginLeft="15dp"
 
         android:visibility="invisible"
 
@@ -165,13 +166,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/emailBox"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="-8dp"
+        android:layout_toRightOf="@id/email"
+        android:fontFamily="@font/sfprotext_semibold"
         android:text="emailError"
         android:textColor="#FF4141"
-        android:fontFamily="@font/sfprotext_semibold"
         android:textSize="8sp"
-        android:layout_toRightOf="@id/email"
-        android:layout_marginTop="-8dp"
-        android:layout_marginLeft="15dp"
 
         android:visibility="invisible"
 
@@ -181,16 +182,16 @@
         android:id="@+id/saveAndExitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SAVE &amp; EXIT"
-        android:background="@drawable/button_bg_rounded_corner_pink"
-        android:fontFamily="@font/sfprotext_semibold"
-        android:textSize="18sp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:textColor="#ffffff"
         android:layout_below="@id/emailError"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:elevation="2dp"/>
+        android:background="@drawable/button_bg_rounded_corner_pink"
+        android:elevation="2dp"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="SAVE &amp; EXIT"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
 
 </RelativeLayout>

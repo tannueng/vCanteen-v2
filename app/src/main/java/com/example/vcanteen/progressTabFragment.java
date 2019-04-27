@@ -178,9 +178,9 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
     }
 
-    public static void getSlotInfo(final Context context, final int orderId, final String vendorName, final String orderName,@Nullable String orderNameExtra) {
+    public static void getSlotInfo(final Context context, final int orderId, final String vendorName, final String orderName,@Nullable String orderNameExtra, ProgressDialog progressDialog) {
 //        progressDialog = new ProgressDialog(context);
-        progressDialog = ProgressDialog.show(context, "","Loading. Please wait...", true);
+//        progressDialog = ProgressDialog.show(context, "","Loading. Please wait...", true);
 
         Retrofit retrofit2 = new Retrofit.Builder()
                 .baseUrl("https://vcanteen.herokuapp.com/")
@@ -304,7 +304,9 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                 System.out.println("start reloading page");
                 loadRecyclerViewData(context);
                 historyTabFragment.loadRecyclerViewData(context);
-
+                DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
                 //Show review dialog
 //                showReviewDialog(context, orderId);
             }
@@ -386,7 +388,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
         (dialog.findViewById(R.id.sendButton))
                 .setOnClickListener(v -> {
                     //check constraint
-                    progressDialog = new ProgressDialog(context);
+//                    progressDialog = new ProgressDialog(context);
                     progressDialog = ProgressDialog.show(context, "","Loading. Please wait...", true);
 
                     Retrofit retrofit = new Retrofit.Builder()
@@ -406,9 +408,14 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
                             }
                             System.out.println("-------start");
-                            Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show();
+                            historyTabFragment.loadRecyclerViewData(context);
                             dialog.dismiss();
                             progressDialog.dismiss();
+                            DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
+                            recyclerView.setAdapter(adapter);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+                            Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show();
                             System.out.println("-------end");
 
                         }
@@ -420,9 +427,9 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                         }
                     });
 
-                    Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show();
-                    progressDialog.dismiss();
-                    dialog.dismiss();
+//                    Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show();
+//                    progressDialog.dismiss();
+//                    dialog.dismiss();
                     /*dialog.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
                         @Override
@@ -430,9 +437,9 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
                         }
                     })*/
-                    DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//                    DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
+//                    recyclerView.setAdapter(adapter);
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
                 });
 
         dialog.findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {

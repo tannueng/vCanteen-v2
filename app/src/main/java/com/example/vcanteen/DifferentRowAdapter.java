@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<orderListData> mList;
-    ProgressDialog progressDialog;
+    static ProgressDialog progressDialog;
     Context context;
     public DifferentRowAdapter(List<orderListData> list) {
         this.mList = list;
@@ -44,28 +44,36 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     ((CookingViewHolder) holder).orderNameExtra.setText(list.getOrderNameExtra());
                     ((CookingViewHolder) holder).vendorName.setText(list.getVendorName());
                     ((CookingViewHolder) holder).orderId.setText("Order ID: "+list.getOrderId());
-                    ((CookingViewHolder) holder).orderPrice.setText(list.getOrderPrice()+"฿");
-                    ((CookingViewHolder) holder).orderPrice.setText(list.getOrderPrice()+"฿");
+                    ((CookingViewHolder) holder).orderPrice.setText(list.getOrderPrice()+" ฿");
+                    ((CookingViewHolder) holder).orderPrice.setText(list.getOrderPrice()+" ฿");
                     ((CookingViewHolder) holder).orderDate.setText(list.getOrderDate());
                     ((CookingViewHolder) holder).orderStatus.setText(list.getOrderStatus());
                     ((CookingViewHolder) holder).orderEstimatedTime.setVisibility(View.INVISIBLE);
                     ((CookingViewHolder) holder).orderEstimatedTimeClock.setVisibility(View.INVISIBLE);
+                    ((CookingViewHolder) holder).cv.setFocusable(true);
 
                     if (list.getOrderStatus().equals("COLLECTED")) {
                         ((CookingViewHolder) holder).cv.setForeground(null);
                         ((CookingViewHolder) holder).orderStatus.setTextColor(Color.parseColor("#4DC031")); //green
                         ((CookingViewHolder) holder).orderStatus.setText(list.orderStatus);
                         ((CookingViewHolder) holder).orderEstimatedTime.setText(Boolean.toString(list.isHasRated()));
+                        if(list.isHasRated()) {
+                            ((CookingViewHolder) holder).cv.setFocusable(false);
+                        } else {
+                            ((CookingViewHolder) holder).cv.setFocusable(true);
+                        }
                     }
                     if (list.getOrderStatus().equals("TIMEOUT")) {
                         ((CookingViewHolder) holder).cv.setForeground(null);
                         ((CookingViewHolder) holder).orderStatus.setTextColor(Color.parseColor("#FF0606"));// red
                         ((CookingViewHolder) holder).orderStatus.setText(list.orderStatus);
+                        ((CookingViewHolder) holder).cv.setFocusable(true);
                     }
                     if (list.getOrderStatus().equals("CANCELLED")) {
                         ((CookingViewHolder) holder).cv.setForeground(null);
                         ((CookingViewHolder) holder).orderStatus.setTextColor(Color.parseColor("#FF0606"));// red
                         ((CookingViewHolder) holder).orderStatus.setText(list.orderStatus);
+                        ((CookingViewHolder) holder).cv.setFocusable(true);
                     }
                     if (list.getOrderStatus().equals("COOKING")) {
                         ((CookingViewHolder) holder).cv.setForeground(null);
@@ -73,6 +81,7 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         ((CookingViewHolder) holder).orderEstimatedTime.setText(Integer.toString(list.getOrderEstimatedTime())+" mins");
                         ((CookingViewHolder) holder).orderEstimatedTime.setVisibility(View.VISIBLE);
                         ((CookingViewHolder) holder).orderEstimatedTimeClock.setVisibility(View.VISIBLE);
+                        ((CookingViewHolder) holder).cv.setFocusable(false);
                     }
                     break;
 
@@ -81,13 +90,14 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     ((DoneViewHolder) holder).orderName.setText(list.getOrderName());
                     ((DoneViewHolder) holder).orderNameExtra.setText(list.getOrderNameExtra());
                     ((DoneViewHolder) holder).orderId.setText("Order ID: "+list.getOrderId());
-                    ((DoneViewHolder) holder).orderPrice.setText(list.getOrderPrice()+"฿");
+                    ((DoneViewHolder) holder).orderPrice.setText(list.getOrderPrice()+" ฿");
                     ((DoneViewHolder) holder).vendorName.setText(list.getVendorName());
                     ((DoneViewHolder) holder).orderDate.setText(list.getOrderDate());
                     if (list.getOrderStatus().equals("DONE")) {
 
                         ((DoneViewHolder) holder).orderStatus.setTextColor(Color.parseColor("#FF0606")); // red
                         ((DoneViewHolder) holder).orderStatus.setText("WAITING FOR PICK UP");
+                        ((DoneViewHolder) holder).cv.setFocusable(true);
                     }
                     break;
             }
@@ -227,7 +237,6 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 if(orderStatus.getText().equals("COLLECTED")&&!Boolean.valueOf(orderEstimatedTime.getText().toString())) {//and hasRated = false
                     System.out.println(orderId.getText().toString()+", hasRated: "+Boolean.valueOf(orderEstimatedTime.getText().toString()));
-
                     progressTabFragment.showReviewDialog(itemView.getContext(),order,vendorName.getText().toString(),orderName.getText().toString(),orderNameExtra.getText().toString());
                 }
 
@@ -327,14 +336,11 @@ public class DifferentRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 @Override
                 public void onClick(View v) {
 
-
-//                    progressDialog = ProgressDialog.show(context
-//                            , "",
-//                            "Loading. Please wait...", true);
-
-                    System.out.println("onClick DONE Detected. "+String.valueOf(orderId.getText()));
+                    progressDialog = new ProgressDialog(itemView.getContext());
+                    progressDialog = ProgressDialog.show(itemView.getContext(), "","Loading. Please wait...", true);
+                    System.out.println("onClick DONE Detected. "+ orderId.getText());
                     int order = Integer.parseInt(String.valueOf(orderId.getText()).substring(10));
-                    progressTabFragment.getSlotInfo(itemView.getContext(),order, vendorName.getText().toString(), orderName.getText().toString(), orderNameExtra.getText().toString());
+                    progressTabFragment.getSlotInfo(itemView.getContext(),order, vendorName.getText().toString(), orderName.getText().toString(), orderNameExtra.getText().toString(), progressDialog);
 
                 }
             });

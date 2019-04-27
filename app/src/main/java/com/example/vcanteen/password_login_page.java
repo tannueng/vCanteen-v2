@@ -137,16 +137,17 @@ public class password_login_page extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                passwd = passwdField.getText().toString();
+                if (passwd.equals("")) {
+                    errorMessage.setText("Password cannot be blank. Please try again.");
+                    errorMessage.setVisibility(View.VISIBLE);
+                    return;
+                }
                 progressDialog = new ProgressDialog(context);
                 progressDialog = ProgressDialog.show(context, "",
                         "Loading. Please wait...", true);
                 final Intent intent = new Intent(password_login_page.this, homev2Activity.class);
-                passwd = passwdField.getText().toString();
-                if (passwd.equals("")) {
-                    errorMessage.setVisibility(View.VISIBLE);
-                    progressDialog.dismiss();
-                    return;
-                }
+
 
                 //////////////hash password/////////////
                 passwd = new String(Hex.encodeHex(DigestUtils.sha256(passwdField.getText().toString())));
@@ -221,7 +222,7 @@ public class password_login_page extends AppCompatActivity {
                                                         progressDialog.dismiss();
                                                     }
                                                     if (response.code() != 200) {
-                                                        errorMessage.setText("THE PASSWORD IS INCORRECT");
+                                                        errorMessage.setText("Password is incorrect. Please try again.");
                                                         errorMessage.setVisibility(View.VISIBLE);
                                                         progressDialog.dismiss();
                                                     } else {
@@ -251,7 +252,7 @@ public class password_login_page extends AppCompatActivity {
 
                                 } else {
                                     System.out.println("Firebase login FAIL");
-                                    errorMessage.setText("THE PASSWORD IS INCORRECT");
+                                    errorMessage.setText("Password is incorrect. Please try again");
                                     errorMessage.setVisibility(View.VISIBLE);
                                     progressDialog.dismiss();
                                 }

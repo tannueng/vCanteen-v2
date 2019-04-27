@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -275,7 +276,11 @@ public class editProfilePageActivity extends AppCompatActivity {
                 openFileChooser();
             }
         });
-
+        findViewById(R.id.relativeLayout).setOnTouchListener((v, event) -> {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            return true;
+        });
     }
 
     private void openFileChooser() {
@@ -420,5 +425,6 @@ public class editProfilePageActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

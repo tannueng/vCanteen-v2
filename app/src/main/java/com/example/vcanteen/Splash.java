@@ -31,9 +31,9 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
-        System.out.println("onCreate Splash "+sharedPref.getString("token", "empty token"));
-        System.out.println("onCreate Splash "+sharedPref.getString("email", "empty email"));
-
+        System.out.println("onCreate Splash JWT "+sharedPref.getString("token", "empty token"));
+        System.out.println("onCreate Splash EMAIL "+sharedPref.getString("email", "empty email"));
+        System.out.println("onCreate Splash FIREBASE "+sharedPref.getString("firebaseToken", "NO TOKEN"));
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
