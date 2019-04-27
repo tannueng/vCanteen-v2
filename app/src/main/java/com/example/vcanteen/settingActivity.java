@@ -174,7 +174,7 @@ public class settingActivity extends AppCompatActivity {
                                 }
                             }
                         }).start();
-                        sharedPref.edit().putString("token", "NO TOKEN JA EDOK").commit();
+                        sharedPref.edit().putString("token", "NO TOKEN").commit();
                         sharedPref.edit().putInt("customerId", 0);
                         sharedPref.edit().putString("email","").commit();
                         logoutWarningDialog.cancel();

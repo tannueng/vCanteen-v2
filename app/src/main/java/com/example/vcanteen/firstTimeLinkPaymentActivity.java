@@ -110,7 +110,7 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
 //                    public void onResponse(Call<LoginResponse> call, final Response<LoginResponse> response) {
 //                        if(response.code() != 200 ){
 //                            // SERVER ERROR
-//                            if (cachedAccountType.equals("FACEBOOK"))  sharedPref.edit().putString("token", "NO TOKEN JA EDOK").commit();
+//                            if (cachedAccountType.equals("FACEBOOK"))  sharedPref.edit().putString("token", "NO TOKEN").commit();
 //
 //                            Toast.makeText(getApplicationContext(), "Oops. Something went wrong :( , please try again later...", Toast.LENGTH_SHORT).show();
 //                            System.out.println(" ==================== Error Code :: "+response.code()+" ==================== ");
@@ -308,7 +308,7 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, final Response<LoginResponse> response) {
                 if(response.code() != 200 ){
                     // SERVER ERROR
-                    if (cachedAccountType.equals("FACEBOOK"))  sharedPref.edit().putString("token", "NO TOKEN JA EDOK").commit();
+                    if (cachedAccountType.equals("FACEBOOK"))  sharedPref.edit().putString("token", "NO TOKEN").commit();
 
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Oops. Something went wrong :( , please try again later...", Toast.LENGTH_SHORT).show();

@@ -497,8 +497,8 @@ public class emailActivity extends AppCompatActivity {
                 if (response.code() != 200 && response.code() != 404 ) {
                     // Error
                     /*if (account_type.equals("FACEBOOK"))
-                        sharedPref.edit().putString("token", "NO TOKEN JA EDOK").commit();*/
-                    sharedPref.edit().putString("token", "NO TOKEN JA EDOK").commit();
+                        sharedPref.edit().putString("token", "NO TOKEN").commit();*/
+                    sharedPref.edit().putString("token", "NO TOKEN").commit();
                     progressDialog.dismiss();
 //                    errorMessage.setText("Email or Password is Incorrect");
 //                    errorMessage.setVisibility(View.VISIBLE);
@@ -717,7 +717,7 @@ public class emailActivity extends AppCompatActivity {
         if (progressDialog!=null && progressDialog.isShowing() ){
             progressDialog.cancel();
         }
-        sharedPref.edit().putString("token", "NO TOKEN JA EDOK").apply();
+        sharedPref.edit().putString("token", "NO TOKEN").apply();
         sharedPref.edit().putInt("customerId", 0).apply();
         sharedPref.edit().putString("email","").apply();
         sharedPref.edit().putString("account_type", "").apply();

@@ -39,7 +39,7 @@ public class OrderListActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("1", "Orders", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("fdgshdfg");
+            channel.setDescription("Orders");
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
@@ -65,7 +65,6 @@ public class OrderListActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(OrderListActivity.this, homev2Activity.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
-
-
 }
