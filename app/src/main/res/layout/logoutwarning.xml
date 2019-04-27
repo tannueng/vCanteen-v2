@@ -35,6 +35,7 @@
             android:layout_gravity="center|left"
             android:layout_margin="5dp"
             android:layout_marginRight="10dp"
+            android:background="@drawable/button_bg_rounded_corner_pink"
             android:fontFamily="@font/sfprotext_bold"
             android:text="Log out"
             android:textSize="16sp" />

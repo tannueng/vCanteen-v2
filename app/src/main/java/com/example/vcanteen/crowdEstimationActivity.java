@@ -15,6 +15,7 @@ import com.example.vcanteen.POJO.hourlyCrowdStat;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -109,7 +110,18 @@ public class crowdEstimationActivity extends AppCompatActivity {
             }
         }
 
+        Calendar calendar = Calendar.getInstance();
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
+        System.out.println(dayOfWeek);
+        switch (dayOfWeek) {
+            case 1 : daySpinner.setSelection(0);
+            case 2 : daySpinner.setSelection(1);
+            case 3 : daySpinner.setSelection(2);
+            case 4 : daySpinner.setSelection(3);
+            case 5 : daySpinner.setSelection(4);
+            default: daySpinner.setSelection(0);
+        }
 
 
 

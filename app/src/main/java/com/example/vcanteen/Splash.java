@@ -83,7 +83,7 @@ public class Splash extends AppCompatActivity {
                                         else
                                             startActivity(new Intent(Splash.this, homev2Activity.class));
                                     }
-                                }, 1000);
+                                }, 500);
                             }
 
                         }

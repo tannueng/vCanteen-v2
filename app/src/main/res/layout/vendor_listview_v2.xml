@@ -33,38 +33,39 @@
 
             <TextView
                 android:id="@+id/vendorName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toStartOf="@+id/next_icon"
+                android:layout_marginRight="30dp"
                 android:layout_toEndOf="@id/vendorImage"
                 android:ellipsize="end"
+                android:fontFamily="@font/sfprotext_semibold"
+                android:inputType="textMultiLine"
+                android:maxLines="2"
                 android:singleLine="true"
                 android:text="Null"
                 android:textColor="#333333"
-                android:fontFamily="@font/sfprotext_semibold"
                 android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/next_icon"
-                android:background="@drawable/ic_right_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="9dp"
-                android:layout_marginRight="8dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-             />
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_right_arrow" />
 
             <ImageView
                 android:id="@+id/estimatedTimeClock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/vendorName"
+                android:layout_alignParentBottom="true"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginBottom="19dp"
                 android:layout_toEndOf="@id/vendorImage"
                 app:srcCompat="@drawable/ic_time" />
 
@@ -72,11 +73,12 @@
                 android:id="@+id/estimate_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/vendorName"
+                android:layout_alignParentBottom="true"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="26dp"
+                android:layout_marginBottom="22dp"
                 android:layout_toStartOf="@+id/next_icon"
                 android:layout_toEndOf="@id/estimatedTimeClock"
+                android:fontFamily="@font/sfprotext_regular"
                 android:text="x min"
                 android:textColor="@color/primaryDark" />
 

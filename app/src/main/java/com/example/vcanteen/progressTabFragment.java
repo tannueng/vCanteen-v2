@@ -195,13 +195,11 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                 if(!response.isSuccessful()) {
                     if(response.code()==404) {
                         progressDialog.dismiss();
-                        Toast.makeText(context, "The order "+orderId+" has expired. ",
-                                Toast.LENGTH_LONG).show();
                         dialog = new Dialog(context);
                         dialog.setContentView(R.layout.popup_order_find_slot_over_timeout);
                         dialog.setCancelable(true);
                         TextView overtime = dialog.findViewById(R.id.popup_order_overtime_title);
-                        overtime.setText("The order "+orderId+" has expired");
+                        overtime.setText("The order "+orderId+" has expired.");
                         Button dismiss_btn = dialog.findViewById(R.id.dismiss_btn);
                         dismiss_btn.setOnClickListener(v -> {
                             dialog.dismiss();
@@ -211,9 +209,14 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                         DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
                         recyclerView.setAdapter(adapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                        return;
                     }
-
+                    progressDialog.dismiss();
                     System.out.println("PROG onResponse getslot unsuccessful");
+                    loadRecyclerViewData(context);
+                    DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     return;
                 }
 
@@ -222,7 +225,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
                 pickupSlot slot = response.body();
                 System.out.println("SLOT A = "+response.body());
-                System.out.println("SLOT = "+Integer.toString(slot.getPickupSlot()));
+                System.out.println("SLOT = "+ slot.getPickupSlot());
                 slotString = Integer.toString(slot.getPickupSlot());
 //                            holder.pickupSlot.setText("321"); //slot.getPickupSlot()
 
@@ -245,7 +248,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
         //display popup confirm pickup
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.popup_confirm_pickup);
-        slotNumber =(TextView)dialog.findViewById(R.id.pickup_slot_number);
+        slotNumber = dialog.findViewById(R.id.pickup_slot_number);
         slotNumber.setText(Integer.toString(slot.getPickupSlot()));
         dialog.setCancelable(true);
 
