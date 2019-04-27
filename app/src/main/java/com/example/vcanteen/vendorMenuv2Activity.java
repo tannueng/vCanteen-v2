@@ -85,6 +85,7 @@ public class vendorMenuv2Activity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        System.out.println("entered page");
         if (android.os.Build.VERSION.SDK_INT > 9)
         {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -258,8 +259,8 @@ public class vendorMenuv2Activity extends AppCompatActivity {
                     return;
                 }
                 vendorAlacarteMenu menu = response.body();
-                System.out.println("Received Restaurant Name: "+menu.getVendorInfo().restaurantName);
-                System.out.println("Received Restaurant URL: "+menu.getVendorInfo().vendorImage);
+//                System.out.println("Received Restaurant Name: "+menu.getVendorInfo().restaurantName);
+//                System.out.println("Received Restaurant URL: "+menu.getVendorInfo().vendorImage);
                 minCombinationPrice = findViewById(R.id.minCombinationPrice);
                 minCombinationPrice.setText("Starting from "+ menu.getMinCombinationPrice() +" ฿");
                 if(menu.getMinCombinationPrice()==0){

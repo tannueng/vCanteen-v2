@@ -33,7 +33,7 @@
 
             <TextView
                 android:id="@+id/vendorName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginLeft="15dp"
@@ -41,9 +41,9 @@
                 android:layout_marginRight="30dp"
                 android:layout_toEndOf="@id/vendorImage"
                 android:ellipsize="end"
+                android:focusableInTouchMode="false"
                 android:fontFamily="@font/sfprotext_semibold"
                 android:inputType="textMultiLine"
-                android:maxLines="2"
                 android:singleLine="true"
                 android:text="Null"
                 android:textColor="#333333"
