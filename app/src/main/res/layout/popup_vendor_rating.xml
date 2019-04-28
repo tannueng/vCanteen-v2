@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relativeLayout"
-    android:layout_width="380dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="30dp">
 
@@ -53,6 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/reviewBox"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/sfprotext_semibold"
         android:text="@string/mustBeText"
@@ -132,7 +133,7 @@
         android:layout_height="33dp"
         android:layout_below="@+id/reviewBox"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="33dp"
         android:background="@drawable/button_bg_rounded_corner_pink"
         android:elevation="2dp"
         android:fontFamily="@font/sfprotext_medium"
