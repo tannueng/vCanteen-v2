@@ -45,28 +45,20 @@ public class passwordSignUpPage extends AppCompatActivity {
         inline = findViewById(R.id.inline);
         nextBtn = findViewById(R.id.next_button);
 
-        showPasswordBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //System.out.println("show1 pressed");
-
-                if (isHidden) {//showPasswordBtn.getText() == "SHOW") {
-                    showPasswordBtn.setText("HIDE");
-                    passwordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    isHidden = false;
-                } else {
-                    showPasswordBtn.setText("SHOW");
-                    passwordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    isHidden = true;
-                }
-                System.out.println("show1 pressed");
+        showPasswordBtn.setOnClickListener(v -> {
+            if (isHidden) {
+                showPasswordBtn.setText("HIDE");
+                passwordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                isHidden = false;
+            } else {
+                showPasswordBtn.setText("SHOW");
+                passwordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                isHidden = true;
             }
         });
 
         showConfirmedPasswordBtn.setOnClickListener(v -> {
-
-            System.out.println("show2 pressed");
-            if (isHidden2){//showConfirmedPasswordBtn.getText() == "SHOW") {
+            if (isHidden2) {
                 showConfirmedPasswordBtn.setText("HIDE");
                 confirmPasswordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 isHidden2 = false;
