@@ -26,6 +26,8 @@ public class passwordSignUpPage extends AppCompatActivity {
     Button showPasswordBtn, showConfirmedPasswordBtn;
     TextView inline;
     ImageButton nextBtn;
+    private boolean isHidden = true;
+    private boolean isHidden2 = true;
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^[a-zA-Z0-9@!#$%^&+-=](?=\\S+$).*$");  // Password Constraint
 
@@ -44,26 +46,26 @@ public class passwordSignUpPage extends AppCompatActivity {
         nextBtn = findViewById(R.id.next_button);
 
         showPasswordBtn.setOnClickListener(v -> {
-            System.out.println("show1 pressed");
-
-            if (showPasswordBtn.getText() == "SHOW") {
+            if (isHidden) {
                 showPasswordBtn.setText("HIDE");
                 passwordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                isHidden = false;
             } else {
                 showPasswordBtn.setText("SHOW");
                 passwordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                isHidden = true;
             }
         });
 
         showConfirmedPasswordBtn.setOnClickListener(v -> {
-
-            System.out.println("show2 pressed");
-            if (showConfirmedPasswordBtn.getText() == "SHOW") {
+            if (isHidden2) {
                 showConfirmedPasswordBtn.setText("HIDE");
                 confirmPasswordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                isHidden2 = false;
             } else {
                 showConfirmedPasswordBtn.setText("SHOW");
                 confirmPasswordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                isHidden2 = true;
             }
         });
 
