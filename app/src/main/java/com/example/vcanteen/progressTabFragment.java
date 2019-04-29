@@ -98,17 +98,14 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
 
          View view2 = inflater.inflate(R.layout.popup_confirm_pickup,container,false);
 //         CardView cv = (CardView) view.findViewById(R.id.cardView);
-        Button btn = (Button) view2.findViewById(R.id.confirmPickup_btn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//
-                System.out.println("detected onclick..");
-            }
-        });
-
-
-
+//        Button btn = (Button) view2.findViewById(R.id.confirmPickup_btn);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////
+//                System.out.println("detected onclick..");
+//            }
+//        });
         return view;
     }
 
@@ -341,6 +338,7 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
         AtomicReference<Double> score = new AtomicReference<>(0.0);
         double score2 = 0.0;
         dialog.setCancelable(true);
+        inline.setVisibility(View.INVISIBLE);
         descriptionText.setText("Tap on the stars to rate!");
         //if rating value is changed,
         //display the current rating value in the result (textview) automatically
@@ -372,6 +370,9 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                     inline.setText("Must be letter, number or these character . , _ - * ‘ \" # & () $ @ ! ?");
                     inline.setVisibility(View.VISIBLE);
                     return;
+                }
+                else {
+                    inline.setVisibility(View.INVISIBLE);
                 }
             }
         });
