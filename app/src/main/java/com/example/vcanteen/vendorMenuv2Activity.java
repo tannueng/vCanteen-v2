@@ -158,6 +158,7 @@ public class vendorMenuv2Activity extends AppCompatActivity {
                 searchKeyword = searchBox.getText().toString().trim();
                 if(searchKeyword.isEmpty()) {
                     setResultListAdapter(availableList);
+                    hideKeyboard(v);
                 } else {
                     resultList = new ArrayList<>();
                     if(currentCategory.equals("ALL")) {
