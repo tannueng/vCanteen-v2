@@ -92,15 +92,7 @@ public class vendorMenuv2Activity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.menuPage);
-        layout.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View view, MotionEvent ev) {
-                hideKeyboard(view);
-                return false;
-            }
-        });
+
         orderStack = com.example.vcanteen.orderStack.getInstance();
 
         //orderStack = getIntent().getExtras().getParcelable("orderStack"); // delete if don't want from home activity
@@ -200,7 +192,7 @@ public class vendorMenuv2Activity extends AppCompatActivity {
         });
         findViewById(R.id.menuPage).setOnTouchListener((v, event) -> {
             InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             return true;
         });
 

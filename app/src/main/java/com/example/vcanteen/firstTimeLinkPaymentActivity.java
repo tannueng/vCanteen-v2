@@ -191,7 +191,7 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
 
         findViewById(R.id.relativeLayout).setOnTouchListener((v, event) -> {
             InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             return true;
         });
 

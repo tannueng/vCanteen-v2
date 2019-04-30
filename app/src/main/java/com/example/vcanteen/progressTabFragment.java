@@ -427,20 +427,6 @@ public class progressTabFragment extends Fragment implements SwipeRefreshLayout.
                             dialog.dismiss();
                         }
                     });
-
-//                    Toast.makeText(context, "Review Submitted", Toast.LENGTH_LONG).show();
-//                    progressDialog.dismiss();
-//                    dialog.dismiss();
-                    /*dialog.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-
-                        }
-                    })*/
-//                    DifferentRowAdapter adapter = new DifferentRowAdapter(data);;
-//                    recyclerView.setAdapter(adapter);
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
                 });
 
         dialog.findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {
