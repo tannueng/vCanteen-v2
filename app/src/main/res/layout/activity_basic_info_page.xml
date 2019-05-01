@@ -78,7 +78,9 @@
         android:textColor="#333333"
         tools:layout_editor_absoluteX="25dp"
         tools:layout_editor_absoluteY="24dp"
-        android:nextFocusForward="@id/lastNameBox"/>
+        android:nextFocusForward="@id/lastNameBox"
+        android:imeOptions="actionNext"
+        android:singleLine="true"/>
 
     <Button
         android:id="@+id/firstNameClearBtn"
@@ -135,7 +137,8 @@
         android:textColor="#333333"
         tools:layout_editor_absoluteX="25dp"
         tools:layout_editor_absoluteY="24dp"
-        android:imeOptions="actionDone"/>
+        android:imeOptions="actionDone"
+        android:singleLine="true"/>
 
     <Button
         android:id="@+id/lastNameClearTextBtn"
