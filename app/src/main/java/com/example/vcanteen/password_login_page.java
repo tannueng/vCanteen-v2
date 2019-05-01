@@ -11,9 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -113,6 +115,8 @@ public class password_login_page extends AppCompatActivity {
         showBtn = findViewById(R.id.show_pw_btn);
         next = findViewById(R.id.next_button);
         errorMessage = findViewById(R.id.inlineError);
+
+        passwdField.setOnEditorActionListener(editorListener);
 
         showBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -384,5 +388,144 @@ public class password_login_page extends AppCompatActivity {
          super.finish();
          overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }*/
+
+    private TextView.OnEditorActionListener editorListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+            if(actionId == EditorInfo.IME_ACTION_DONE){
+                Gson gson = new GsonBuilder().serializeNulls().create();
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(url)
+                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .build();
+                final JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+                passwd = passwdField.getText().toString();
+                if (passwd.equals("")) {
+                    errorMessage.setText("Password cannot be blank. Please try again.");
+                    errorMessage.setVisibility(View.VISIBLE);
+                    return false;
+                }
+                progressDialog = new ProgressDialog(password_login_page.this);
+                progressDialog = ProgressDialog.show(password_login_page.this, "",
+                        "Loading. Please wait...", true);
+                final Intent intent = new Intent(password_login_page.this, homev2Activity.class);
+
+
+                //////////////hash password/////////////
+                passwd = new String(Hex.encodeHex(DigestUtils.sha256(passwdField.getText().toString())));
+                System.out.println(passwd);
+                account_type = "NORMAL";
+
+                // start firebase login
+                System.out.println("Firebase email: " + email);
+                System.out.println("Firebase passwd: " + passwd);
+
+                //////////////START mAuth/////////////
+                mAuth.signInWithEmailAndPassword(email, passwd)
+                        .addOnCompleteListener(password_login_page.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    System.out.println("mAuth SUCCESS");
+
+                                    // Reteive firebase token
+                                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                    dbUsers = FirebaseDatabase.getInstance().getReference("users").child(uid);
+
+                                    mAuth = FirebaseAuth.getInstance();
+
+                                    FirebaseInstanceId.getInstance().getInstanceId()
+                                            .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                                    if (task.isSuccessful()) {
+                                                        String token = task.getResult().getToken();
+                                                        System.out.println(token);
+                                                        saveToken(token);
+                                                    } else {
+
+                                                    }
+                                                }
+                                            });
+
+                                    System.out.println("check1");
+                                    dbUsers.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot dsUser : dataSnapshot.getChildren())
+
+                                                firebaseToken = dsUser.getValue(String.class);
+                                            System.out.println("token: "+firebaseToken);
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            System.out.println("================== FIREBASE TOKEN to sharepref : "+firebaseToken+" ==================");
+                                            sharedPref.edit().putString("firebaseToken", firebaseToken).commit();
+                                            System.out.println("================== Begin Login by NORMAL LOGIN ==================");
+                                            System.out.println("Calling HTTP Login request");
+
+                                            Call<LoginResponse> call = jsonPlaceHolderApi.sendLoginV2(email, passwd,  firebaseToken);
+                                            call.enqueue(new Callback<LoginResponse>() {
+                                                @Override
+                                                public void onResponse(Call<LoginResponse> call, final Response<LoginResponse> response) {
+                                                    if (!response.isSuccessful()) {
+                                                        errorMessage.setText("An error occurred");
+                                                        errorMessage.setVisibility(View.VISIBLE);
+                                                        progressDialog.dismiss();
+                                                    }
+                                                    if (response.code() != 200) {
+                                                        errorMessage.setText("Password is incorrect. Please try again.");
+                                                        errorMessage.setVisibility(View.VISIBLE);
+                                                        progressDialog.dismiss();
+                                                    } else {
+                                                        System.out.println(response.body().toString());
+                                                        sharedPref.edit().putInt("customerId", response.body().getCustomerId()).commit();
+                                                        sharedPref.edit().putString("token", response.body().getCustomerSessionToken()).commit();
+                                                        sharedPref.edit().putString("email", email).commit();
+                                                        sharedPref.edit().putString("account_type", account_type).commit();
+                                                        sharedPref.edit().putString("firebaseToken", firebaseToken).commit();
+                                                        progressDialog.dismiss();
+                                                        startActivity(intent);
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                                                    System.out.println("ERROR");
+                                                    progressDialog.dismiss();
+                                                    Toast.makeText(getApplicationContext(), "HTTP request Error", Toast.LENGTH_SHORT).show();
+                                                    t.printStackTrace();
+                                                }
+                                            });
+
+                                        }
+                                    }, 3500);
+
+
+                                } else {
+                                    System.out.println("Firebase login FAIL");
+                                    errorMessage.setText("Password is incorrect. Please try again");
+                                    errorMessage.setVisibility(View.VISIBLE);
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        });
+            }
+
+            return false;
+        }
+    };
 
 }

@@ -88,7 +88,8 @@
             android:ems="10"
             android:fontFamily="@font/sfprotext_medium"
             android:inputType="textEmailAddress"
-            android:textColor="#333333" />
+            android:textColor="#333333"
+            android:imeOptions="actionDone"/>
 
         <Button
             android:id="@+id/clear_text_btn"

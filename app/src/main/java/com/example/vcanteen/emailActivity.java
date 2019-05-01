@@ -13,7 +13,9 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.content.Intent;
@@ -55,6 +57,8 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -146,6 +150,8 @@ public class emailActivity extends AppCompatActivity {
         next_button.setOnClickListener(v -> {
             openpassword_login_page();
         });
+
+        emailbox.setOnEditorActionListener(editorListener);
 
 
 
@@ -738,5 +744,19 @@ public class emailActivity extends AppCompatActivity {
     public void onBackPressed() {
         moveTaskToBack(true);
     }
+
+
+
+    private TextView.OnEditorActionListener editorListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+            if(actionId == EditorInfo.IME_ACTION_DONE){
+                openpassword_login_page();
+            }
+
+            return false;
+        }
+    };
 }
 

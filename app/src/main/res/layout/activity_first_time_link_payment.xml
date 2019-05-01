@@ -93,7 +93,8 @@
         android:maxLength="13"
         android:textColor="#333333"
         tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="24dp" />
+        tools:layout_editor_absoluteY="24dp"
+        android:imeOptions="actionDone"/>
 
 
     <TextView

@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,6 +71,8 @@ public class passwordSignUpPage extends AppCompatActivity {
             }
         });
 
+        confirmPasswordField.setOnEditorActionListener(editorListener);
+
         nextBtn.setOnClickListener(v -> {
             password = passwordField.getText().toString();
 
@@ -107,4 +111,43 @@ public class passwordSignUpPage extends AppCompatActivity {
             return true;
         });
     }
+
+    private TextView.OnEditorActionListener editorListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+            if(actionId == EditorInfo.IME_ACTION_DONE){
+                password = passwordField.getText().toString();
+
+                confirmPassword = confirmPasswordField.getText().toString();
+
+                if (passwordField.getText().toString().isEmpty() || confirmPasswordField.getText().toString().isEmpty()) {
+                    inline.setText("Password cannot be empty. Please try again.");
+                    inline.setVisibility(View.VISIBLE);
+                    return false;
+                } else if (!password.equals(confirmPassword)) {
+                    //password doesn't match
+                    inline.setText("Passwords do not match. Please try again.");
+                    inline.setVisibility(View.VISIBLE);
+                } else if (password.length() < 8) {
+                    inline.setText("Password must be longer than 8 characters.");
+                    inline.setVisibility(View.VISIBLE);
+                } else if (!(PASSWORD_PATTERN.matcher(password).matches()) || !(PASSWORD_PATTERN.matcher(confirmPassword).matches())) {
+                    inline.setText("Only a-z A-Z 0-9 _ - * ‘ “ # & () @ are allowed.");
+                    inline.setVisibility(View.VISIBLE);
+                }  else {
+                    inline.setVisibility(View.INVISIBLE);
+                    String passwordHash = new String(Hex.encodeHex(DigestUtils.sha256(passwordField.getText().toString())));
+                    Intent i = new Intent(passwordSignUpPage.this, basicInfoPageActivity.class);
+                    i.putExtra("cachedEmail", email);
+                    i.putExtra("cachedPassword",passwordHash);
+                    i.putExtra("cachedAccountType", "NORMAL");
+                    System.out.println("From PW Sign Up : "+email+", "+", pw: "+password);
+                    startActivity(i);
+                }
+            }
+
+            return false;
+        }
+    };
 }

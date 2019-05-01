@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,6 +78,8 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 //        String.valueOf(serviceProviderSpinner.getSelectedItem()).toUpperCase();
 //        System.out.println(String.valueOf(serviceProviderSpinner.getSelectedItem()));
+
+        accountNumberField.setOnEditorActionListener(editorListener);
 
         linkButton.setOnClickListener(v -> {
             accountNumber = accountNumberField.getText().toString();
@@ -348,6 +355,30 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
 
     }
 
+    private TextView.OnEditorActionListener editorListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+            if(actionId == EditorInfo.IME_ACTION_DONE){
+                accountNumber = accountNumberField.getText().toString();
+                if(accountNumber.isEmpty()) {
+                    inline.setText("Please fill in your account number.");
+                    inline.setVisibility(View.VISIBLE);
+                    return false;
+                } else {
+
+                    System.out.println("account number not null");
+                    inline.setVisibility(View.INVISIBLE);
+                    serviceProvider = renameServiceProvider(String.valueOf(serviceProviderSpinner.getSelectedItem()));
+
+                    registerFireBase();
+                }
+            }
+
+            return false;
+        }
+    };
+
     private String renameServiceProvider (String serviceProvider) {
         if(serviceProvider.equals("CU NEX")) {
             return "CU_NEX";
@@ -360,4 +391,6 @@ public class firstTimeLinkPaymentActivity extends AppCompatActivity {
         }
         return null;
     }
+
+
 }

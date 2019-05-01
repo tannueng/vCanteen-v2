@@ -77,7 +77,8 @@
         android:maxLength="20"
         android:textColor="#333333"
         tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="24dp" />
+        tools:layout_editor_absoluteY="24dp"
+        android:nextFocusForward="@id/lastNameBox"/>
 
     <Button
         android:id="@+id/firstNameClearBtn"
@@ -133,7 +134,8 @@
         android:maxLength="20"
         android:textColor="#333333"
         tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="24dp" />
+        tools:layout_editor_absoluteY="24dp"
+        android:imeOptions="actionDone"/>
 
     <Button
         android:id="@+id/lastNameClearTextBtn"
